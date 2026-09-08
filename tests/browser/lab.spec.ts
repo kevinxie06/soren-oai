@@ -1,6 +1,62 @@
 import { test, expect } from "@playwright/test";
 import type { Experiment, ExperimentDetail } from "../../lib/types";
 
+test("workspace starts with a prompt and preserves environment navigation on reload and back", async ({
+  page,
+  request,
+}) => {
+  const experiments = (await (
+    await request.get("/api/lab/experiments")
+  ).json()) as Experiment[];
+  const experiment = experiments.find(
+    (item) => item.plan?.scenarios.length === 16,
+  );
+  test.skip(!experiment, "A generated experiment is required.");
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { name: "Launch a new experiment." }),
+  ).toBeVisible();
+  await expect(
+    page.getByLabel("Research question", { exact: true }),
+  ).toHaveValue(/starting policy/);
+  await expect(
+    page.getByRole("button", { name: "Generate experiment plan", exact: true }),
+  ).toBeEnabled();
+  await expect(
+    page.getByRole("button", { name: "Launch experiment", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator(".scenario-card")).toHaveCount(0);
+  await page.goto("/?experiment=" + experiment!.id);
+  await expect(page.locator(".scenario-card")).toHaveCount(16);
+  await page.getByRole("button", { name: /Scenario 16:/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "Environment parameters" }),
+  ).toBeVisible();
+  await expect(page.locator(".scenario-card")).toHaveCount(0);
+  await page.reload();
+  await expect(
+    page.getByRole("heading", { name: "Reward function" }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Open simulation", exact: true })
+    .first()
+    .click();
+  await expect(page.locator(".inspection")).toBeVisible();
+  await page.goBack();
+  await expect(
+    page.getByRole("heading", { name: "Environment parameters" }),
+  ).toBeVisible();
+  await page.goBack();
+  await expect(page.locator(".scenario-card")).toHaveCount(16);
+  await page
+    .getByRole("button", { name: "New experiment", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Launch a new experiment." }),
+  ).toBeVisible();
+  await expect(page).toHaveURL("/");
+});
+
 test("real baseline and candidate suite, playback, telemetry, reload, and mobile layout", async ({
   page,
   request,
@@ -43,7 +99,21 @@ test("real baseline and candidate suite, playback, telemetry, reload, and mobile
     ),
   );
   await page.getByRole("button", { name: /Scenario 16:/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "Environment parameters" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Reward function" }),
+  ).toBeVisible();
+  await expect(page.locator("video")).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Open simulation", exact: true })
+    .first()
+    .click();
   await expect(page.locator(".inspection")).toContainText("SCENARIO 16");
+  await page
+    .getByRole("button", { name: "Original simulation", exact: true })
+    .click();
   const video = page.locator("video");
   await video.evaluate(async (el: HTMLVideoElement) => {
     await el.play();
@@ -61,8 +131,15 @@ test("real baseline and candidate suite, playback, telemetry, reload, and mobile
   });
   expect(range.status()).toBe(206);
   expect((await range.body()).length).toBe(64);
-  await page.getByRole("tab", { name: "Compare", exact: true }).click();
+  await page
+    .getByRole("button", { name: "All environments", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Compare", exact: true }).click();
   await expect(page.locator(".scenario-table tbody tr")).toHaveCount(16);
+  for (const button of await page
+    .getByRole("button", { name: "Original simulation", exact: true })
+    .all())
+    await button.click();
   await expect(page.locator("video")).toHaveCount(2);
   await page.getByRole("button", { name: "Play both", exact: true }).click();
   await page.waitForFunction(() =>
@@ -72,7 +149,7 @@ test("real baseline and candidate suite, playback, telemetry, reload, and mobile
   );
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page
-    .getByRole("tab", { name: "Rewards & training", exact: true })
+    .getByRole("button", { name: "Rewards & training", exact: true })
     .click();
   await expect(
     page.getByRole("button", { name: "Start RL training", exact: true }),
@@ -89,6 +166,7 @@ test("real baseline and candidate suite, playback, telemetry, reload, and mobile
   await page.getByLabel("Action smoothness", { exact: true }).fill("0.02");
   await page.reload();
   await expect(page.locator("h1")).toHaveText(detail.experiment.title);
+  await page.getByRole("button", { name: /Environments/ }).click();
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator(".scenario-card")).toHaveCount(16);
   expect(
@@ -140,15 +218,18 @@ test("task creation, budget validation, conflicting jobs, and cancellation are r
     .getByRole("button", { name: "New experiment", exact: true })
     .click();
   await page
-    .getByLabel("Improvement task")
+    .getByLabel("Research question", { exact: true })
     .fill(
       "Test needle transfer and closure across wider wound gaps and greater stiffness.",
     );
   await page
-    .getByRole("combobox", { name: "Planner", exact: true })
-    .selectOption("template");
+    .getByRole("button", { name: "Generate experiment plan", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Review your experiment." }),
+  ).toBeVisible();
   await page
-    .getByRole("button", { name: "Generate 16 scenarios", exact: true })
+    .getByRole("button", { name: "Launch experiment", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Environment suite", exact: true }),
@@ -175,7 +256,7 @@ test("task creation, budget validation, conflicting jobs, and cancellation are r
   });
   expect(conflict.status()).toBe(409);
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
-  await page.getByRole("tab", { name: "Activity", exact: true }).click();
+  await page.getByRole("button", { name: "Activity", exact: true }).click();
   await expect(page.locator(".activity-meta").first()).toContainText(
     "cancelled",
   );
@@ -196,18 +277,20 @@ test("object lifting task generates native scenes, evaluates its policy, and kee
   await page
     .getByRole("button", { name: "New experiment", exact: true })
     .click();
-  await page.getByLabel("Simulation task").selectOption("lifting");
-  await expect(page.getByLabel("Improvement task")).toHaveValue(
-    /object lifting/,
-  );
-  await expect(page.locator(".policy-tag")).toContainText(
-    "policy_recovery.npz",
-  );
   await page
-    .getByRole("combobox", { name: "Planner", exact: true })
-    .selectOption("template");
+    .getByLabel("Task package", { exact: true })
+    .selectOption("lifting");
+  await expect(
+    page.getByLabel("Research question", { exact: true }),
+  ).toHaveValue(/clear the cavity/);
   await page
-    .getByRole("button", { name: "Generate 16 scenarios", exact: true })
+    .getByRole("button", { name: "Generate experiment plan", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Review your experiment." }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Launch experiment", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Environment suite", exact: true }),
@@ -216,8 +299,16 @@ test("object lifting task generates native scenes, evaluates its policy, and kee
   await expect(page.locator(".experiment-header")).toContainText(
     "OBJECT LIFTING & PLACEMENT",
   );
-  await expect(page.locator(".inspection")).toContainText("Object orientation");
-  await expect(page.locator(".inspection")).not.toContainText("Wound gap");
+  await page.getByRole("button", { name: /Scenario 1:/ }).click();
+  await expect(page.locator(".detail-specifications")).toContainText(
+    "Object orientation",
+  );
+  await expect(page.locator(".detail-specifications")).not.toContainText(
+    "Wound gap",
+  );
+  await page
+    .getByRole("button", { name: "All environments", exact: true })
+    .click();
   await page.waitForFunction(() =>
     Array.from(document.querySelectorAll(".scenario-image img")).every(
       (img) => (img as HTMLImageElement).naturalWidth > 0,
@@ -242,6 +333,13 @@ test("object lifting task generates native scenes, evaluates its policy, and kee
   await page.reload();
   await expect(page.locator(".suite-summary")).toContainText("rim clearances");
   await page.getByRole("button", { name: /Scenario 16:/ }).click();
+  await page
+    .getByRole("button", { name: "Open simulation", exact: true })
+    .first()
+    .click();
+  await page
+    .getByRole("button", { name: "Original simulation", exact: true })
+    .click();
   await expect(page.locator(".measurements")).toContainText("Placement error");
   await page.locator("video").evaluate(async (v: HTMLVideoElement) => {
     await v.play();
@@ -270,7 +368,10 @@ test("object lifting task generates native scenes, evaluates its policy, and kee
   expect(manifest.action_names).toHaveLength(4);
   expect(manifest.observation_names).toHaveLength(32);
   await page
-    .getByRole("tab", { name: "Rewards & training", exact: true })
+    .getByRole("button", { name: "All environments", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Rewards & training", exact: true })
     .click();
   await expect(
     page.getByLabel("Placement progress", { exact: true }),
@@ -304,20 +405,10 @@ test("object lifting task generates native scenes, evaluates its policy, and kee
   const childResponse = await request.post("/api/lab/experiments", {
     data: { prompt: "Improve lifting", source: "template", parent_id: id },
   });
-  expect(childResponse.status()).toBe(201);
-  const childId = (await childResponse.json()).experiment.id;
-  const child = (await (
-    await request.get("/api/lab/experiments/" + childId)
-  ).json()) as ExperimentDetail;
-  expect(child.experiment.task).toBe("lifting");
-  const feedback = JSON.parse(child.jobs[0].data.feedback!);
-  expect(
-    feedback.measured_development_results[0].results[0].mean_placement_error_mm,
-  ).toEqual(expect.any(Number));
-  expect(
-    feedback.measured_development_results[0].results[0],
-  ).not.toHaveProperty("mean_gap_mm");
+  expect(childResponse.status()).toBe(409);
+  expect((await childResponse.json()).error).toMatch(/reviewed study/);
   await page.reload();
+  await page.getByRole("button", { name: /Environments/ }).click();
   await expect(page.locator(".scenario-card")).toHaveCount(16);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(

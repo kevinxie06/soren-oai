@@ -1,0 +1,138 @@
+.procedure-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 68px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ffffff20;
+}
+.showcase > .procedure-header {
+  margin-inline: 5%;
+}
+.procedure-header .procedure-brand {
+  font:
+    600 26px system-ui,
+    sans-serif;
+  letter-spacing: -1px;
+  color: #e3eeea;
+}
+.procedure-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.procedure-header nav a {
+  padding: 10px 12px;
+  border-radius: 5px;
+  color: #abbfb8;
+  font-size: 13px;
+}
+.procedure-header nav a[aria-current="page"] {
+  color: #e3eeea;
+  background: #ffffff0d;
+}
+.procedure-header a:focus-visible {
+  outline: 2px solid #b3ddc9;
+  outline-offset: 3px;
+}
+.procedure-details {
+  border-top: 1px solid #ffffff20;
+  margin-top: 16px;
+}
+.procedure-details summary {
+  cursor: pointer;
+  padding-block: 14px;
+  color: #b6c9c2;
+  font-size: 13px;
+}
+.procedure-details summary:focus-visible {
+  outline: 2px solid #b3ddc9;
+  outline-offset: 3px;
+}
+.showcase .showcase-heading h1 {
+  font-size: 28px;
+  margin: 0 0 8px;
+  letter-spacing: -0.7px;
+}
+.showcase .showcase-heading {
+  margin-bottom: 20px;
+  align-items: center;
+}
+.showcase .recorded-badge {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: 12px system-ui;
+  letter-spacing: 0;
+}
+.showcase .showcase-main {
+  padding-top: 24px;
+}
+.showcase .showcase-sidebar h2 {
+  font-size: 16px;
+}
+.showcase .procedure-card {
+  padding: 18px;
+}
+.suture-app .procedure-title {
+  margin: 24px auto 0;
+  max-width: 1800px;
+}
+.suture-app .procedure-title h1 {
+  font: 500 28px/1.25 system-ui;
+  letter-spacing: -0.7px;
+}
+.suture-app .procedure-title p {
+  margin-top: 8px;
+  font-size: 13px;
+}
+.suture-app .suture-layout {
+  margin-top: 20px;
+  gap: 24px;
+}
+.suture-app .suture-info {
+  padding-top: 0;
+}
+.suture-app .suture-phase {
+  padding-top: 0;
+  border-top: 0;
+}
+.suture-app .suture-disclosure {
+  font-size: 12px;
+}
+.showcase .playback-controls button,
+.suture-app .suture-playback button {
+  min-width: 40px;
+  min-height: 40px;
+}
+@media (max-width: 600px) {
+  .procedure-header {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .procedure-header nav {
+    width: 100%;
+  }
+  .procedure-header nav a {
+    padding: 10px;
+    font-size: 12px;
+  }
+  .showcase .showcase-heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .showcase .view-tabs,
+  .suture-app .suture-source {
+    flex-wrap: wrap;
+  }
+  .suture-app .suture-stage-top {
+    height: auto;
+  }
+  .showcase .view-tabs button,
+  .suture-app .suture-source button {
+    min-height: 40px;
+    font-size: 12px;
+  }
+}

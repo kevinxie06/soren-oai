@@ -27,20 +27,39 @@ npm run dev -- --port 3210
 
 ## Workflow
 
-1. **New experiment:** select **Suturing** or **Object lifting**, enter the improvement task, and select Astra or the built-in sweep.
-2. **Generate:** produce exactly 16 distinct configurations, validate physical parameters, compile/reset each scene, and render real thumbnails.
-3. **Evaluate baseline:** run 1–10 episodes per scenario from the browser (API limit: 20). Each scenario's first episode has a native MP4; every episode has a trajectory, telemetry, and versioned manifest.
+1. **Define and review a study:** choose a versioned **Needle transfer & closure** or **Object lifting & placement** task package, select **Evaluate reliability** or **Improve policy**, and edit the suggested research question. The compatible starting checkpoint is fixed by the package. **Study settings** exposes bounded parameter ranges, episodes, seed, and training budget. Select **Generate experiment plan** (Cmd/Ctrl+Enter) to review exact coverage, policy, outcomes, and limitations without starting a job. **Launch experiment** executes that reviewed plan. No Astra access is needed for this flow.
+2. **Environment suite:** generation opens a dedicated grid of 16 configurations. Select an environment to inspect its physical parameters, shared reward function, baseline outcomes, and seed. Choose **Open simulation** to view the rendering and recorded telemetry. Environment and view URLs support reload and browser back/forward navigation.
+3. **Evaluate baseline:** run 1–20 episodes per scenario. Reviewed episode, seed, and transition budgets become run defaults; later overrides are recorded in job history. Each scenario's first episode has a native MP4; every episode has a trajectory, telemetry, and versioned manifest.
 4. **Rewards & training:** inspect or edit five bounded reward weights and run PPO for 1,024–131,072 transitions. The actor starts from the selected task's NumPy checkpoint with verified action parity (including the lifting gripper's binary close/open command). A critic and stochastic exploration enable real policy-gradient updates. Continue from a saved candidate to resume weights, optimizer state, and transition count at a new episode boundary.
 5. **Compare:** evaluate the trained checkpoint on the same configurations and episode seeds as the completed baseline. Inspect paired recordings, success counts, failures, and regressions. Comparison automatically uses the baseline's episode count.
-6. **Refine with Astra:** create a child experiment using the latest completed baseline and candidate development evaluations plus optional user feedback. Repeated evaluations of different checkpoints are not pooled. Previous plans, rewards, checkpoints, and runs remain immutable.
+6. **Follow-up studies:** reviewed experiments reopen their specification for a new question and operating envelope, requiring a fresh review before launch. Legacy experiments still support Astra refinement using the latest completed baseline and candidate development evidence. Repeated evaluations of different checkpoints are not pooled.
 
 Gallery selection opens playback, measured gap/tension, a time scrubber, configuration, and artifact links. Experiments survive refresh; their URL includes the selected experiment ID. Jobs expose progress, errors, and cancellation.
+
+Reviewed study specifications are stored with their package, compatible policy, exploratory evidence identifier, ranges, question, and protocol. `POST /api/lab/plans` validates and previews a deterministic plan without creating an experiment. `POST /api/lab/experiments` with `specification` and `review_fingerprint` recomputes the preview and rejects stale reviews. The worker uses the persisted plan, adds rendering artifacts, and is prevented from changing reviewed configurations. Restart an existing Python worker after updating this code.
+
+Two varying parameters produce a 4 × 4 grid; other envelopes use 16 stratified combinations. Fixed parameters stay fixed during PPO resets, and training perturbations are clipped to the reviewed envelope. Other task-native seeded initialization remains unchanged. These are development suites, not held-out validation sets. The included evidence package is explicitly exploratory: there is no physical calibration or clinical evidence attached. Natural language records the research question; explicit ranges define execution and do not introduce unsupported mechanics.
+
+Study checks: `node --experimental-strip-types --test tests/experiment-spec.test.mjs`, `.venv/bin/python -m unittest tests.test_experiment_spec -v`, and `node --experimental-strip-types scripts/test-study-api.mjs` against a running lab. The last check creates one study, renders all 16 environments, and evaluates one baseline episode per environment.
+
+## RL research workspace
+
+The environment suite exposes an interactive **Observe → Act → Score → Update** explanation, including the observation/action contract, frozen normalization, policy architecture, control frequency, and training/evaluation sampling protocol. The task policies use simulator state; the rendered scene is an inspection view.
+
+**Rewards & training** connects the five editable weights to a per-transition equation, with exact progress gates, one-time milestones, action-change penalties, and independent completion criteria. Choose the original baseline or latest candidate as initialization, a transition budget, and an explicit training seed. PPO's clipped objective, advantage estimation, critic loss, and fixed optimizer settings are available in an expandable explanation. Reward edits are a draft until a job is launched; jobs snapshot their own weights, and reload restores the latest candidate's saved weights (or the original proposal before training).
+
+Saved runs expose raw episode return, episode length, and trailing-ten-episode training success curves. New `soren-training-v2` reports additionally record approximate KL, clipping fraction, critic loss, explained variance, per-episode reward contributions, actual optimizer settings, and the actor parameter L2 change. Metrics are captured after each PPO rollout update, including the final update. These diagnostics appear after checkpoint completion; older reports show unavailable fields explicitly. The run selector exposes checkpoint lineage and downloads without replacing historical records. Resuming restores model/optimizer state and starts a new sampling stream with the selected seed; it is not an exact simulator-state continuation.
+
+**Compare** explains paired regressions, provisional results, checkpoint/scoring provenance, and the limits of development evaluation. Switch between baseline and candidate telemetry to inspect that policy's measured curve, per-step weighted reward breakdown, task outcomes, and artifacts. Playback presents the first episode per scenario while outcome counts include all episodes.
+
+Research UI validation: `node --experimental-strip-types --test tests/research.test.mjs`. Python RL tests verify real parameter updates, finite optimizer diagnostics, reward accounting, checkpoint reload, and seeded continuation.
 
 ## Implementation
 
 | Location | Responsibility |
 | --- | --- |
 | `app/workspace.tsx`, `app/globals.css` | Experiment UI, gallery, telemetry, reward controls, comparison |
+| `app/research-workspace.tsx`, `app/research-workspace.css`, `lib/research.ts` | RL contract, reward equations, PPO explanation, learning curves, checkpoint provenance |
 | `app/api/lab/[...path]/route.ts` | Experiment/job API, validation, leases, artifact access |
 | `db/schema.ts`, `drizzle/0001_lab.sql` | D1 schema and idempotent hosting migration |
 | `lab/tasks.py`, `lab/specs.py`, `lab/planner.py` | Task/checkpoint registry, bounded configuration, structured Astra planning |
@@ -73,7 +92,7 @@ The acceptance experiment generated by Astra completed **48/48 baseline** and **
 
 ## Object lifting
 
-Choose **New experiment → Simulation task → Object lifting**. This uses the existing `bootstrap.ExtractionEnv` and recommended `artifacts/policy_recovery.npz`, with 32 state observations and four controls (XYZ motion plus close/open). Astra receives only the lifting mechanics and parameter schema. The built-in sweep covers four object approaches and four tray locations.
+Choose **New experiment → Task package → Object lifting & placement**. This uses the existing `bootstrap.ExtractionEnv` and recommended `artifacts/policy_recovery.npz`, with 32 state observations and four controls (XYZ motion plus close/open). Astra receives only the lifting mechanics and parameter schema. The built-in sweep covers four object approaches and four tray locations.
 
 | Scenario parameter | Supported range |
 | --- | --- |

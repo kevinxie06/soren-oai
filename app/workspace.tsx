@@ -1,16 +1,25 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
+import ExperimentComposer, { StudyRecord } from "./experiment-composer";
+import type { ExperimentSpecification } from "@/lib/experiment-spec";
+import { SceneThumbnail, SimulationPlayer } from "./scenario-rendering";
+import {
+  ScenarioExplanation,
+  ScenarioFingerprint,
+} from "./scenario-explanation";
+import { scenarioInsights } from "@/lib/scenario-insights";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowDownToLine,
+  ArrowLeft,
+  ArrowUpRight,
+  Command,
+  Menu,
+  SlidersHorizontal,
   ArrowRight,
   Box,
   Check,
   ChevronRight,
   CircleHelp,
-  FlaskConical,
-  Layers,
   LoaderCircle,
   Play,
   Plus,
@@ -19,9 +28,16 @@ import {
   Square,
   X,
 } from "lucide-react";
+import "./workspace.css";
+import {
+  PolicyContract,
+  ResearchTraining,
+  RewardBreakdown,
+  RewardEquation,
+} from "./research-workspace";
+import { rewardTerms, sameWeights, validWeights } from "@/lib/research";
 import { taskInfo } from "@/lib/tasks";
 import type {
-  TaskKind,
   Experiment,
   ExperimentDetail,
   Job,
@@ -49,55 +65,6 @@ async function api<T>(path: string, body?: unknown): Promise<T> {
   return data as T;
 }
 const asset = (key?: string) => (key ? "/api/lab/artifacts/" + key : undefined);
-const defaultPrompt = taskInfo.stitch.prompt;
-const labels: Record<
-  keyof RewardSpec,
-  { name: string; description: string; min: number; max: number; step: number }
-> = {
-  completion: {
-    name: "Task completion",
-    description: "Reward independently verified success.",
-    min: 1,
-    max: 100,
-    step: 1,
-  },
-  milestones: {
-    name: "Needle-transfer milestones",
-    description: "Reward entry, exit, catch, and clearance once each.",
-    min: 0,
-    max: 10,
-    step: 0.1,
-  },
-  closure: {
-    name: "Closure progress",
-    description: "Reward net gap reduction after a valid transfer.",
-    min: 0,
-    max: 10,
-    step: 0.1,
-  },
-  placement: {
-    name: "Placement progress",
-    description:
-      "Reward net approach to the tray after clearing the cavity rim.",
-    min: 0,
-    max: 10,
-    step: 0.1,
-  },
-  smoothness: {
-    name: "Action smoothness",
-    description: "Penalize changes between consecutive actions.",
-    min: 0,
-    max: 1,
-    step: 0.01,
-  },
-  failure: {
-    name: "Failure penalty",
-    description: "Penalize lost needles, invalid passes, and timeouts.",
-    min: 0,
-    max: 100,
-    step: 1,
-  },
-};
 function currentJob(jobs: Job[], kind: JobKind) {
   const trained = jobs.find(
     (j) => j.kind === "train" && j.status === "completed",
@@ -125,6 +92,49 @@ const score = (runs: Run[]) =>
   runs.length
     ? `${runs.filter((r) => r.info.success).length}/${runs.length}`
     : "—";
+
+function meanReward(runs: Run[]) {
+  return runs.length
+    ? (
+        runs.reduce((sum, run) => sum + run.reward_total, 0) / runs.length
+      ).toFixed(2)
+    : "—";
+}
+function ScenarioParameters({ scenario }: { scenario: Scenario }) {
+  const entries =
+    scenario.task === "lifting"
+      ? [
+          [
+            "Object position (XY)",
+            `${scenario.object_x_mm}, ${scenario.object_y_mm} mm`,
+          ],
+          ["Object orientation", `${scenario.object_yaw_deg}°`],
+          [
+            "Tray position (XY)",
+            `${scenario.tray_x_mm}, ${scenario.tray_y_mm} mm`,
+          ],
+          ["Initial gripper variation", "±25 mm"],
+        ]
+      : [
+          ["Initial wound gap", `${scenario.gap_mm.toFixed(1)} mm`],
+          ["Spring stiffness", `${scenario.stiffness} N/m`],
+          ["Needle radius", `${scenario.radius_mm} mm`],
+          [
+            "Starting offset (XYZ)",
+            `${scenario.offset_x_mm}, ${scenario.offset_y_mm}, ${scenario.offset_z_mm} mm`,
+          ],
+        ];
+  return (
+    <dl className="parameters">
+      {entries.map(([name, value]) => (
+        <div key={name}>
+          <dt>{name}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 function Curve({
   telemetry,
@@ -215,28 +225,44 @@ function Inspector({
   baseline,
   candidate,
   compare = false,
+  plan,
 }: {
+  plan: import("@/lib/types").Plan;
   scenario: Scenario;
   baseline?: Run;
   candidate?: Run;
   compare?: boolean;
 }) {
-  const [telemetry, setTelemetry] = useState<Telemetry | null>(null),
+  const [telemetryRecord, setTelemetryRecord] = useState<{
+      key: string;
+      data: Telemetry;
+    } | null>(null),
     [time, setTime] = useState(0),
     [error, setError] = useState("");
   const lifting = scenario.task === "lifting";
+  const [telemetrySource, setTelemetrySource] = useState<
+    "baseline" | "candidate"
+  >("baseline");
+  const inspectedRun =
+    telemetrySource === "candidate" && compare ? candidate : baseline;
+  const telemetryKey = inspectedRun?.telemetry;
+  const telemetry =
+    telemetryRecord?.key === telemetryKey
+      ? (telemetryRecord?.data ?? null)
+      : null;
   const first = useRef<HTMLVideoElement>(null),
     second = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     let active = true;
-    if (baseline?.telemetry)
-      fetch(asset(baseline.telemetry)!)
+    if (telemetryKey)
+      fetch(asset(telemetryKey)!)
         .then((r) => {
           if (!r.ok) throw new Error("Telemetry unavailable");
           return r.json();
         })
         .then((d) => {
-          if (active) setTelemetry(d as Telemetry);
+          if (active)
+            setTelemetryRecord({ key: telemetryKey, data: d as Telemetry });
         })
         .catch((e) => {
           if (active) setError(e.message);
@@ -244,7 +270,7 @@ function Inspector({
     return () => {
       active = false;
     };
-  }, [baseline?.telemetry]);
+  }, [telemetryKey]);
   const frame =
     telemetry?.frames[
       Math.min(Math.round(time / 0.05), (telemetry?.frames.length ?? 1) - 1)
@@ -258,53 +284,43 @@ function Inspector({
           Number.isFinite(v.duration) ? v.duration : value,
         );
   };
-  function player(
-    run: Run | undefined,
-    label: string,
-    ref: React.RefObject<HTMLVideoElement | null>,
-  ) {
-    return (
-      <div className="video-panel">
-        <div className="video-label">
-          <span>{label}</span>
-          <span>
-            {run
-              ? `${run.info.success ? "Success" : run.info.termination} · seed ${run.seed}`
-              : "Not evaluated"}
-          </span>
-        </div>
-        {run?.video ? (
-          <video
-            muted
-            ref={ref}
-            src={asset(run.video)}
-            poster={asset(run.thumbnail)}
-            controls={!compare}
-            preload="metadata"
-            playsInline
-            aria-label={`${label} simulation playback`}
-            onError={() =>
-              setError("Video unavailable. Inspect the recording artifact.")
-            }
-            onTimeUpdate={(e) => {
-              if (ref === first) setTime(e.currentTarget.currentTime);
-            }}
-          />
-        ) : (
-          <div className="video-placeholder">
-            <Image
-              unoptimized
-              width={640}
-              height={480}
-              src={asset(scenario.thumbnail)!}
-              alt="Initial MuJoCo scene"
-            />
-            <span>Initial state · awaiting {label.toLowerCase()}</span>
-          </div>
-        )}
-      </div>
-    );
-  }
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const [recordingDuration, setRecordingDuration] = useState(0);
+  const onDuration = useCallback((duration: number) => {
+    if (Number.isFinite(duration))
+      setRecordingDuration((previous) => Math.max(previous, duration));
+  }, []);
+  const duration = Math.max(
+    recordingDuration,
+    telemetry?.frames.at(-1)?.t ?? 0,
+  );
+  const baselinePlayable = !!(baseline?.motion || baseline?.video);
+  const candidatePlayable = !!(candidate?.motion || candidate?.video);
+  const playbackReady =
+    baselinePlayable && (!compare || candidatePlayable) && duration > 0;
+  const clock = useRef(time);
+  useEffect(() => {
+    clock.current = time;
+  }, [time]);
+  useEffect(() => {
+    if (!playing) return;
+    let id = 0,
+      previous = performance.now();
+    const tick = (now: number) => {
+      const next = Math.min(
+        duration,
+        clock.current + ((now - previous) / 1000) * speed,
+      );
+      previous = now;
+      clock.current = next;
+      setTime(next);
+      if (next >= duration) setPlaying(false);
+      else id = requestAnimationFrame(tick);
+    };
+    id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
+  }, [playing, speed, duration]);
   return (
     <section className={"inspection " + (compare ? "comparison-player" : "")}>
       <div className="section-heading">
@@ -312,43 +328,115 @@ function Inspector({
           <span className="eyebrow">
             SCENARIO {scenario.id.replace("scene-", "")}
           </span>
-          <h3>{scenario.name}</h3>
+          <h3>{scenarioInsights(scenario, plan.scenarios).title}</h3>
         </div>
         <span className="pill">MuJoCo</span>
       </div>
-      <p className="rationale">{scenario.rationale}</p>
+      <ScenarioExplanation scenario={scenario} plan={plan} />
       <div className="players">
-        {player(baseline, "Baseline", first)}
-        {compare && player(candidate, "Candidate", second)}
+        <SimulationPlayer
+          scenario={scenario}
+          suite={plan.scenarios}
+          run={baseline}
+          label="Baseline"
+          time={time}
+          playing={playing}
+          speed={speed}
+          videoRef={first}
+          onTime={setTime}
+          onDuration={onDuration}
+          onPlayingChange={setPlaying}
+        />
+        {compare && (
+          <SimulationPlayer
+            scenario={scenario}
+            suite={plan.scenarios}
+            run={candidate}
+            label="Candidate"
+            time={time}
+            playing={playing}
+            speed={speed}
+            videoRef={second}
+            onTime={setTime}
+            onDuration={onDuration}
+            onPlayingChange={setPlaying}
+          />
+        )}
       </div>
-      {compare && (
+      {(baseline || candidate) && (
         <div className="paired-controls">
           <button
             onClick={() => {
               for (const v of [first.current, second.current]) v?.pause();
+              setPlaying(false);
               sync(0);
             }}
           >
             <RefreshCw size={13} /> Reset
           </button>
           <button
+            disabled={!playbackReady}
             onClick={() => {
-              for (const v of [first.current, second.current])
-                v?.play().catch(() => {});
+              if (!playbackReady) return;
+              if (time >= duration) sync(0);
+              setPlaying(true);
             }}
           >
-            <Play size={13} /> Play both
+            <Play size={13} /> {compare ? "Play both" : "Play"}
           </button>
           <button
             onClick={() => {
+              setPlaying(false);
               for (const v of [first.current, second.current]) v?.pause();
             }}
           >
             <Square size={13} /> Pause
           </button>
+          <select
+            aria-label="Playback speed"
+            value={speed}
+            onChange={(event) => setSpeed(Number(event.target.value))}
+          >
+            {[0.25, 0.5, 0.75, 1, 2].map((value) => (
+              <option key={value} value={value}>
+                {value}×
+              </option>
+            ))}
+          </select>
         </div>
       )}
+      {compare && (!baselinePlayable || !candidatePlayable) && (
+        <p className="rendering-note" role="status">
+          Paired playback needs a recording from both policies for this
+          scenario.{" "}
+          {!baselinePlayable
+            ? "Complete baseline evaluation first."
+            : "Use Evaluate candidate to record the trained policy. If evaluation is running, this pair will be ready when its candidate recording finishes."}
+        </p>
+      )}
       {error && <p role="alert">{error}</p>}
+      {compare && (
+        <div
+          className="telemetry-source"
+          role="group"
+          aria-label="Telemetry source"
+        >
+          <span>Chart, measurements & reward</span>
+          <button
+            aria-pressed={telemetrySource === "baseline"}
+            onClick={() => setTelemetrySource("baseline")}
+          >
+            Baseline telemetry
+          </button>
+          <button
+            aria-pressed={telemetrySource === "candidate"}
+            disabled={!candidate?.telemetry}
+            onClick={() => setTelemetrySource("candidate")}
+          >
+            Candidate telemetry
+          </button>
+        </div>
+      )}
       <div className="telemetry-heading">
         <span>{frame?.phase ?? "Initial state"}</span>
         <span>{time.toFixed(2)} s</span>
@@ -359,7 +447,7 @@ function Inspector({
           aria-label="Simulation time"
           type="range"
           min={0}
-          max={telemetry.frames.at(-1)?.t ?? 0}
+          max={duration}
           step={0.05}
           value={time}
           onChange={(e) => sync(Number(e.target.value))}
@@ -388,79 +476,104 @@ function Inspector({
           </strong>
         </div>
       </div>
-      {scenario.task === "lifting" ? (
-        <dl className="parameters">
-          <div>
-            <dt>Object position (XY)</dt>
-            <dd>
-              {scenario.object_x_mm}, {scenario.object_y_mm} mm
-            </dd>
+      <details className="workspace-details">
+        <summary>Parameters, reward breakdown & downloads</summary>
+        {scenario.task === "lifting" ? (
+          <dl className="parameters">
+            <div>
+              <dt>Object position (XY)</dt>
+              <dd>
+                {scenario.object_x_mm}, {scenario.object_y_mm} mm
+              </dd>
+            </div>
+            <div>
+              <dt>Object orientation</dt>
+              <dd>{scenario.object_yaw_deg}°</dd>
+            </div>
+            <div>
+              <dt>Tray position (XY)</dt>
+              <dd>
+                {scenario.tray_x_mm}, {scenario.tray_y_mm} mm
+              </dd>
+            </div>
+            <div>
+              <dt>Initial gripper position</dt>
+              <dd>Seeded · ±25 mm</dd>
+            </div>
+            {inspectedRun && (
+              <>
+                <div>
+                  <dt>Rim cleared</dt>
+                  <dd>{inspectedRun.info.cleared ? "Yes" : "No"}</dd>
+                </div>
+                <div>
+                  <dt>Drops / flagged contacts</dt>
+                  <dd>
+                    {inspectedRun.info.drops} /{" "}
+                    {inspectedRun.info.unwanted_collisions}
+                  </dd>
+                </div>
+              </>
+            )}
+          </dl>
+        ) : (
+          <dl className="parameters">
+            <div>
+              <dt>Initial gap</dt>
+              <dd>{scenario.gap_mm.toFixed(1)} mm</dd>
+            </div>
+            <div>
+              <dt>Spring stiffness</dt>
+              <dd>{scenario.stiffness} N/m</dd>
+            </div>
+            <div>
+              <dt>Needle radius</dt>
+              <dd>{scenario.radius_mm} mm</dd>
+            </div>
+            <div>
+              <dt>Starting offset</dt>
+              <dd>
+                {scenario.offset_x_mm}, {scenario.offset_y_mm},{" "}
+                {scenario.offset_z_mm} mm
+              </dd>
+            </div>
+          </dl>
+        )}
+        <RewardBreakdown
+          terms={frame?.reward}
+          task={scenario.task ?? "stitch"}
+          label={
+            telemetrySource === "candidate" && compare
+              ? "Candidate"
+              : "Baseline"
+          }
+        />
+        {inspectedRun && (
+          <div className="artifact-links">
+            <a
+              href={asset(inspectedRun.manifest)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ArrowDownToLine size={12} /> Manifest
+            </a>
+            <a
+              href={asset(inspectedRun.telemetry)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Telemetry
+            </a>
+            <a
+              href={asset(inspectedRun.video)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Recording
+            </a>
           </div>
-          <div>
-            <dt>Object orientation</dt>
-            <dd>{scenario.object_yaw_deg}°</dd>
-          </div>
-          <div>
-            <dt>Tray position (XY)</dt>
-            <dd>
-              {scenario.tray_x_mm}, {scenario.tray_y_mm} mm
-            </dd>
-          </div>
-          <div>
-            <dt>Initial gripper position</dt>
-            <dd>Seeded · ±25 mm</dd>
-          </div>
-          {baseline && (
-            <>
-              <div>
-                <dt>Rim cleared</dt>
-                <dd>{baseline.info.cleared ? "Yes" : "No"}</dd>
-              </div>
-              <div>
-                <dt>Drops / flagged contacts</dt>
-                <dd>
-                  {baseline.info.drops} / {baseline.info.unwanted_collisions}
-                </dd>
-              </div>
-            </>
-          )}
-        </dl>
-      ) : (
-        <dl className="parameters">
-          <div>
-            <dt>Initial gap</dt>
-            <dd>{scenario.gap_mm.toFixed(1)} mm</dd>
-          </div>
-          <div>
-            <dt>Spring stiffness</dt>
-            <dd>{scenario.stiffness} N/m</dd>
-          </div>
-          <div>
-            <dt>Needle radius</dt>
-            <dd>{scenario.radius_mm} mm</dd>
-          </div>
-          <div>
-            <dt>Starting offset</dt>
-            <dd>
-              {scenario.offset_x_mm}, {scenario.offset_y_mm},{" "}
-              {scenario.offset_z_mm} mm
-            </dd>
-          </div>
-        </dl>
-      )}
-      {baseline && (
-        <div className="artifact-links">
-          <a href={asset(baseline.manifest)} target="_blank" rel="noreferrer">
-            <ArrowDownToLine size={12} /> Manifest
-          </a>
-          <a href={asset(baseline.telemetry)} target="_blank" rel="noreferrer">
-            Telemetry
-          </a>
-          <a href={asset(baseline.video)} target="_blank" rel="noreferrer">
-            Recording
-          </a>
-        </div>
-      )}
+        )}
+      </details>
       <p className="scope-note">
         <CircleHelp size={12} />{" "}
         {lifting
@@ -473,25 +586,31 @@ function Inspector({
 
 export default function Workspace() {
   const [ready, setReady] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [experiments, setExperiments] = useState<Experiment[]>([]),
     [selected, setSelected] = useState(""),
     [detail, setDetail] = useState<ExperimentDetail | null>(null);
   const [sceneId, setSceneId] = useState("scene-01"),
     [tab, setTab] = useState("environments"),
-    [creating, setCreating] = useState(false);
-  const [task, setTask] = useState<TaskKind>("stitch");
-  const [prompt, setPrompt] = useState(defaultPrompt),
-    [source, setSource] = useState("astra"),
-    [busy, setBusy] = useState(false),
+    [creating, setCreating] = useState(true);
+  const [draftSpec, setDraftSpec] = useState<
+    ExperimentSpecification | undefined
+  >();
+  const [composerKey, setComposerKey] = useState(0);
+  const loadedSpecification = useRef("");
+  const [busy, setBusy] = useState(false),
     [error, setError] = useState("");
   const [workers, setWorkers] = useState<
       { astra: boolean; rl: boolean; model: string }[]
     >([]),
     [episodes, setEpisodes] = useState(3),
     [steps, setSteps] = useState(8192);
+  const [seed, setSeed] = useState(7);
   const [reward, setReward] = useState<RewardSpec | null>(null),
     [feedback, setFeedback] = useState("");
   const selection = useRef("");
+  const contentHeading = useRef<HTMLHeadingElement>(null);
+  const [connected, setConnected] = useState(false);
   const refresh = useCallback(async () => {
     try {
       const [list, health] = await Promise.all([
@@ -503,35 +622,86 @@ export default function Workspace() {
       setExperiments(list);
       setWorkers(health.workers);
       setReady(true);
-      const requested = new URLSearchParams(window.location.search).get(
-        "experiment",
-      );
-      const id =
-        selection.current ||
-        (list.some((e) => e.id === requested) ? requested : list[0]?.id);
+      setConnected(true);
+      const id = selection.current;
       if (id) {
         const d = await api<ExperimentDetail>("/experiments/" + id);
-        if (!selection.current || selection.current === id) {
+        if (selection.current === id) {
           selection.current = id;
           setSelected(id);
           setDetail(d);
+          if (loadedSpecification.current !== id) {
+            loadedSpecification.current = id;
+            setEpisodes(d.experiment.specification?.episodes ?? 3);
+            setSteps(d.experiment.specification?.steps ?? 8192);
+            setSeed(d.experiment.specification?.seed ?? 7);
+          }
         }
       }
     } catch (e) {
+      setConnected(false);
+      setReady(true);
       setError(e instanceof Error ? e.message : "Connection failed");
     }
   }, []);
   useEffect(() => {
-    const initial = setTimeout(() => void refresh(), 0);
+    const restore = () => {
+      const query = new URLSearchParams(window.location.search);
+      const id = query.get("experiment") ?? "";
+      const scene = query.get("scene");
+      const view = query.get("view") ?? "environments";
+      selection.current = id;
+      setSelected(id);
+      setCreating(!id);
+      setDetail(null);
+      setReward(null);
+      setSceneId(scene ?? "scene-01");
+      setTab(
+        scene
+          ? view === "render"
+            ? "render"
+            : "detail"
+          : ["training", "compare", "activity"].includes(view)
+            ? view
+            : "environments",
+      );
+      void refresh();
+    };
+    const initial = setTimeout(restore, 0);
     const timer = setInterval(() => void refresh(), 2500);
+    window.addEventListener("popstate", restore);
     return () => {
       clearTimeout(initial);
       clearInterval(timer);
+      window.removeEventListener("popstate", restore);
     };
   }, [refresh]);
+  function navigate(view: string, scene?: string) {
+    const query = new URLSearchParams({ experiment: selection.current });
+    if (scene) query.set("scene", scene);
+    if (view !== "environments") query.set("view", view);
+    window.history.pushState(null, "", `/?${query}`);
+    if (scene) setSceneId(scene);
+    setTab(view);
+    requestAnimationFrame(() => contentHeading.current?.focus());
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+  function newExperiment() {
+    setMenuOpen(false);
+    selection.current = "";
+    window.history.pushState(null, "", "/");
+    setSelected("");
+    setDetail(null);
+    setReward(null);
+    setCreating(true);
+    setError("");
+    setDraftSpec(undefined);
+    setComposerKey((key) => key + 1);
+  }
   async function choose(id: string) {
+    setMenuOpen(false);
     selection.current = id;
-    window.history.replaceState(
+    window.history.pushState(
       null,
       "",
       `/?experiment=${encodeURIComponent(id)}`,
@@ -542,6 +712,7 @@ export default function Workspace() {
     setCreating(false);
     setTab("environments");
     setDetail(null);
+    setError("");
     await refresh();
   }
   async function action(fn: () => Promise<void>) {
@@ -556,13 +727,22 @@ export default function Workspace() {
       setBusy(false);
     }
   }
-  function create(parent = false) {
+  function refine() {
+    if (detail?.experiment.specification) {
+      const initial = detail.experiment.specification;
+      newExperiment();
+      setDraftSpec({
+        ...initial,
+        question: feedback.trim() || initial.question,
+      });
+      return;
+    }
     void action(async () => {
       const result = await api<{ experiment: Experiment }>("/experiments", {
-        task: parent ? (detail!.experiment.task ?? "stitch") : task,
-        prompt: parent ? detail!.experiment.prompt : prompt,
-        source: parent ? "astra" : source,
-        parent_id: parent ? selected : undefined,
+        task: detail!.experiment.task ?? "stitch",
+        prompt: detail!.experiment.prompt,
+        source: "astra",
+        parent_id: selected,
         feedback,
       });
       await choose(result.experiment.id);
@@ -573,21 +753,9 @@ export default function Workspace() {
     plan = detail?.experiment.plan;
   const kind = detail?.experiment.task ?? "stitch";
   const lifting = kind === "lifting";
-  const rewardLabels = lifting
-    ? {
-        ...labels,
-        milestones: {
-          ...labels.milestones,
-          name: "Grasp and clearance milestones",
-          description:
-            "Reward grasp, rim clearance, and release in the tray once each.",
-        },
-        failure: {
-          ...labels.failure,
-          description: "Penalize out-of-bounds failures and timeouts.",
-        },
-      }
-    : labels;
+  const rewardLabels = Object.fromEntries(
+    rewardTerms(kind).map((term) => [term.key, term]),
+  );
   const baseline = detail ? runsFor(detail, "baseline") : [],
     candidate = detail ? runsFor(detail, "candidate") : [],
     baseJob = currentJob(jobs, "baseline"),
@@ -601,190 +769,167 @@ export default function Workspace() {
     cand = candidate.find(
       (r) => r.scenario_id === scenario?.id && r.episode === 0,
     );
-  const blocked = busy || Boolean(active) || !workers.length,
-    weights = reward ?? plan?.reward;
+  const blocked = busy || Boolean(active) || !connected || !workers.length,
+    weights = reward ?? trained?.data.reward ?? plan?.reward;
   const launch = (kind: JobKind, resume = false) =>
     void action(async () => {
       await api("/experiments/" + selected + "/jobs", {
         kind,
         episodes,
         steps,
-        seed: 7,
+        seed,
         reward: weights,
         resume,
       });
     });
+  const inspecting = tab === "detail" || tab === "render";
   return (
-    <div className="lab-shell">
+    <div className={"lab-shell" + (menuOpen ? " menu-open" : "")}>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <aside className="sidebar">
-        <Link className="wordmark" href="/">
-          soren<span>●</span>
-        </Link>
-        <div className="workspace-label">
-          <FlaskConical size={16} />
-          Policy lab<span className="tiny-label">BETA</span>
-        </div>
         <button
-          className="new-button"
-          disabled={!ready}
-          onClick={() => setCreating(true)}
+          className="wordmark"
+          onClick={newExperiment}
+          aria-label="Soren workspace"
         >
-          <Plus size={16} /> New experiment
+          <span className="brand-symbol">
+            <Command size={21} strokeWidth={1.6} />
+          </span>
+          soren<span className="brand-edition">LAB</span>
         </button>
-        <div className="sidebar-caption">
-          EXPERIMENTS <span>{experiments.length}</span>
-        </div>
-        <nav className="experiment-nav" aria-label="Experiments">
-          {experiments.map((e) => (
-            <button
-              key={e.id}
-              className={
-                "experiment-link " +
-                (selected === e.id && !creating ? "selected" : "")
-              }
-              onClick={() => void choose(e.id)}
-            >
-              <Box size={15} />
-              <span>{e.title}</span>
+        <button
+          className="mobile-menu"
+          aria-expanded={menuOpen}
+          aria-controls="workspace-navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X size={18} /> : <Menu size={18} />} Menu
+        </button>
+        <div className="sidebar-navigation" id="workspace-navigation">
+          <nav className="primary-nav" aria-label="Main navigation">
+            <button className="new-button" onClick={newExperiment}>
+              <Plus size={16} />
+              New experiment
             </button>
-          ))}
-        </nav>
-        <nav className="procedure-nav" aria-labelledby="procedure-nav-title">
-          <h2 id="procedure-nav-title">Procedure playbacks</h2>
-          <p>Watch and compare policy versions.</p>
-          <div className="procedure-links">
-            <Link href="/showcase">
-              <Play size={15} aria-hidden="true" />
-              <span>Heart extraction</span>
-              <ChevronRight size={14} aria-hidden="true" />
-            </Link>
-            <Link href="/suturing">
-              <Play size={15} aria-hidden="true" />
-              <span>Suturing</span>
-              <ChevronRight size={14} aria-hidden="true" />
-            </Link>
+          </nav>
+          <div className="sidebar-caption">
+            EXPERIMENTS{" "}
+            <span>{experiments.length.toString().padStart(2, "0")}</span>
           </div>
-        </nav>
-        <div className="sidebar-bottom">
-          <div className="connection">
-            <span className={workers.length ? "dot online" : "dot"} />
-            {workers.length ? "Simulation worker online" : "Waiting for worker"}
+          <nav className="experiment-nav" aria-label="Experiments">
+            {experiments.map((e) => (
+              <button
+                key={e.id}
+                className={
+                  "experiment-link " +
+                  (selected === e.id && !creating ? "selected" : "")
+                }
+                onClick={() => void choose(e.id)}
+                title={e.title}
+              >
+                <Box size={15} />
+                <span>{e.title}</span>
+              </button>
+            ))}
+            {ready && !experiments.length && (
+              <p className="nav-empty">Your experiments will appear here.</p>
+            )}
+          </nav>
+          <div className="sidebar-bottom">
+            <div className="connection">
+              <span
+                className={connected && workers.length ? "dot online" : "dot"}
+              />
+              {!ready
+                ? "Connecting…"
+                : connected && workers.length
+                  ? "Simulation worker online"
+                  : "Simulation worker offline"}
+            </div>
           </div>
-          <span>MuJoCo · CPU execution</span>
-          <a href="/api/lab/health" target="_blank" rel="noreferrer">
-            Connection details <ArrowRight size={12} />
-          </a>
         </div>
       </aside>
-      <main className="workspace">
+      <main className="workspace" id="main-content">
         <header className="topbar">
-          <div>
-            <Layers size={16} />
-            <span>Experiments</span>
-            <ChevronRight size={14} />
-            <span>
-              {creating ? "New experiment" : (plan?.title ?? "Workspace")}
-            </span>
+          <div className="breadcrumbs">
+            <button onClick={newExperiment}>Workspace</button>
+            <ChevronRight size={13} />
+            {!creating && detail ? (
+              <>
+                <button onClick={() => navigate("environments")}>
+                  {detail.experiment.title}
+                </button>
+                {inspecting && (
+                  <>
+                    <ChevronRight size={13} />
+                    <span>
+                      {scenario && plan
+                        ? scenarioInsights(scenario, plan.scenarios).title
+                        : ""}
+                    </span>
+                  </>
+                )}
+              </>
+            ) : (
+              <span>New experiment</span>
+            )}
           </div>
-          <span className="runtime-label">
-            <span className="dot online" /> Local research workspace
-          </span>
         </header>
         {error && (
           <div className="error-banner" role="alert">
             <span>{error}</span>
+            <button
+              onClick={() => void refresh()}
+              aria-label="Retry connection"
+            >
+              <RefreshCw size={14} />
+            </button>
             <button aria-label="Dismiss error" onClick={() => setError("")}>
               <X size={16} />
             </button>
           </div>
         )}
-        {creating || (ready && !experiments.length && !detail) ? (
+        {creating ? (
           <section className="create-view">
-            <div className="create-icon">
-              <FlaskConical size={28} />
-            </div>
-            <span className="eyebrow">FROM INTENT TO EXPERIMENT</span>
-            <h1>
-              What should your policy
-              <br />
-              get better at?
-            </h1>
-            <p>
-              Turn a task into 16 physical variations. Evaluate the baseline,
-              <br className="desktop-break" /> learn from its failures, and
-              train a candidate.
-            </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                create();
-              }}
-            >
-              <label htmlFor="task-kind">Simulation task</label>
-              <select
-                id="task-kind"
-                value={task}
-                onChange={(e) => {
-                  const next = e.target.value as TaskKind;
-                  if (prompt === taskInfo[task].prompt)
-                    setPrompt(taskInfo[next].prompt);
-                  setTask(next);
-                }}
-              >
-                <option value="stitch">
-                  Suturing · needle transfer & closure
-                </option>
-                <option value="lifting">
-                  Object lifting · grasp, lift & place
-                </option>
-              </select>
-              <label htmlFor="task">Improvement task</label>
-              <textarea
-                id="task"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                minLength={10}
-                maxLength={4000}
-                rows={4}
-                required
-              />
-              <div className="create-options">
-                <label>
-                  Planner
-                  <select
-                    aria-label="Planner"
-                    value={source}
-                    onChange={(e) => setSource(e.target.value)}
-                  >
-                    <option value="astra">
-                      Astra · natural-language planning
-                    </option>
-                    <option value="template">{taskInfo[task].sweep}</option>
-                  </select>
-                </label>
-                <span className="policy-tag">
-                  <Box size={14} /> {taskInfo[task].checkpoint}
-                </span>
-              </div>
-              <button
-                className="primary generate-button"
-                disabled={busy || !workers.length}
-              >
-                {busy ? (
-                  <LoaderCircle className="spin" size={16} />
-                ) : (
-                  <Sparkles size={16} />
-                )}
-                Generate 16 scenarios
-                <ArrowRight size={16} />
-              </button>
-            </form>
-            <p className="supported">
-              {taskInfo[task].description}
-              <br />
-              Simulation assumptions and reward terms stay visible in every
-              experiment.
-            </p>
+            <ExperimentComposer
+              key={composerKey}
+              initial={draftSpec}
+              available={connected && workers.length > 0}
+              trainingAvailable={workers.some((worker) => worker.rl)}
+              onCreated={choose}
+            />
+            {experiments.length > 0 && (
+              <section className="recent-experiments">
+                <div className="recent-heading">
+                  <h2>Recent experiments</h2>
+                </div>
+                {experiments.slice(0, 3).map((e) => (
+                  <button key={e.id} onClick={() => void choose(e.id)}>
+                    <span className="recent-icon">
+                      <Box size={17} />
+                    </span>
+                    <span className="recent-title">
+                      <strong>{e.title}</strong>
+                      <span>
+                        {taskInfo[e.task ?? "stitch"].name} ·{" "}
+                        {e.plan
+                          ? `${e.plan.scenarios.length} environments`
+                          : "Preparing suite"}
+                      </span>
+                    </span>
+                    <time dateTime={new Date(e.created_at).toISOString()}>
+                      {new Date(e.created_at).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <ArrowUpRight size={15} />
+                  </button>
+                ))}
+              </section>
+            )}
           </section>
         ) : (
           detail && (
@@ -794,41 +939,25 @@ export default function Workspace() {
                   <div className="eyebrow">
                     {taskInfo[kind].heading.toUpperCase()}
                   </div>
-                  <h1>{plan?.title ?? "Designing your experiment"}</h1>
-                  <p>{plan?.hypothesis ?? detail.experiment.prompt}</p>
+                  <h1 ref={contentHeading} tabIndex={-1}>
+                    {inspecting
+                      ? scenario && plan
+                        ? scenarioInsights(scenario, plan.scenarios).title
+                        : ""
+                      : (plan?.title ?? "Preparing your experiment")}
+                  </h1>
+                  <p>
+                    {inspecting
+                      ? scenario && plan
+                        ? scenarioInsights(scenario, plan.scenarios).purpose
+                        : ""
+                      : (plan?.hypothesis ?? detail.experiment.prompt)}
+                  </p>
                 </div>
-                <span className="pill">
-                  <Sparkles size={12} />
-                  {plan?.provider ??
-                    (detail.experiment.source === "astra"
-                      ? "Astra"
-                      : "Parameter sweep")}
-                </span>
               </section>
-              <div className="workflow-strip">
-                {[
-                  "Generate",
-                  "Evaluate baseline",
-                  "Train candidate",
-                  "Compare",
-                ].map((label, i) => {
-                  const done =
-                    i === 0
-                      ? Boolean(plan)
-                      : i === 1
-                        ? baseJob?.status === "completed"
-                        : i === 2
-                          ? Boolean(trained)
-                          : candidateJob?.status === "completed";
-                  return (
-                    <div key={label} className={done ? "done" : ""}>
-                      <span>{done ? <Check size={12} /> : i + 1}</span>
-                      {label}
-                      {i < 3 && <ChevronRight size={13} />}
-                    </div>
-                  );
-                })}
-              </div>
+              {detail.experiment.specification && (
+                <StudyRecord specification={detail.experiment.specification} />
+              )}
               {active && (
                 <div className="job-progress" role="status">
                   <div>
@@ -851,35 +980,34 @@ export default function Workspace() {
               {jobs[0]?.status === "failed" && (
                 <div className="error-banner" role="alert">
                   {jobs[0].error}
-                  <button onClick={() => setCreating(true)}>
-                    New experiment
-                  </button>
+                  <button onClick={newExperiment}>New experiment</button>
                 </div>
               )}
-              <div
-                className="tabs"
-                role="tablist"
-                aria-label="Experiment views"
-              >
-                {[
-                  ["environments", "Environments"],
-                  ["training", "Rewards & training"],
-                  ["compare", "Compare"],
-                  ["activity", "Activity"],
-                ].map(([key, label]) => (
-                  <button
-                    key={key}
-                    role="tab"
-                    aria-selected={tab === key}
-                    onClick={() => setTab(key)}
-                  >
-                    {label}
-                    {key === "environments" && (
-                      <span>{plan?.scenarios.length ?? 0}</span>
-                    )}
-                  </button>
-                ))}
-              </div>
+              {plan && (
+                <nav className="tabs" aria-label="Experiment views">
+                  {[
+                    ["environments", "Environments"],
+                    ["training", "Rewards & training"],
+                    ["compare", "Compare"],
+                    ["activity", "Activity"],
+                  ].map(([key, label]) => (
+                    <button
+                      key={key}
+                      aria-current={
+                        tab === key || (inspecting && key === "environments")
+                          ? "page"
+                          : undefined
+                      }
+                      onClick={() => navigate(key)}
+                    >
+                      {label}
+                      {key === "environments" && (
+                        <span>{plan?.scenarios.length ?? 0}</span>
+                      )}
+                    </button>
+                  ))}
+                </nav>
+              )}
               {!plan ? (
                 <div className="generation-empty">
                   <LoaderCircle size={26} className={active ? "spin" : ""} />
@@ -903,7 +1031,8 @@ export default function Workspace() {
                           <div>
                             <h2>Environment suite</h2>
                             <span>
-                              16 scenarios · {baseline.length} measured episodes
+                              {plan.scenarios.length} environments · Select one
+                              to inspect parameters and rewards
                             </span>
                           </div>
                           <div className="run-controls">
@@ -918,7 +1047,7 @@ export default function Workspace() {
                               }
                               disabled={blocked}
                             >
-                              {[1, 3, 5, 10].map((n) => (
+                              {[1, 3, 5, 10, 20].map((n) => (
                                 <option key={n} value={n}>
                                   {n} episode{n > 1 ? "s" : ""} / scene
                                 </option>
@@ -968,34 +1097,25 @@ export default function Workspace() {
                             </span>
                           </div>
                         )}
+                        <p className="suite-condition-key">Each card shows why the case matters. Dots locate its parameters within the study ranges; the center tick marks the range midpoint.</p>
                         <div className="scenario-grid">
                           {plan.scenarios.map((s, i) => {
                             const runs = baseline.filter(
                                 (r) => r.scenario_id === s.id,
                               ),
-                              first = runs.find((r) => r.episode === 0),
                               failed = runs.some((r) => !r.info.success);
                             return (
                               <button
                                 key={s.id}
-                                className={
-                                  "scenario-card " +
-                                  (scenario?.id === s.id ? "is-selected" : "")
-                                }
-                                onClick={() => setSceneId(s.id)}
-                                aria-pressed={scenario?.id === s.id}
-                                aria-label={`Scenario ${i + 1}: ${s.name}`}
+                                className="scenario-card"
+                                onClick={() => navigate("detail", s.id)}
+                                aria-label={`Scenario ${i + 1}: ${scenarioInsights(s, plan.scenarios).title}`}
                               >
                                 <div className="scenario-image">
-                                  <Image
-                                    unoptimized
-                                    width={640}
-                                    height={480}
-                                    src={asset(
-                                      first?.thumbnail ?? s.thumbnail,
-                                    )!}
-                                    alt={`MuJoCo rendering: ${s.name}`}
-                                    loading="lazy"
+                                  <SceneThumbnail
+                                    key={s.motion ?? s.id}
+                                    scenario={s}
+                                    fallback={asset(s.thumbnail)}
                                   />
                                   <span className="scene-number">
                                     {String(i + 1).padStart(2, "0")}
@@ -1021,17 +1141,29 @@ export default function Workspace() {
                                   </span>
                                 </div>
                                 <div className="scenario-caption">
-                                  <strong>{s.name}</strong>
-                                  <span>
-                                    {s.task === "lifting"
-                                      ? `Object ${s.object_x_mm}, ${s.object_y_mm} mm · tray ${s.tray_x_mm} mm`
-                                      : `${s.gap_mm.toFixed(1)} mm gap · ${s.stiffness} N/m`}
+                                  <strong>
+                                    {scenarioInsights(s, plan.scenarios).title}
+                                    <ArrowUpRight size={13} />
+                                  </strong>
+                                  <span className="scenario-role">
+                                    {scenarioInsights(s, plan.scenarios).role}
                                   </span>
+                                  <p className="scenario-purpose" title={plan.model !== "deterministic" ? s.rationale : undefined}>
+                                    {plan.model !== "deterministic" ? s.rationale : scenarioInsights(s, plan.scenarios).purpose}
+                                  </p>
+                                  <ScenarioFingerprint
+                                    scenario={s}
+                                    suite={plan.scenarios}
+                                  />
                                 </div>
                               </button>
                             );
                           })}
                         </div>
+                        <details className="workspace-details">
+                          <summary>Policy and simulation details</summary>
+                          <PolicyContract task={kind} plan={plan} />
+                        </details>
                         <details className="assumptions">
                           <summary>Model scope & assumptions</summary>
                           <ul>
@@ -1045,186 +1177,315 @@ export default function Workspace() {
                           </p>
                         </details>
                       </section>
-                      {scenario && (
-                        <Inspector
-                          key={`${scenario.id}-${base?.id ?? "initial"}`}
-                          scenario={scenario}
-                          baseline={base}
-                        />
-                      )}
                     </div>
                   )}
-                  {tab === "training" && (
-                    <div className="training-layout">
-                      <section className="panel reward-panel">
-                        <span className="eyebrow">ASTRA REWARD PROPOSAL</span>
-                        <h2>Shape the learning signal</h2>
-                        <p>
-                          Weights apply to a new training run. Task success and
-                          failure criteria remain fixed.
-                        </p>
-                        {weights &&
-                          Object.entries(rewardLabels)
-                            .filter(([key]) => key in weights)
-                            .map(([key, label]) => (
-                              <label className="reward-row" key={key}>
-                                <span>
-                                  <strong>{label.name}</strong>
-                                  <span>{label.description}</span>
-                                </span>
-                                <input
-                                  aria-label={label.name}
-                                  type="number"
-                                  min={label.min}
-                                  max={label.max}
-                                  step={label.step}
-                                  value={weights[key as keyof RewardSpec]}
-                                  disabled={blocked}
-                                  onChange={(e) =>
-                                    setReward({
-                                      ...weights,
-                                      [key]: Number(e.target.value),
-                                    })
-                                  }
-                                />
-                              </label>
-                            ))}
-                        <div className="fixed-criteria">
-                          <Check size={15} />
-                          <div>
-                            <strong>Independent success criteria</strong>
-                            <p>
-                              {lifting
-                                ? "Clear the cavity rim, release with an open gripper in the tray, and remain settled for 0.75 seconds. Drops and wall contacts are reported separately."
-                                : "Valid pass, receiving catch, donor release, full clearance, and gap below 0.7 mm for 0.75 seconds with low needle velocity."}
-                            </p>
-                          </div>
-                        </div>
-                      </section>
-                      <section className="panel train-panel">
-                        <span className="eyebrow">POLICY OPTIMIZATION</span>
-                        <h2>Train a candidate</h2>
-                        <dl className="parameters">
-                          <div>
-                            <dt>Algorithm</dt>
-                            <dd>PPO</dd>
-                          </div>
-                          <div>
-                            <dt>Starting policy</dt>
-                            <dd>{taskInfo[kind].checkpoint}</dd>
-                          </div>
-                          <div>
-                            <dt>Network</dt>
-                            <dd>
-                              {lifting
-                                ? "32 → 64 → 64 → 4"
-                                : "38 → 64 → 64 → 7"}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt>Distribution</dt>
-                            <dd>16 families + bounded variation</dd>
-                          </div>
-                          <div>
-                            <dt>Training seed</dt>
-                            <dd>7</dd>
-                          </div>
-                        </dl>
-                        <label className="field-label">
-                          Transition budget
-                          <select
-                            value={steps}
-                            onChange={(e) => setSteps(Number(e.target.value))}
-                            disabled={blocked}
-                          >
-                            <option value={1024}>1,024 · smoke run</option>
-                            <option value={8192}>
-                              8,192 · short experiment
-                            </option>
-                            <option value={32768}>
-                              32,768 · extended experiment
-                            </option>
-                            <option value={131072}>
-                              131,072 · longer training
-                            </option>
-                          </select>
-                        </label>
+                  {inspecting && scenario && (
+                    <section className="environment-detail">
+                      <div className="detail-toolbar">
                         <button
-                          className="primary full-width"
-                          disabled={blocked || baseJob?.status !== "completed"}
-                          onClick={() => launch("train")}
+                          className="back-button"
+                          onClick={() => navigate("environments")}
                         >
-                          <Play size={14} /> Start RL training
+                          <ArrowLeft size={14} />
+                          All environments
                         </button>
-                        {trained && (
+                        <div className="environment-pagination">
                           <button
-                            className="full-width resume-button"
-                            disabled={blocked}
-                            onClick={() => launch("train", true)}
+                            aria-label="Previous environment"
+                            disabled={plan.scenarios.indexOf(scenario) === 0}
+                            onClick={() =>
+                              navigate(
+                                tab,
+                                plan.scenarios[
+                                  plan.scenarios.indexOf(scenario) - 1
+                                ].id,
+                              )
+                            }
                           >
-                            <RefreshCw size={14} /> Continue from saved
-                            candidate
+                            <ArrowLeft size={14} />
                           </button>
-                        )}
-                        {baseJob?.status !== "completed" && (
-                          <p className="muted">
-                            Complete baseline evaluation to enable training.
-                          </p>
-                        )}
-                        {trained && (
-                          <div className="training-result">
-                            <Check size={17} />
-                            <div>
-                              <strong>Candidate checkpoint saved</strong>
-                              <p>
-                                {String(trained.result?.steps)} transitions ·
-                                baseline import verified
-                              </p>
-                              <a
-                                href={asset(String(trained.result?.report))}
-                                target="_blank"
-                                rel="noreferrer"
+                          <span>
+                            {String(
+                              plan.scenarios.indexOf(scenario) + 1,
+                            ).padStart(2, "0")}{" "}
+                            / {plan.scenarios.length}
+                          </span>
+                          <button
+                            aria-label="Next environment"
+                            disabled={
+                              plan.scenarios.indexOf(scenario) ===
+                              plan.scenarios.length - 1
+                            }
+                            onClick={() =>
+                              navigate(
+                                tab,
+                                plan.scenarios[
+                                  plan.scenarios.indexOf(scenario) + 1
+                                ].id,
+                              )
+                            }
+                          >
+                            <ArrowRight size={14} />
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        className="detail-view-tabs"
+                        role="group"
+                        aria-label="Environment view"
+                      >
+                        <button
+                          aria-pressed={tab === "detail"}
+                          onClick={() => navigate("detail", scenario.id)}
+                        >
+                          <SlidersHorizontal size={14} />
+                          Overview
+                        </button>
+                        <button
+                          aria-pressed={tab === "render"}
+                          onClick={() => navigate("render", scenario.id)}
+                        >
+                          <Play size={14} />
+                          Simulation
+                        </button>
+                      </div>
+                      {tab === "detail" ? (
+                        <div className="detail-grid">
+                          <div>
+                            <div className="environment-preview">
+                              <SceneThumbnail
+                                key={scenario.motion ?? scenario.id}
+                                scenario={scenario}
+                                fallback={asset(scenario.thumbnail)}
+                              />
+                              <span className="preview-badge">
+                                <span className="dot" />
+                                INITIAL SIMULATION STATE
+                              </span>
+                              <button
+                                className="preview-open"
+                                onClick={() => navigate("render", scenario.id)}
                               >
-                                Training report <ArrowDownToLine size={12} />
-                              </a>
-                              {typeof trained.result?.checkpoint ===
-                                "string" && (
-                                <p>
-                                  <a
-                                    href={asset(
-                                      String(trained.result.checkpoint),
-                                    )}
-                                    download="candidate.zip"
-                                  >
-                                    Download checkpoint{" "}
-                                    <ArrowDownToLine size={12} />
-                                  </a>
-                                </p>
-                              )}
+                                <Play size={16} />
+                                Open simulation
+                                <ArrowUpRight size={15} />
+                              </button>
+                            </div>
+                            <div className="detail-outcomes">
+                              <div>
+                                <span>Baseline successes</span>
+                                <strong>
+                                  {score(
+                                    baseline.filter(
+                                      (r) => r.scenario_id === scenario.id,
+                                    ),
+                                  )}
+                                </strong>
+                              </div>
+                              <div>
+                                <span>Mean reward</span>
+                                <strong>
+                                  {meanReward(
+                                    baseline.filter(
+                                      (r) => r.scenario_id === scenario.id,
+                                    ),
+                                  )}
+                                </strong>
+                              </div>
+                              <div>
+                                <span>Scenario seed</span>
+                                <strong>{scenario.seed}</strong>
+                              </div>
                             </div>
                           </div>
-                        )}
-                        <p className="scope-note">
-                          Optimization may improve or regress performance.
-                          Evaluate the candidate before drawing conclusions.
-                        </p>
-                      </section>
-                    </div>
+                          <div className="detail-specifications">
+                            <ScenarioExplanation
+                              scenario={scenario}
+                              plan={plan}
+                            />
+                            <section className="detail-panel">
+                              <div className="section-heading">
+                                <h2>Environment parameters</h2>
+                                <span className="eyebrow">CONFIGURATION</span>
+                              </div>
+                              <ScenarioParameters scenario={scenario} />
+                            </section>
+                            <section className="detail-panel">
+                              <div className="section-heading">
+                                <h2>Reward function</h2>
+                                <button
+                                  className="text-button"
+                                  onClick={() => navigate("training")}
+                                >
+                                  Configure
+                                  <ArrowUpRight size={12} />
+                                </button>
+                              </div>
+                              <p>
+                                Original experiment proposal · shared across
+                                environments. Training runs retain their own
+                                reward weights.
+                              </p>
+                              <dl className="parameters">
+                                {Object.entries(plan.reward).map(
+                                  ([key, value]) => (
+                                    <div key={key}>
+                                      <dt>
+                                        {
+                                          rewardLabels[key as keyof RewardSpec]
+                                            .name
+                                        }
+                                      </dt>
+                                      <dd>{value}</dd>
+                                    </div>
+                                  ),
+                                )}
+                              </dl>
+                            </section>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="render-view">
+                          {!base?.video && (
+                            <div className="render-notice">
+                              <div>
+                                <strong>
+                                  {active?.kind === "baseline"
+                                    ? "Recording your baseline"
+                                    : "Ready to run this environment"}
+                                </strong>
+                                <p>
+                                  {active?.kind === "baseline"
+                                    ? "The recording will appear when this environment finishes."
+                                    : "Evaluate the 16-environment suite to unlock recordings and telemetry."}
+                                </p>
+                              </div>
+                              <button
+                                className="primary"
+                                disabled={blocked}
+                                onClick={() => launch("baseline")}
+                              >
+                                <Play size={14} />
+                                Evaluate baseline
+                              </button>
+                            </div>
+                          )}
+                          <Inspector
+                            plan={plan}
+                            key={`${scenario.id}-${base?.id ?? "initial"}`}
+                            scenario={scenario}
+                            baseline={base}
+                          />
+                        </div>
+                      )}
+                    </section>
+                  )}
+                  {tab === "training" && weights && (
+                    <ResearchTraining
+                      key={selected}
+                      task={kind}
+                      plan={plan}
+                      weights={weights}
+                      onWeights={setReward}
+                      steps={steps}
+                      onSteps={setSteps}
+                      seed={seed}
+                      onSeed={setSeed}
+                      jobs={jobs}
+                      blocked={blocked}
+                      rlAvailable={workers.some((worker) => worker.rl)}
+                      baselineReady={baseJob?.status === "completed"}
+                      onTrain={(resume) => launch("train", resume)}
+                      onCompare={() => navigate("compare")}
+                    />
                   )}
                   {tab === "compare" && (
                     <section className="compare-section">
                       <div className="gallery-heading">
                         <div>
                           <h2>Baseline vs. candidate</h2>
-                          <span>Same configurations and episode seeds</span>
+                          <span>
+                            Same configurations, episode seeds, and episode
+                            count · development evaluation
+                          </span>
                         </div>
                         <button
                           className="primary"
-                          disabled={blocked || !trained}
+                          disabled={
+                            blocked ||
+                            !trained ||
+                            baseJob?.status !== "completed" ||
+                            !weights ||
+                            !validWeights(weights, kind)
+                          }
                           onClick={() => launch("candidate")}
                         >
                           <Play size={14} /> Evaluate candidate
                         </button>
+                      </div>
+                      <div className="research-notice">
+                        <strong>Evaluation protocol</strong>
+                        <br />
+                        Success is checked by the simulator independently of
+                        reward weights. A paired regression means the baseline
+                        succeeded and the candidate failed on the same scenario
+                        and seed.
+                        {baseJob?.status !== "completed" ||
+                        candidateJob?.status !== "completed"
+                          ? " Results remain provisional until both evaluations complete."
+                          : " Both displayed evaluations are complete."}
+                        {(candidateJob?.data.reward ?? weights) &&
+                          baseJob?.data.reward &&
+                          !sameWeights(
+                            (candidateJob?.data.reward ?? weights)!,
+                            baseJob.data.reward,
+                          ) &&
+                          " Candidate scoring weights differ from the baseline run. Raw reward totals are not directly comparable."}
+                        {trained && (
+                          <details className="research-details">
+                            <summary>
+                              Checkpoint and scoring provenance{" "}
+                              <ChevronRight size={14} />
+                            </summary>
+                            <div className="research-detail-body">
+                              <p>
+                                Baseline job: {baseJob?.id ?? "Not evaluated"}
+                                <br />
+                                Candidate job:{" "}
+                                {candidateJob?.id ?? "Not evaluated"}
+                                <br />
+                                Candidate checkpoint:{" "}
+                                {String(
+                                  trained.result?.checkpoint_sha256 ??
+                                    "Not recorded",
+                                )}
+                              </p>
+                              <p>
+                                The candidate is the latest saved training run.
+                                Playback shows episode 1 of each scenario;
+                                success counts include every evaluated episode.
+                              </p>
+                              {baseJob?.data.reward && (
+                                <>
+                                  <strong>Baseline scoring weights</strong>
+                                  <RewardEquation
+                                    weights={baseJob.data.reward}
+                                    task={kind}
+                                  />
+                                </>
+                              )}
+                              {candidateJob?.data.reward && (
+                                <>
+                                  <strong>Candidate scoring weights</strong>
+                                  <RewardEquation
+                                    weights={candidateJob.data.reward}
+                                    task={kind}
+                                  />
+                                </>
+                              )}
+                            </div>
+                          </details>
+                        )}
                       </div>
                       <div className="comparison-summary">
                         <div>
@@ -1274,7 +1535,12 @@ export default function Workspace() {
                                   <td>
                                     <button onClick={() => setSceneId(s.id)}>
                                       {String(i + 1).padStart(2, "0")}{" "}
-                                      <span>{s.name}</span>
+                                      <span>
+                                        {
+                                          scenarioInsights(s, plan.scenarios)
+                                            .title
+                                        }
+                                      </span>
                                     </button>
                                   </td>
                                   <td>
@@ -1298,6 +1564,7 @@ export default function Workspace() {
                         </div>
                         {scenario && (
                           <Inspector
+                            plan={plan}
                             key={`compare-${scenario.id}-${base?.id}-${cand?.id}`}
                             scenario={scenario}
                             baseline={base}
@@ -1309,10 +1576,11 @@ export default function Workspace() {
                       <div className="refine-panel">
                         <Sparkles size={20} />
                         <div>
-                          <h3>Turn failures into the next experiment</h3>
+                          <h3>Refine experiment</h3>
                           <p>
-                            Astra receives measured development outcomes and
-                            proposes a new scenario and reward plan.
+                            {detail.experiment.specification
+                              ? "Reuse this specification. Review the next question and operating envelope before launch."
+                              : "Create a new experiment using these results and your feedback."}
                           </p>
                           <label className="sr-only" htmlFor="feedback">
                             Refinement guidance
@@ -1329,10 +1597,18 @@ export default function Workspace() {
                           />
                         </div>
                         <button
-                          disabled={blocked || !baseline.length}
-                          onClick={() => create(true)}
+                          disabled={
+                            blocked ||
+                            !baseline.length ||
+                            (!detail.experiment.specification &&
+                              !workers.some((w) => w.astra))
+                          }
+                          onClick={refine}
                         >
-                          Refine with Astra <ArrowRight size={14} />
+                          {detail.experiment.specification
+                            ? "Create follow-up study"
+                            : "Refine with Astra"}{" "}
+                          <ArrowRight size={14} />
                         </button>
                       </div>
                     </section>
@@ -1394,18 +1670,19 @@ export default function Workspace() {
             </>
           )
         )}
-        {!detail && (!ready || experiments.length > 0) && !creating && (
+        {!detail && !creating && (
           <div className="generation-empty">
             <LoaderCircle size={24} className="spin" />
-            <p>Loading experiment…</p>
+            <p>
+              {error
+                ? "Unable to load this experiment. Retry the connection or return to your workspace."
+                : "Loading experiment…"}
+            </p>
+            {error && (
+              <button onClick={newExperiment}>Back to workspace</button>
+            )}
           </div>
         )}
-        <footer className="workspace-footer">
-          <span>Evidence from simulation</span>
-          <span>
-            Measured trajectories · versioned rewards · reproducible seeds
-          </span>
-        </footer>
       </main>
     </div>
   );

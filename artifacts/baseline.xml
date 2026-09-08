@@ -1,0 +1,20 @@
+<mujoco model="extraction"><compiler angle="radian"/><option timestep=".002" integrator="implicitfast"/>
+    <default><geom friction="1 .01 .001" solref=".008 1"/><joint damping="10"/></default>
+    <visual><global offwidth="800" offheight="600"/></visual>
+    <worldbody><light pos="0 -1 2"/><camera name="overview" pos=".75 -.95 .8" xyaxes=".8 .6 0 -.3 .4 .866"/>
+    <geom name="floor" type="plane" size="1 1 .05" rgba=".18 .22 .25 1"/>
+    <geom name="tray_floor" type="box" pos="0.25115693448699705 0.02819432152802452 .005" size=".085 .085 .005" rgba=".15 .6 .45 1"/><geom name="cavity_wall0" type="box" pos="0.085 0 0.05" size="0.007 0.085 0.05" rgba=".45 .55 .65 1"/><geom name="cavity_wall1" type="box" pos="-0.085 0 0.05" size="0.007 0.085 0.05" rgba=".45 .55 .65 1"/><geom name="cavity_wall2" type="box" pos="0 0.085 0.05" size="0.085 0.007 0.05" rgba=".45 .55 .65 1"/><geom name="cavity_wall3" type="box" pos="0 -0.085 0.05" size="0.085 0.007 0.05" rgba=".45 .55 .65 1"/><geom name="tray_wall0" type="box" pos="0.33615693448699707 0.02819432152802452 0.0175" size="0.007 0.085 0.0175" rgba=".45 .55 .65 1"/><geom name="tray_wall1" type="box" pos="0.16615693448699703 0.02819432152802452 0.0175" size="0.007 0.085 0.0175" rgba=".45 .55 .65 1"/><geom name="tray_wall2" type="box" pos="0.25115693448699705 0.11319432152802453 0.0175" size="0.085 0.007 0.0175" rgba=".45 .55 .65 1"/><geom name="tray_wall3" type="box" pos="0.25115693448699705 -0.056805678471975485 0.0175" size="0.085 0.007 0.0175" rgba=".45 .55 .65 1"/>
+    <body name="ee" pos="0 0 0" gravcomp="1">
+    <joint name="x" type="slide" axis="1 0 0"/><joint name="y" type="slide" axis="0 1 0"/><joint name="z" type="slide" axis="0 0 1"/>
+    <geom name="palm" type="box" pos="0 0 .065" size=".047 .018 .01" mass=".4" rgba=".7 .75 .8 1"/>
+    <body name="left" pos="-.038 0 .015"><joint name="left_finger" type="slide" axis="1 0 0" range="0 .013" limited="true"/><geom name="finger_l" type="box" size=".005 .018 .04" mass=".05" rgba=".2 .3 .8 1"/></body>
+    <body name="right" pos=".038 0 .015"><joint name="right_finger" type="slide" axis="-1 0 0" range="0 .013" limited="true"/><geom name="finger_r" type="box" size=".005 .018 .04" mass=".05" rgba=".2 .3 .8 1"/></body></body>
+    <body name="heart" pos="0 0 .026"><freejoint name="object"/>
+    <geom name="object_collision" type="box" size=".023 .025 .025" mass=".07" rgba=".8 .08 .15 0"/>
+    <geom type="ellipsoid" pos="-.011 .007 .003" size=".017 .021 .024" contype="0" conaffinity="0" mass="0" rgba=".85 .05 .13 1"/>
+    <geom type="ellipsoid" pos=".011 .007 .003" size=".017 .021 .024" contype="0" conaffinity="0" mass="0" rgba=".85 .05 .13 1"/>
+    <geom type="ellipsoid" pos="0 -.012 0" size=".018 .022 .02" contype="0" conaffinity="0" mass="0" rgba=".85 .05 .13 1"/>
+    </body></worldbody>
+    <equality><weld name="grasp" body1="ee" body2="heart" active="false" solref=".004 1"/></equality>
+    <actuator><position joint="x" kp="1800" kv="85"/><position joint="y" kp="1800" kv="85"/><position joint="z" kp="1800" kv="85"/>
+    <position joint="left_finger" kp="120"/><position joint="right_finger" kp="120"/></actuator></mujoco>

@@ -1,0 +1,2735 @@
+{
+  "scripted": {
+    "successes": 50,
+    "episodes": 50,
+    "success_rate": 1.0,
+    "drops": 0,
+    "unwanted_collisions": 0,
+    "mean_placement_error_m": 4.4151382831508764e-11,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.882522695473286e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20000,
+          "object_xy": [
+            0.001178734787158301,
+            0.01768793609259038
+          ],
+          "object_yaw": -0.1429017458421753,
+          "tray_xy": [
+            0.2980491579611749,
+            0.016589096400565773
+          ],
+          "ee_xy": [
+            -0.01714001912986149,
+            -0.022407633292552645
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.9624526191256943e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20001,
+          "object_xy": [
+            -0.01895570316306303,
+            0.012965634132743258
+          ],
+          "object_yaw": 0.1380863803636995,
+          "tray_xy": [
+            0.2790361363453241,
+            0.006172736426083611
+          ],
+          "ee_xy": [
+            -0.008175843431728374,
+            0.003434432771681213
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.2283732178082133e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20002,
+          "object_xy": [
+            0.012503107364658407,
+            -0.021040835924143117
+          ],
+          "object_yaw": 0.08530201637011803,
+          "tray_xy": [
+            0.2561454757257326,
+            -0.03464685529293437
+          ],
+          "ee_xy": [
+            -0.0010002489961341635,
+            0.009740285553212977
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 8.621211043417245e-12,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20003,
+          "object_xy": [
+            -0.0067078615519709575,
+            -0.003823132107801268
+          ],
+          "object_yaw": 0.10935951031548233,
+          "tray_xy": [
+            0.2918532556388526,
+            -0.030560259016287443
+          ],
+          "ee_xy": [
+            -0.005921490204733388,
+            0.005201970920292499
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.2251935471347843e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20004,
+          "object_xy": [
+            0.00673567573395225,
+            0.0062039080148764796
+          ],
+          "object_yaw": -0.1449676273397759,
+          "tray_xy": [
+            0.293701646295685,
+            0.02458704952079914
+          ],
+          "ee_xy": [
+            0.014768852559132108,
+            -0.024726989201243735
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 8.472999330140854e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20005,
+          "object_xy": [
+            -0.005104043236392325,
+            -0.009179275593207241
+          ],
+          "object_yaw": 0.12457896721111913,
+          "tray_xy": [
+            0.29839173605186275,
+            0.017986141568709174
+          ],
+          "ee_xy": [
+            0.008991067699649365,
+            -0.018619059820912633
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.975266150089187e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20006,
+          "object_xy": [
+            -0.013436564701753998,
+            -0.018887861328588974
+          ],
+          "object_yaw": -0.10805317041827367,
+          "tray_xy": [
+            0.31270768573589264,
+            -0.03357599530713026
+          ],
+          "ee_xy": [
+            -0.007268069714358529,
+            -0.018193293951637296
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.658525839820999e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20007,
+          "object_xy": [
+            0.01397223107813722,
+            -0.012686206367809523
+          ],
+          "object_yaw": 0.14571126884377575,
+          "tray_xy": [
+            0.3079822946703813,
+            -0.016649366802590118
+          ],
+          "ee_xy": [
+            0.00904917072039449,
+            0.01599340673780114
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 7.186090509337703e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20008,
+          "object_xy": [
+            0.018666433598849987,
+            0.00734447382430356
+          ],
+          "object_yaw": 0.08975495896041988,
+          "tray_xy": [
+            0.2786134024608256,
+            -0.0016933812524648484
+          ],
+          "ee_xy": [
+            0.0031348228640183766,
+            0.01668274174147065
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.6851535495446265e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20009,
+          "object_xy": [
+            -0.006609479019610056,
+            -0.004989304676843109
+          ],
+          "object_yaw": -0.0025928193937347632,
+          "tray_xy": [
+            0.26383909395764915,
+            -0.024524787107427004
+          ],
+          "ee_xy": [
+            -0.019405676818985435,
+            -0.02072676774402161
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.863090541795203e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20010,
+          "object_xy": [
+            0.008158704036943461,
+            -0.01815721724555271
+          ],
+          "object_yaw": 0.1259455901809948,
+          "tray_xy": [
+            0.30318853737306617,
+            -0.03257871179255675
+          ],
+          "ee_xy": [
+            -0.004152460372172467,
+            -0.0012184505052259369
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 9.932616660792083e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20011,
+          "object_xy": [
+            -0.01810809048421783,
+            -0.009710347343884405
+          ],
+          "object_yaw": -0.1405040263138154,
+          "tray_xy": [
+            0.2849854946401497,
+            -0.01587891250648199
+          ],
+          "ee_xy": [
+            0.0070720787970310756,
+            -0.011165849631485286
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.035844209262859e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 117,
+        "scene": {
+          "seed": 20012,
+          "object_xy": [
+            -0.020641492291770126,
+            -0.006872626738528337
+          ],
+          "object_yaw": -0.004747902874371546,
+          "tray_xy": [
+            0.3181393314745188,
+            0.04372412905834917
+          ],
+          "ee_xy": [
+            -0.01757947776980011,
+            -0.008075078819164413
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 4.8348302063340776e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 107,
+        "scene": {
+          "seed": 20013,
+          "object_xy": [
+            0.013431815305540759,
+            0.013050183575978008
+          ],
+          "object_yaw": -0.14055197256484572,
+          "tray_xy": [
+            0.2706016778096657,
+            -0.033473220970296175
+          ],
+          "ee_xy": [
+            9.262744872923223e-05,
+            -0.0094679617206287
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 4.958854828144174e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20014,
+          "object_xy": [
+            0.014166408451327536,
+            -0.004463223753538394
+          ],
+          "object_yaw": -0.07700582650200648,
+          "tray_xy": [
+            0.3037148579807386,
+            0.007166902411742573
+          ],
+          "ee_xy": [
+            -0.007636677144027028,
+            0.024362555009018648
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.1036316475649991e-10,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20015,
+          "object_xy": [
+            0.004679807365724327,
+            0.014452109262637118
+          ],
+          "object_yaw": -0.10339300321807823,
+          "tray_xy": [
+            0.2695977717704007,
+            0.023089510301188443
+          ],
+          "ee_xy": [
+            -0.01689857763007609,
+            0.01670364215219946
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 5.635758053894216e-12,
+        "cleared": true,
+        "released": true,
+        "steps": 118,
+        "scene": {
+          "seed": 20016,
+          "object_xy": [
+            -0.0026297284456939796,
+            -0.0203428690092216
+          ],
+          "object_yaw": 0.09027067733310667,
+          "tray_xy": [
+            0.3134484087679104,
+            -0.035087922367533886
+          ],
+          "ee_xy": [
+            0.008604600671640428,
+            0.02346272123636608
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 6.686296200223566e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20017,
+          "object_xy": [
+            -0.0016487993503580024,
+            0.008019599105208074
+          ],
+          "object_yaw": 0.04641848985084307,
+          "tray_xy": [
+            0.27970488904332574,
+            0.008476816571278169
+          ],
+          "ee_xy": [
+            -0.024966327104177084,
+            0.011981233772113131
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.45776838813239e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20018,
+          "object_xy": [
+            -0.004699380742344113,
+            -0.0022862335378376133
+          ],
+          "object_yaw": 0.017968347109303118,
+          "tray_xy": [
+            0.289570015158235,
+            0.024892048973785663
+          ],
+          "ee_xy": [
+            -0.009354717058976444,
+            -0.01276910322920828
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 8.628851877434588e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 117,
+        "scene": {
+          "seed": 20019,
+          "object_xy": [
+            -0.017259478544252232,
+            -0.005396369342089074
+          ],
+          "object_yaw": -0.12910217217928346,
+          "tray_xy": [
+            0.30068132534061437,
+            0.03162104131260568
+          ],
+          "ee_xy": [
+            0.013775989177977573,
+            0.0019781434573856
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 8.231697032943095e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20020,
+          "object_xy": [
+            -0.005639325017500432,
+            0.002425509681172989
+          ],
+          "object_yaw": -0.053173479588869574,
+          "tray_xy": [
+            0.29839970665461085,
+            0.04064467748885908
+          ],
+          "ee_xy": [
+            0.020860814746406546,
+            -0.021985951304279924
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 4.6827869642175897e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20021,
+          "object_xy": [
+            -0.012614267049874884,
+            -0.00815143400452717
+          ],
+          "object_yaw": -0.0904384925610539,
+          "tray_xy": [
+            0.3032596503213624,
+            0.002961408072977366
+          ],
+          "ee_xy": [
+            -0.017404619572830078,
+            -0.022534237079322825
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.1532053589829563e-10,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20022,
+          "object_xy": [
+            -0.0015943230920162504,
+            0.011775585936060526
+          ],
+          "object_yaw": -0.09053632449428548,
+          "tray_xy": [
+            0.3019431816215543,
+            0.01517523514145605
+          ],
+          "ee_xy": [
+            -0.02354700086084155,
+            -0.010655580826268546
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.7633454972796377e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 107,
+        "scene": {
+          "seed": 20023,
+          "object_xy": [
+            0.012795002329969551,
+            0.013253859923149848
+          ],
+          "object_yaw": 0.01738029511311842,
+          "tray_xy": [
+            0.2631589008236435,
+            0.009907651412732407
+          ],
+          "ee_xy": [
+            0.022948235876681912,
+            -0.01590565050549793
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.736242334562665e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20024,
+          "object_xy": [
+            -0.02115168661166782,
+            0.017164582053121144
+          ],
+          "object_yaw": -0.07445091997925793,
+          "tray_xy": [
+            0.2809137121141348,
+            0.039723326425988706
+          ],
+          "ee_xy": [
+            0.0017511217166779267,
+            -0.015071466756862485
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.4347742081217924e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20025,
+          "object_xy": [
+            -0.0014462309695963786,
+            -0.016645606648752195
+          ],
+          "object_yaw": -0.016526214884612755,
+          "tray_xy": [
+            0.27008411600211824,
+            0.013561412056507217
+          ],
+          "ee_xy": [
+            -0.00265349032948552,
+            -0.020928105733080394
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.4006841156070418e-10,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20026,
+          "object_xy": [
+            -0.007525009068906937,
+            0.003941624077987042
+          ],
+          "object_yaw": -0.13145722895935935,
+          "tray_xy": [
+            0.31063315287503424,
+            0.034713030479308155
+          ],
+          "ee_xy": [
+            0.021153015413350927,
+            0.003887960770403088
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.4420441444331173e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20027,
+          "object_xy": [
+            -0.0017850904726514245,
+            0.0006115745554413146
+          ],
+          "object_yaw": -0.08006071448322882,
+          "tray_xy": [
+            0.25821219291269004,
+            -0.009565736901737815
+          ],
+          "ee_xy": [
+            -0.01889818271621063,
+            -0.006288039627658372
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.0731155105905476e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20028,
+          "object_xy": [
+            -0.014060152979695935,
+            0.0070698948265871565
+          ],
+          "object_yaw": 0.0639838008131868,
+          "tray_xy": [
+            0.273725430263467,
+            -0.04117156450131007
+          ],
+          "ee_xy": [
+            -0.017717676249094778,
+            -0.0006454841903117681
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.9232823662181985e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20029,
+          "object_xy": [
+            -0.01567459325628593,
+            -0.017371201305242813
+          ],
+          "object_yaw": 0.04390476237437757,
+          "tray_xy": [
+            0.3059534695318104,
+            -0.009209951166587321
+          ],
+          "ee_xy": [
+            -0.004826483243129925,
+            -0.016586096725313935
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.558985428274995e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20030,
+          "object_xy": [
+            -0.006133771955416815,
+            0.0025015990375817296
+          ],
+          "object_yaw": 0.08072890393175539,
+          "tray_xy": [
+            0.2987672788610724,
+            -0.04117522146469417
+          ],
+          "ee_xy": [
+            -0.00824763743074183,
+            0.021605690208117943
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 7.890832596914996e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20031,
+          "object_xy": [
+            0.012103516792122446,
+            0.008059088551789186
+          ],
+          "object_yaw": 0.08579025746113206,
+          "tray_xy": [
+            0.28441422095152297,
+            0.03510143053580153
+          ],
+          "ee_xy": [
+            0.006550493415800093,
+            -0.0019350940844740927
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.1113101418526476e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20032,
+          "object_xy": [
+            -0.0073396093923457605,
+            -0.011716870049955686
+          ],
+          "object_yaw": -0.002477272073815956,
+          "tray_xy": [
+            0.27433409587977053,
+            0.04412113925557805
+          ],
+          "ee_xy": [
+            -0.021889447774604356,
+            0.001617613535408631
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.035515757840028e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20033,
+          "object_xy": [
+            0.005502111716246316,
+            -0.009932162539721805
+          ],
+          "object_yaw": -0.06715995243630991,
+          "tray_xy": [
+            0.3180305916697502,
+            -0.0417594438541038
+          ],
+          "ee_xy": [
+            0.012710590060016097,
+            -0.020687352605929434
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.295707293495792e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20034,
+          "object_xy": [
+            -0.021985248454896085,
+            -0.001571894896575863
+          ],
+          "object_yaw": -0.006105356662099881,
+          "tray_xy": [
+            0.26368854367271327,
+            -0.002861737488175878
+          ],
+          "ee_xy": [
+            0.007560219511658396,
+            -0.004659103553666572
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.1337352793195862e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 107,
+        "scene": {
+          "seed": 20035,
+          "object_xy": [
+            0.006075251566590303,
+            -0.010092599436285295
+          ],
+          "object_yaw": -0.13511812624277922,
+          "tray_xy": [
+            0.25845850016319155,
+            -0.0072356929390352265
+          ],
+          "ee_xy": [
+            0.0006610857990267741,
+            0.011339532176264697
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.5409482335828873e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20036,
+          "object_xy": [
+            0.010132336389433769,
+            0.020442763216243574
+          ],
+          "object_yaw": -0.003904277234765552,
+          "tray_xy": [
+            0.275391805410143,
+            -0.04412658913732829
+          ],
+          "ee_xy": [
+            0.013536698105653375,
+            0.0030290119228515086
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.1147156236224994e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 105,
+        "scene": {
+          "seed": 20037,
+          "object_xy": [
+            0.02176178260069861,
+            -0.008477529662932012
+          ],
+          "object_yaw": 0.08149063726725314,
+          "tray_xy": [
+            0.2594912803446669,
+            -0.043613499035401314
+          ],
+          "ee_xy": [
+            0.01636368101974394,
+            0.008150985162732355
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.894216470031744e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20038,
+          "object_xy": [
+            0.014396232877082457,
+            -0.016855023941359862
+          ],
+          "object_yaw": 0.02921156544106479,
+          "tray_xy": [
+            0.31903334313471443,
+            0.01302291093657252
+          ],
+          "ee_xy": [
+            -0.01967572382851809,
+            0.014100706519878492
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 8.110644381844321e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20039,
+          "object_xy": [
+            0.01541442646013725,
+            0.0010915796356640722
+          ],
+          "object_yaw": 0.03855454820050286,
+          "tray_xy": [
+            0.2918388763370338,
+            -0.02192423805701532
+          ],
+          "ee_xy": [
+            -0.001394255901330365,
+            -0.022804176328655515
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.0250606060301179e-10,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20040,
+          "object_xy": [
+            0.0158900202352873,
+            -0.0008173505149314739
+          ],
+          "object_yaw": -0.13577523972167652,
+          "tray_xy": [
+            0.3028681380997903,
+            -0.021447556188022063
+          ],
+          "ee_xy": [
+            -0.008590045863939282,
+            0.006279041281146737
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.1030865192714163e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20041,
+          "object_xy": [
+            0.017552915081939464,
+            0.016184871295483204
+          ],
+          "object_yaw": -0.09345714819207465,
+          "tray_xy": [
+            0.2922832915705692,
+            0.02923024837146118
+          ],
+          "ee_xy": [
+            0.020855547138659232,
+            0.015006820829321768
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.52910619535806e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20042,
+          "object_xy": [
+            0.011688015055024259,
+            -0.0111322134075355
+          ],
+          "object_yaw": 0.01821761144076353,
+          "tray_xy": [
+            0.30751128043967124,
+            -0.007553912092887666
+          ],
+          "ee_xy": [
+            0.007571640216028089,
+            -0.0043583841090440445
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.341666381399027e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 110,
+        "scene": {
+          "seed": 20043,
+          "object_xy": [
+            0.0033803980035981493,
+            -0.003086265590679413
+          ],
+          "object_yaw": -0.10238861081245837,
+          "tray_xy": [
+            0.2796368941568154,
+            -0.022716148522713593
+          ],
+          "ee_xy": [
+            0.0009097273660891511,
+            0.0068726995635230576
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 5.286761261134736e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20044,
+          "object_xy": [
+            0.00293092989656717,
+            -0.011848471482433391
+          ],
+          "object_yaw": 0.10835844358206279,
+          "tray_xy": [
+            0.3080381089174414,
+            -0.012739460162682417
+          ],
+          "ee_xy": [
+            0.018973799505025736,
+            -0.007371795773949176
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 6.815202783648538e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20045,
+          "object_xy": [
+            -0.016740839415270693,
+            -0.013060754761944774
+          ],
+          "object_yaw": 0.1265860395546198,
+          "tray_xy": [
+            0.26751399580978324,
+            0.01940373030537508
+          ],
+          "ee_xy": [
+            -0.0026499627982140214,
+            0.002299704895211481
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 3.360839775740884e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20046,
+          "object_xy": [
+            -0.012283794060740679,
+            -0.011989175509380551
+          ],
+          "object_yaw": 0.06769919106987388,
+          "tray_xy": [
+            0.2954910807564382,
+            0.0029475932962831145
+          ],
+          "ee_xy": [
+            -0.01594387765795703,
+            -0.010026046744511075
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 9.101615693156071e-12,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20047,
+          "object_xy": [
+            -0.004135015056079324,
+            -0.017452897933114293
+          ],
+          "object_yaw": -0.07162877459839019,
+          "tray_xy": [
+            0.2956270614205854,
+            0.03609218497967534
+          ],
+          "ee_xy": [
+            -0.004618696159923896,
+            -0.015476478880185596
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 7.383948825748705e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20048,
+          "object_xy": [
+            -0.0027083867928886403,
+            0.016126693901035043
+          ],
+          "object_yaw": 0.13506277650241835,
+          "tray_xy": [
+            0.26791919982216095,
+            -0.013253645780487329
+          ],
+          "ee_xy": [
+            0.008766442657582578,
+            0.014593466511508071
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 2.1259970186041397e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20049,
+          "object_xy": [
+            -0.01709513767816217,
+            0.003102073189626079
+          ],
+          "object_yaw": -0.07404171687610901,
+          "tray_xy": [
+            0.3102909910611687,
+            -0.0435041857956902
+          ],
+          "ee_xy": [
+            -0.020892397585502705,
+            0.0016785319356722346
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      }
+    ],
+    "successful_mean_placement_error_m": 4.4151382831508764e-11
+  },
+  "learned": {
+    "successes": 49,
+    "episodes": 50,
+    "success_rate": 0.98,
+    "drops": 0,
+    "unwanted_collisions": 0,
+    "mean_placement_error_m": 0.007973640377166384,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0019722424245393376,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20000,
+          "object_xy": [
+            0.001178734787158301,
+            0.01768793609259038
+          ],
+          "object_yaw": -0.1429017458421753,
+          "tray_xy": [
+            0.2980491579611749,
+            0.016589096400565773
+          ],
+          "ee_xy": [
+            -0.01714001912986149,
+            -0.022407633292552645
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0007175316340727295,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20001,
+          "object_xy": [
+            -0.01895570316306303,
+            0.012965634132743258
+          ],
+          "object_yaw": 0.1380863803636995,
+          "tray_xy": [
+            0.2790361363453241,
+            0.006172736426083611
+          ],
+          "ee_xy": [
+            -0.008175843431728374,
+            0.003434432771681213
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0017906609891835737,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20002,
+          "object_xy": [
+            0.012503107364658407,
+            -0.021040835924143117
+          ],
+          "object_yaw": 0.08530201637011803,
+          "tray_xy": [
+            0.2561454757257326,
+            -0.03464685529293437
+          ],
+          "ee_xy": [
+            -0.0010002489961341635,
+            0.009740285553212977
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0008216515344280098,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20003,
+          "object_xy": [
+            -0.0067078615519709575,
+            -0.003823132107801268
+          ],
+          "object_yaw": 0.10935951031548233,
+          "tray_xy": [
+            0.2918532556388526,
+            -0.030560259016287443
+          ],
+          "ee_xy": [
+            -0.005921490204733388,
+            0.005201970920292499
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00037527329452795993,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20004,
+          "object_xy": [
+            0.00673567573395225,
+            0.0062039080148764796
+          ],
+          "object_yaw": -0.1449676273397759,
+          "tray_xy": [
+            0.293701646295685,
+            0.02458704952079914
+          ],
+          "ee_xy": [
+            0.014768852559132108,
+            -0.024726989201243735
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0011057362808056127,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20005,
+          "object_xy": [
+            -0.005104043236392325,
+            -0.009179275593207241
+          ],
+          "object_yaw": 0.12457896721111913,
+          "tray_xy": [
+            0.29839173605186275,
+            0.017986141568709174
+          ],
+          "ee_xy": [
+            0.008991067699649365,
+            -0.018619059820912633
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0019246806088181793,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20006,
+          "object_xy": [
+            -0.013436564701753998,
+            -0.018887861328588974
+          ],
+          "object_yaw": -0.10805317041827367,
+          "tray_xy": [
+            0.31270768573589264,
+            -0.03357599530713026
+          ],
+          "ee_xy": [
+            -0.007268069714358529,
+            -0.018193293951637296
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0007385166656175842,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20007,
+          "object_xy": [
+            0.01397223107813722,
+            -0.012686206367809523
+          ],
+          "object_yaw": 0.14571126884377575,
+          "tray_xy": [
+            0.3079822946703813,
+            -0.016649366802590118
+          ],
+          "ee_xy": [
+            0.00904917072039449,
+            0.01599340673780114
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0014994991058187655,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20008,
+          "object_xy": [
+            0.018666433598849987,
+            0.00734447382430356
+          ],
+          "object_yaw": 0.08975495896041988,
+          "tray_xy": [
+            0.2786134024608256,
+            -0.0016933812524648484
+          ],
+          "ee_xy": [
+            0.0031348228640183766,
+            0.01668274174147065
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0031649404025467284,
+        "cleared": true,
+        "released": true,
+        "steps": 110,
+        "scene": {
+          "seed": 20009,
+          "object_xy": [
+            -0.006609479019610056,
+            -0.004989304676843109
+          ],
+          "object_yaw": -0.0025928193937347632,
+          "tray_xy": [
+            0.26383909395764915,
+            -0.024524787107427004
+          ],
+          "ee_xy": [
+            -0.019405676818985435,
+            -0.02072676774402161
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0015988467103765938,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20010,
+          "object_xy": [
+            0.008158704036943461,
+            -0.01815721724555271
+          ],
+          "object_yaw": 0.1259455901809948,
+          "tray_xy": [
+            0.30318853737306617,
+            -0.03257871179255675
+          ],
+          "ee_xy": [
+            -0.004152460372172467,
+            -0.0012184505052259369
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0009353980204060045,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20011,
+          "object_xy": [
+            -0.01810809048421783,
+            -0.009710347343884405
+          ],
+          "object_yaw": -0.1405040263138154,
+          "tray_xy": [
+            0.2849854946401497,
+            -0.01587891250648199
+          ],
+          "ee_xy": [
+            0.0070720787970310756,
+            -0.011165849631485286
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": false,
+        "termination": "timeout",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.34253828710816014,
+        "cleared": false,
+        "released": false,
+        "steps": 240,
+        "scene": {
+          "seed": 20012,
+          "object_xy": [
+            -0.020641492291770126,
+            -0.006872626738528337
+          ],
+          "object_yaw": -0.004747902874371546,
+          "tray_xy": [
+            0.3181393314745188,
+            0.04372412905834917
+          ],
+          "ee_xy": [
+            -0.01757947776980011,
+            -0.008075078819164413
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0016562786201740915,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20013,
+          "object_xy": [
+            0.013431815305540759,
+            0.013050183575978008
+          ],
+          "object_yaw": -0.14055197256484572,
+          "tray_xy": [
+            0.2706016778096657,
+            -0.033473220970296175
+          ],
+          "ee_xy": [
+            9.262744872923223e-05,
+            -0.0094679617206287
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0003733754427135578,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20014,
+          "object_xy": [
+            0.014166408451327536,
+            -0.004463223753538394
+          ],
+          "object_yaw": -0.07700582650200648,
+          "tray_xy": [
+            0.3037148579807386,
+            0.007166902411742573
+          ],
+          "ee_xy": [
+            -0.007636677144027028,
+            0.024362555009018648
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0005160509941131244,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20015,
+          "object_xy": [
+            0.004679807365724327,
+            0.014452109262637118
+          ],
+          "object_yaw": -0.10339300321807823,
+          "tray_xy": [
+            0.2695977717704007,
+            0.023089510301188443
+          ],
+          "ee_xy": [
+            -0.01689857763007609,
+            0.01670364215219946
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0016820892673354581,
+        "cleared": true,
+        "released": true,
+        "steps": 119,
+        "scene": {
+          "seed": 20016,
+          "object_xy": [
+            -0.0026297284456939796,
+            -0.0203428690092216
+          ],
+          "object_yaw": 0.09027067733310667,
+          "tray_xy": [
+            0.3134484087679104,
+            -0.035087922367533886
+          ],
+          "ee_xy": [
+            0.008604600671640428,
+            0.02346272123636608
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0007985513685044275,
+        "cleared": true,
+        "released": true,
+        "steps": 110,
+        "scene": {
+          "seed": 20017,
+          "object_xy": [
+            -0.0016487993503580024,
+            0.008019599105208074
+          ],
+          "object_yaw": 0.04641848985084307,
+          "tray_xy": [
+            0.27970488904332574,
+            0.008476816571278169
+          ],
+          "ee_xy": [
+            -0.024966327104177084,
+            0.011981233772113131
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0007301191464742729,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20018,
+          "object_xy": [
+            -0.004699380742344113,
+            -0.0022862335378376133
+          ],
+          "object_yaw": 0.017968347109303118,
+          "tray_xy": [
+            0.289570015158235,
+            0.024892048973785663
+          ],
+          "ee_xy": [
+            -0.009354717058976444,
+            -0.01276910322920828
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00025082002050296067,
+        "cleared": true,
+        "released": true,
+        "steps": 118,
+        "scene": {
+          "seed": 20019,
+          "object_xy": [
+            -0.017259478544252232,
+            -0.005396369342089074
+          ],
+          "object_yaw": -0.12910217217928346,
+          "tray_xy": [
+            0.30068132534061437,
+            0.03162104131260568
+          ],
+          "ee_xy": [
+            0.013775989177977573,
+            0.0019781434573856
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 6.121691630084151e-05,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20020,
+          "object_xy": [
+            -0.005639325017500432,
+            0.002425509681172989
+          ],
+          "object_yaw": -0.053173479588869574,
+          "tray_xy": [
+            0.29839970665461085,
+            0.04064467748885908
+          ],
+          "ee_xy": [
+            0.020860814746406546,
+            -0.021985951304279924
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0013181261918935538,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20021,
+          "object_xy": [
+            -0.012614267049874884,
+            -0.00815143400452717
+          ],
+          "object_yaw": -0.0904384925610539,
+          "tray_xy": [
+            0.3032596503213624,
+            0.002961408072977366
+          ],
+          "ee_xy": [
+            -0.017404619572830078,
+            -0.022534237079322825
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0005680007791639766,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20022,
+          "object_xy": [
+            -0.0015943230920162504,
+            0.011775585936060526
+          ],
+          "object_yaw": -0.09053632449428548,
+          "tray_xy": [
+            0.3019431816215543,
+            0.01517523514145605
+          ],
+          "ee_xy": [
+            -0.02354700086084155,
+            -0.010655580826268546
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0021737971731461245,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20023,
+          "object_xy": [
+            0.012795002329969551,
+            0.013253859923149848
+          ],
+          "object_yaw": 0.01738029511311842,
+          "tray_xy": [
+            0.2631589008236435,
+            0.009907651412732407
+          ],
+          "ee_xy": [
+            0.022948235876681912,
+            -0.01590565050549793
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00039889145422255075,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20024,
+          "object_xy": [
+            -0.02115168661166782,
+            0.017164582053121144
+          ],
+          "object_yaw": -0.07445091997925793,
+          "tray_xy": [
+            0.2809137121141348,
+            0.039723326425988706
+          ],
+          "ee_xy": [
+            0.0017511217166779267,
+            -0.015071466756862485
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0005084759670795474,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20025,
+          "object_xy": [
+            -0.0014462309695963786,
+            -0.016645606648752195
+          ],
+          "object_yaw": -0.016526214884612755,
+          "tray_xy": [
+            0.27008411600211824,
+            0.013561412056507217
+          ],
+          "ee_xy": [
+            -0.00265349032948552,
+            -0.020928105733080394
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0005381504875907748,
+        "cleared": true,
+        "released": true,
+        "steps": 118,
+        "scene": {
+          "seed": 20026,
+          "object_xy": [
+            -0.007525009068906937,
+            0.003941624077987042
+          ],
+          "object_yaw": -0.13145722895935935,
+          "tray_xy": [
+            0.31063315287503424,
+            0.034713030479308155
+          ],
+          "ee_xy": [
+            0.021153015413350927,
+            0.003887960770403088
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0035462012223704655,
+        "cleared": true,
+        "released": true,
+        "steps": 107,
+        "scene": {
+          "seed": 20027,
+          "object_xy": [
+            -0.0017850904726514245,
+            0.0006115745554413146
+          ],
+          "object_yaw": -0.08006071448322882,
+          "tray_xy": [
+            0.25821219291269004,
+            -0.009565736901737815
+          ],
+          "ee_xy": [
+            -0.01889818271621063,
+            -0.006288039627658372
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0016051906988188522,
+        "cleared": true,
+        "released": true,
+        "steps": 110,
+        "scene": {
+          "seed": 20028,
+          "object_xy": [
+            -0.014060152979695935,
+            0.0070698948265871565
+          ],
+          "object_yaw": 0.0639838008131868,
+          "tray_xy": [
+            0.273725430263467,
+            -0.04117156450131007
+          ],
+          "ee_xy": [
+            -0.017717676249094778,
+            -0.0006454841903117681
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00277538168355975,
+        "cleared": true,
+        "released": true,
+        "steps": 117,
+        "scene": {
+          "seed": 20029,
+          "object_xy": [
+            -0.01567459325628593,
+            -0.017371201305242813
+          ],
+          "object_yaw": 0.04390476237437757,
+          "tray_xy": [
+            0.3059534695318104,
+            -0.009209951166587321
+          ],
+          "ee_xy": [
+            -0.004826483243129925,
+            -0.016586096725313935
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00024447565514155566,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20030,
+          "object_xy": [
+            -0.006133771955416815,
+            0.0025015990375817296
+          ],
+          "object_yaw": 0.08072890393175539,
+          "tray_xy": [
+            0.2987672788610724,
+            -0.04117522146469417
+          ],
+          "ee_xy": [
+            -0.00824763743074183,
+            0.021605690208117943
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0006680723957625735,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20031,
+          "object_xy": [
+            0.012103516792122446,
+            0.008059088551789186
+          ],
+          "object_yaw": 0.08579025746113206,
+          "tray_xy": [
+            0.28441422095152297,
+            0.03510143053580153
+          ],
+          "ee_xy": [
+            0.006550493415800093,
+            -0.0019350940844740927
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0020228342263997555,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20032,
+          "object_xy": [
+            -0.0073396093923457605,
+            -0.011716870049955686
+          ],
+          "object_yaw": -0.002477272073815956,
+          "tray_xy": [
+            0.27433409587977053,
+            0.04412113925557805
+          ],
+          "ee_xy": [
+            -0.021889447774604356,
+            0.001617613535408631
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.001789063004281383,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20033,
+          "object_xy": [
+            0.005502111716246316,
+            -0.009932162539721805
+          ],
+          "object_yaw": -0.06715995243630991,
+          "tray_xy": [
+            0.3180305916697502,
+            -0.0417594438541038
+          ],
+          "ee_xy": [
+            0.012710590060016097,
+            -0.020687352605929434
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.003943442942337461,
+        "cleared": true,
+        "released": true,
+        "steps": 113,
+        "scene": {
+          "seed": 20034,
+          "object_xy": [
+            -0.021985248454896085,
+            -0.001571894896575863
+          ],
+          "object_yaw": -0.006105356662099881,
+          "tray_xy": [
+            0.26368854367271327,
+            -0.002861737488175878
+          ],
+          "ee_xy": [
+            0.007560219511658396,
+            -0.004659103553666572
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.00019041618175614505,
+        "cleared": true,
+        "released": true,
+        "steps": 107,
+        "scene": {
+          "seed": 20035,
+          "object_xy": [
+            0.006075251566590303,
+            -0.010092599436285295
+          ],
+          "object_yaw": -0.13511812624277922,
+          "tray_xy": [
+            0.25845850016319155,
+            -0.0072356929390352265
+          ],
+          "ee_xy": [
+            0.0006610857990267741,
+            0.011339532176264697
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0006240853314299527,
+        "cleared": true,
+        "released": true,
+        "steps": 108,
+        "scene": {
+          "seed": 20036,
+          "object_xy": [
+            0.010132336389433769,
+            0.020442763216243574
+          ],
+          "object_yaw": -0.003904277234765552,
+          "tray_xy": [
+            0.275391805410143,
+            -0.04412658913732829
+          ],
+          "ee_xy": [
+            0.013536698105653375,
+            0.0030290119228515086
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0014940167211168242,
+        "cleared": true,
+        "released": true,
+        "steps": 106,
+        "scene": {
+          "seed": 20037,
+          "object_xy": [
+            0.02176178260069861,
+            -0.008477529662932012
+          ],
+          "object_yaw": 0.08149063726725314,
+          "tray_xy": [
+            0.2594912803446669,
+            -0.043613499035401314
+          ],
+          "ee_xy": [
+            0.01636368101974394,
+            0.008150985162732355
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0006750460195094042,
+        "cleared": true,
+        "released": true,
+        "steps": 116,
+        "scene": {
+          "seed": 20038,
+          "object_xy": [
+            0.014396232877082457,
+            -0.016855023941359862
+          ],
+          "object_yaw": 0.02921156544106479,
+          "tray_xy": [
+            0.31903334313471443,
+            0.01302291093657252
+          ],
+          "ee_xy": [
+            -0.01967572382851809,
+            0.014100706519878492
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0004197908104690375,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20039,
+          "object_xy": [
+            0.01541442646013725,
+            0.0010915796356640722
+          ],
+          "object_yaw": 0.03855454820050286,
+          "tray_xy": [
+            0.2918388763370338,
+            -0.02192423805701532
+          ],
+          "ee_xy": [
+            -0.001394255901330365,
+            -0.022804176328655515
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0002810668991195528,
+        "cleared": true,
+        "released": true,
+        "steps": 111,
+        "scene": {
+          "seed": 20040,
+          "object_xy": [
+            0.0158900202352873,
+            -0.0008173505149314739
+          ],
+          "object_yaw": -0.13577523972167652,
+          "tray_xy": [
+            0.3028681380997903,
+            -0.021447556188022063
+          ],
+          "ee_xy": [
+            -0.008590045863939282,
+            0.006279041281146737
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0009975110249291885,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20041,
+          "object_xy": [
+            0.017552915081939464,
+            0.016184871295483204
+          ],
+          "object_yaw": -0.09345714819207465,
+          "tray_xy": [
+            0.2922832915705692,
+            0.02923024837146118
+          ],
+          "ee_xy": [
+            0.020855547138659232,
+            0.015006820829321768
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0011331264821798403,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20042,
+          "object_xy": [
+            0.011688015055024259,
+            -0.0111322134075355
+          ],
+          "object_yaw": 0.01821761144076353,
+          "tray_xy": [
+            0.30751128043967124,
+            -0.007553912092887666
+          ],
+          "ee_xy": [
+            0.007571640216028089,
+            -0.0043583841090440445
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0011370807936767098,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20043,
+          "object_xy": [
+            0.0033803980035981493,
+            -0.003086265590679413
+          ],
+          "object_yaw": -0.10238861081245837,
+          "tray_xy": [
+            0.2796368941568154,
+            -0.022716148522713593
+          ],
+          "ee_xy": [
+            0.0009097273660891511,
+            0.0068726995635230576
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0003656181624403429,
+        "cleared": true,
+        "released": true,
+        "steps": 114,
+        "scene": {
+          "seed": 20044,
+          "object_xy": [
+            0.00293092989656717,
+            -0.011848471482433391
+          ],
+          "object_yaw": 0.10835844358206279,
+          "tray_xy": [
+            0.3080381089174414,
+            -0.012739460162682417
+          ],
+          "ee_xy": [
+            0.018973799505025736,
+            -0.007371795773949176
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0009498267753595156,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20045,
+          "object_xy": [
+            -0.016740839415270693,
+            -0.013060754761944774
+          ],
+          "object_yaw": 0.1265860395546198,
+          "tray_xy": [
+            0.26751399580978324,
+            0.01940373030537508
+          ],
+          "ee_xy": [
+            -0.0026499627982140214,
+            0.002299704895211481
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.001173262414129257,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20046,
+          "object_xy": [
+            -0.012283794060740679,
+            -0.011989175509380551
+          ],
+          "object_yaw": 0.06769919106987388,
+          "tray_xy": [
+            0.2954910807564382,
+            0.0029475932962831145
+          ],
+          "ee_xy": [
+            -0.01594387765795703,
+            -0.010026046744511075
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0003215060725702161,
+        "cleared": true,
+        "released": true,
+        "steps": 112,
+        "scene": {
+          "seed": 20047,
+          "object_xy": [
+            -0.004135015056079324,
+            -0.017452897933114293
+          ],
+          "object_yaw": -0.07162877459839019,
+          "tray_xy": [
+            0.2956270614205854,
+            0.03609218497967534
+          ],
+          "ee_xy": [
+            -0.004618696159923896,
+            -0.015476478880185596
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0008757503191011556,
+        "cleared": true,
+        "released": true,
+        "steps": 109,
+        "scene": {
+          "seed": 20048,
+          "object_xy": [
+            -0.0027083867928886403,
+            0.016126693901035043
+          ],
+          "object_yaw": 0.13506277650241835,
+          "tray_xy": [
+            0.26791919982216095,
+            -0.013253645780487329
+          ],
+          "ee_xy": [
+            0.008766442657582578,
+            0.014593466511508071
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0006920444133438015,
+        "cleared": true,
+        "released": true,
+        "steps": 115,
+        "scene": {
+          "seed": 20049,
+          "object_xy": [
+            -0.01709513767816217,
+            0.003102073189626079
+          ],
+          "object_yaw": -0.07404171687610901,
+          "tray_xy": [
+            0.3102909910611687,
+            -0.0435041857956902
+          ],
+          "ee_xy": [
+            -0.020892397585502705,
+            0.0016785319356722346
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      }
+    ],
+    "successful_mean_placement_error_m": 0.0011457904438807976
+  },
+  "checkpoint": "artifacts/policy.npz",
+  "checkpoint_sha256": "6742fc4850d9afe6d7046a7bc71b13e029977438ca1901c82fdb234ba6ede9c0",
+  "evaluation_seeds": [
+    20000,
+    20049
+  ],
+  "metric_definitions": {
+    "drops": "release of attached object outside settled tray region (conservative; can settle afterward)",
+    "unwanted_collisions": "new robot/object wall contact pairs plus robot/floor penetration >1mm; intended finger/object and object support excluded",
+    "placement_error": "final XY center distance in meters, including failures"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "status": "blocked",
+  "success": null,
+  "simulation_started": false,
+  "policy_kind": "scripted",
+  "blockers": [
+    "This pinned NVIDIA workflow supports Ubuntu 22.04/24.04, not this runtime OS.",
+    "A separate Python 3.11 Isaac environment is required.",
+    "isaacsim 5.1.0 required; detected None.",
+    "isaaclab 2.3.0 required; detected None.",
+    "nvidia-smi unavailable; this workstation has Intel Arc graphics, not the required NVIDIA RTX GPU."
+  ],
+  "facts": {
+    "upstream_commit": "fb7727ef12e980022997fccb6cbca5621e4616e4",
+    "runtime": {
+      "python": "3.14.3",
+      "os": "Windows",
+      "isaacsim": null,
+      "isaaclab": null,
+      "rsl-rl-lib": null
+    },
+    "gpu": null
+  }
+}

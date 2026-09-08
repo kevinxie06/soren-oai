@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "termination": "success",
+  "drops": 0,
+  "unwanted_collisions": 0,
+  "placement_error": 0.00013163674182375908,
+  "cleared": true,
+  "released": true,
+  "steps": 114,
+  "scene": {
+    "seed": 1082,
+    "object_xy": [
+      0.00856175063690497,
+      -0.006748228713740449
+    ],
+    "object_yaw": -0.038201930994426106,
+    "tray_xy": [
+      0.3045238077713555,
+      -0.003902413155147999
+    ],
+    "ee_xy": [
+      -0.013176641832129167,
+      -0.0217917216466727
+    ]
+  },
+  "controller_version": "geometry-teacher-v1",
+  "collection": "learned roll-in, teacher recovery",
+  "roll_in_steps": 45,
+  "training_targets": "expert_actions",
+  "replay_actions": "actions",
+  "roll_in_checkpoint_sha256": "6742fc4850d9afe6d7046a7bc71b13e029977438ca1901c82fdb234ba6ede9c0"
+}

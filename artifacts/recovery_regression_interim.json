@@ -1,0 +1,84 @@
+{
+  "scripted": {
+    "successes": 1,
+    "episodes": 1,
+    "success_rate": 1.0,
+    "drops": 0,
+    "unwanted_collisions": 0,
+    "mean_placement_error_m": 1.035844209262859e-11,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 1.035844209262859e-11,
+        "cleared": true,
+        "released": true,
+        "steps": 117,
+        "scene": {
+          "seed": 20012,
+          "object_xy": [
+            -0.020641492291770126,
+            -0.006872626738528337
+          ],
+          "object_yaw": -0.004747902874371546,
+          "tray_xy": [
+            0.3181393314745188,
+            0.04372412905834917
+          ],
+          "ee_xy": [
+            -0.01757947776980011,
+            -0.008075078819164413
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      }
+    ],
+    "successful_mean_placement_error_m": 1.035844209262859e-11
+  },
+  "learned": {
+    "successes": 1,
+    "episodes": 1,
+    "success_rate": 1.0,
+    "drops": 0,
+    "unwanted_collisions": 0,
+    "mean_placement_error_m": 0.0021672273594758548,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "drops": 0,
+        "unwanted_collisions": 0,
+        "placement_error": 0.0021672273594758548,
+        "cleared": true,
+        "released": true,
+        "steps": 119,
+        "scene": {
+          "seed": 20012,
+          "object_xy": [
+            -0.020641492291770126,
+            -0.006872626738528337
+          ],
+          "object_yaw": -0.004747902874371546,
+          "tray_xy": [
+            0.3181393314745188,
+            0.04372412905834917
+          ],
+          "ee_xy": [
+            -0.01757947776980011,
+            -0.008075078819164413
+          ]
+        },
+        "simulator_version": "gantry-v1"
+      }
+    ],
+    "successful_mean_placement_error_m": 0.0021672273594758548
+  },
+  "checkpoint": "artifacts/policy_recovery.npz",
+  "checkpoint_sha256": "37970f5d10e575b27452fd211da7fb3592f0ad7133cffdfc4682589dd13adbb8",
+  "evaluation_seeds": [
+    20012,
+    20012
+  ]
+}

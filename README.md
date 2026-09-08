@@ -1,5 +1,7 @@
 # Soren Isaac Studio
 
+The repository also includes the CPU policy bootstrapping project, datasets, and evaluation artifacts. See [policy bootstrapping documentation](BOOTSTRAP.md) for setup and usage.
+
 A locally hosted React app that displays **real NVIDIA Isaac Sim video over WebRTC**, with a Python simulator launcher, a Franka Panda workcell, camera presets, live joint telemetry, and play/pause/reset controls.
 
 The frontend runs on macOS, Linux, or Windows. **The simulator must run on an Ubuntu host with an Isaac Sim compatible NVIDIA RTX GPU and NVENC support.** This Mac can run the frontend and connect to a separate GPU workstation. A blank/offline viewport is expected until that simulator is running; this project does not substitute prerecorded or fabricated video.

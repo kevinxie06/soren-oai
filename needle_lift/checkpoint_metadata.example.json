@@ -1,0 +1,9 @@
+﻿{
+  "task": "Isaac-Lift-Needle-PSM-IK-Rel-v0",
+  "simulator": "5.1.0",
+  "isaaclab": "2.3.0",
+  "actor_obs_normalization": false,
+  "checkpoint_format": "rsl_rl",
+  "sha256": "REPLACE_WITH_ACTUAL_CHECKPOINT_SHA256",
+  "source_url": "REPLACE_WITH_VERIFIED_NEEDLE_POLICY_SOURCE"
+}

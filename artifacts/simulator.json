@@ -1,0 +1,74 @@
+{
+  "robot": "custom three-axis Cartesian gantry with two slide fingers",
+  "source": "bootstrap/env.py",
+  "simulator": "MuJoCo",
+  "version": "3.12.0",
+  "python": "3.14.3",
+  "numpy": "2.5.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "physics_timestep_s": 0.002,
+  "control_hz": 20,
+  "max_delta_m": 0.012,
+  "workspace_min": [
+    -0.15,
+    -0.18,
+    0.025
+  ],
+  "workspace_max": [
+    0.45,
+    0.18,
+    0.35
+  ],
+  "assisted_grasp": true,
+  "orientation": "fixed gripper identity; object wxyz",
+  "baseline_scene": {
+    "seed": 0,
+    "object_xy": [
+      0.00602631424214399,
+      -0.010129384594389706
+    ],
+    "object_yaw": -0.1377079428191416,
+    "tray_xy": [
+      0.25115693448699705,
+      0.02819432152802452
+    ],
+    "ee_xy": [
+      0.02063777886388609,
+      0.005331788788358993
+    ]
+  },
+  "observation_names": [
+    "ee_x",
+    "ee_y",
+    "ee_z",
+    "object_x",
+    "object_y",
+    "object_z",
+    "tray_x",
+    "tray_y",
+    "tray_z",
+    "object_minus_ee_x",
+    "object_minus_ee_y",
+    "object_minus_ee_z",
+    "tray_minus_object_x",
+    "tray_minus_object_y",
+    "tray_minus_object_z",
+    "ee_velocity_x",
+    "ee_velocity_y",
+    "ee_velocity_z",
+    "object_velocity_x",
+    "object_velocity_y",
+    "object_velocity_z",
+    "closed",
+    "attached",
+    "cleared",
+    "released",
+    "object_quaternion_w",
+    "object_quaternion_x",
+    "object_quaternion_y",
+    "object_quaternion_z",
+    "object_angular_velocity_x",
+    "object_angular_velocity_y",
+    "object_angular_velocity_z"
+  ]
+}

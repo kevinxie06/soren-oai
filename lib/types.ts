@@ -1,9 +1,11 @@
+import type { ExperimentSpecification } from "./experiment-spec";
 export type JobKind =
   "generate" | "baseline" | "train" | "candidate" | "refine";
 export type JobStatus =
   "queued" | "running" | "completed" | "failed" | "cancelled";
 export type TaskKind = "stitch" | "lifting";
 interface ScenarioBase {
+  training_bounds?: Record<string, [number, number]>;
   thumbnail?: string;
   id: string;
   name: string;
@@ -49,6 +51,9 @@ export interface Plan {
   version: string;
 }
 export interface Experiment {
+  specification?: ExperimentSpecification;
+  reviewed_plan?: Plan;
+  review_fingerprint?: string;
   task?: TaskKind;
   id: string;
   title: string;

@@ -57,6 +57,7 @@ def validate_plan(plan, task=None):
             "seed",
             "thumbnail",
             "task",
+            "training_bounds",
         }
         if set(s) - allowed:
             raise ValueError("Unsupported scenario parameter")
@@ -69,6 +70,16 @@ def validate_plan(plan, task=None):
                 or not lo <= v <= hi
             ):
                 raise ValueError(f"Scenario {i + 1}: {key} outside {lo}–{hi}")
+        envelope = s.get("training_bounds")
+        if envelope is not None:
+            if not isinstance(envelope, dict) or set(envelope) != set(spec.bounds):
+                raise ValueError("Invalid training envelope parameters")
+            for key, (lo, hi) in spec.bounds.items():
+                limits = envelope[key]
+                if (not isinstance(limits, list) or len(limits) != 2
+                    or any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in limits)
+                    or not lo <= limits[0] <= s[key] <= limits[1] <= hi):
+                    raise ValueError(f"Invalid training envelope for {key}")
         values = tuple(s[k] for k in spec.bounds)
         if values in seen:
             raise ValueError("Duplicate scenario parameters")
@@ -128,6 +139,15 @@ def config_for(scenario, episode=0, training=False, rng=None):
             c["tissue_stiffness"] = float(
                 np.clip(c["tissue_stiffness"] + rng.normal(0, 1), 65, 85)
             )
+    envelope = scenario.get("training_bounds")
+    if training and envelope:
+        if spec.id == "lifting":
+            c["object_xy"] = [float(np.clip(c["object_xy"][i], *(np.array(envelope[key]) / 1000)))
+                              for i, key in enumerate(["object_x_mm", "object_y_mm"])]
+            c["object_yaw"] = float(np.clip(c["object_yaw"], *np.radians(envelope["object_yaw_deg"])))
+        else:
+            c["gap"] = float(np.clip(c["gap"], *(np.array(envelope["gap_mm"]) / 1000)))
+            c["tissue_stiffness"] = float(np.clip(c["tissue_stiffness"], *envelope["stiffness"]))
     return c
 
 
@@ -143,8 +163,13 @@ def template_plan(prompt, task="stitch"):
             ):
                 scenes.append(
                     dict(
-                        name=f"Approach {row + 1} · tray {col + 1}",
-                        rationale="Tests corner-offset grasping, rim clearance, and placement across near/far tray targets.",
+                        name=f"Object ({x}, {y}) mm · tray ({tx}, {ty}) mm",
+                        rationale=(f"Combined boundary case: object at ({x}, {y}) mm with {yaw:g}° rotation, "
+                                   f"tray at ({tx}, {ty}) mm. Tests grasp alignment near the cavity corner "
+                                   f"and {'longer' if tx == 320 else 'shorter'} transport to the tray. "
+                                   "Check grasp acquisition, rim contacts, drops, and placement error. "
+                                   "Compare the same object configuration at other tray positions to assess target sensitivity; "
+                                   "difficulty is a hypothesis until evaluated."),
                         seed=50000 + (row * 4 + col) * 100,
                         object_x_mm=x,
                         object_y_mm=y,
@@ -160,8 +185,13 @@ def template_plan(prompt, task="stitch"):
             for col, gap in enumerate([6, 7.3, 8.7, 10]):
                 scenes.append(
                     dict(
-                        name=f"{gap:g} mm · {stiffness} N/m",
-                        rationale="Measures closure stability across wound width and spring stiffness.",
+                        name=f"Gap {gap:g} mm · spring {stiffness} N/m",
+                        rationale=(f"{'Boundary' if gap in (6, 10) or stiffness in (65, 85) else 'Interior coverage'} case: "
+                                   f"{gap:g} mm wound gap and {stiffness} N/m spring stiffness. "
+                                   "Tests needle span and closure travel under this spring resistance. "
+                                   "Compare cases at the same gap to assess stiffness sensitivity, and at the same stiffness "
+                                   "to assess gap sensitivity. Check receiving catch, final gap, and thread tension. "
+                                   "Spring stiffness affects dynamics, not initial visible shape; no failure is assumed."),
                         seed=40000 + (row * 4 + col) * 100,
                         gap_mm=gap,
                         stiffness=stiffness,

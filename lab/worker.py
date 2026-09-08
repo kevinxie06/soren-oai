@@ -145,7 +145,9 @@ class Execution:
                     if data.get("source") == "astra"
                     else "Building parameter sweep",
                 )
-                if data.get("source") == "astra":
+                if self.experiment.get("reviewed_plan"):
+                    plan = validate_plan(self.experiment["reviewed_plan"], task)
+                elif data.get("source") == "astra":
                     from .planner import generate
 
                     plan = generate(

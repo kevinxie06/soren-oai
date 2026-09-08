@@ -1,4 +1,9 @@
 import {
+  reviewStudy,
+  SpecificationError,
+  matchesReviewedPlan,
+} from "@/lib/experiment-spec";
+import {
   database,
   enqueue,
   env,
@@ -90,6 +95,10 @@ async function handle(request: Request) {
       simulator: "MuJoCo",
     });
   }
+  if (path[0] === "plans" && path.length === 1 && method === "POST") {
+    const body = (await request.json()) as { specification?: unknown };
+    return json(await reviewStudy(body.specification));
+  }
   if (path[0] === "experiments" && path.length === 1) {
     if (method === "GET") {
       const rows = await db
@@ -106,7 +115,35 @@ async function handle(request: Request) {
         source?: string;
         parent_id?: string;
         feedback?: string;
+        specification?: unknown;
+        review_fingerprint?: string;
       };
+      const reviewed =
+        b.specification !== undefined
+          ? await reviewStudy(b.specification)
+          : undefined;
+      if (reviewed) {
+        if (b.parent_id)
+          return json(
+            { error: "Reviewed studies must be launched as a new experiment." },
+            400,
+          );
+        if (b.review_fingerprint !== reviewed.fingerprint)
+          return json(
+            {
+              error: "The plan has changed. Review it again before launching.",
+            },
+            409,
+          );
+        if (b.task !== undefined && b.task !== reviewed.specification.task)
+          return json(
+            { error: "Task does not match the reviewed specification." },
+            400,
+          );
+        b.task = reviewed.specification.task;
+        b.prompt = reviewed.specification.question;
+        b.source = "template";
+      }
       if (
         typeof b.prompt !== "string" ||
         b.prompt.trim().length < 10 ||
@@ -137,6 +174,14 @@ async function handle(request: Request) {
         const parentTask = parent.task ?? "stitch";
         if (b.task && b.task !== parentTask)
           return json({ error: "Refinement must retain the parent task" }, 400);
+        if (parent.specification)
+          return json(
+            {
+              error:
+                "Create a new reviewed study to change this experiment’s operating envelope.",
+            },
+            409,
+          );
         task = parentTask;
         const rows = await db
           .prepare(
@@ -204,12 +249,19 @@ async function handle(request: Request) {
       const e: Experiment = {
         id: crypto.randomUUID(),
         task,
-        title: b.prompt.slice(0, 75),
+        title: reviewed?.plan.title ?? b.prompt.slice(0, 75),
         prompt: b.prompt.trim(),
         source: b.source === "template" ? "template" : "astra",
         plan: null,
         created_at: Date.now(),
         ...(b.parent_id ? { parent_id: b.parent_id } : {}),
+        ...(reviewed
+          ? {
+              specification: reviewed.specification,
+              reviewed_plan: reviewed.plan,
+              review_fingerprint: reviewed.fingerprint,
+            }
+          : {}),
       };
       await db
         .prepare("INSERT INTO experiments VALUES(?,?,?)")
@@ -268,9 +320,9 @@ async function handle(request: Request) {
         return json({ error: "Generate valid scenarios first." }, 409);
       if (!["baseline", "train", "candidate"].includes(b.kind))
         return json({ error: "Unsupported job kind" }, 400);
-      let episodes = b.episodes ?? 3;
-      const steps = b.steps ?? 8192,
-        seed = b.seed ?? 7;
+      let episodes = b.episodes ?? e.specification?.episodes ?? 3;
+      const steps = b.steps ?? e.specification?.steps ?? 8192,
+        seed = b.seed ?? e.specification?.seed ?? 7;
       if (
         !Number.isInteger(episodes) ||
         episodes < 1 ||
@@ -468,6 +520,14 @@ async function handle(request: Request) {
       const statements = [];
       if (b.plan) {
         const e = await experiment(String(row.experiment_id));
+        if (e?.reviewed_plan && !matchesReviewedPlan(b.plan, e.reviewed_plan))
+          return json(
+            {
+              error:
+                "Worker output differs from the reviewed plan. Update the worker and retry.",
+            },
+            409,
+          );
         const plan = b.plan as { title: string };
         statements.push(
           db
@@ -518,6 +578,8 @@ async function route(request: Request) {
     const message = error instanceof Error ? error.message : "Unexpected error";
     if (message.includes("UNIQUE constraint"))
       return json({ error: "An experiment job is already running." }, 409);
+    if (error instanceof SpecificationError)
+      return json({ error: message }, 400);
     if (error instanceof SyntaxError)
       return json({ error: "Invalid JSON" }, 400);
     console.error("Lab API failure", message);

@@ -35,9 +35,16 @@ class Policy:
         self.model=Network(len(ck['mean']),ck['w0'].shape[1],output_dim=ck['b2'].shape[0])
         self.model.params={k:ck[k] for k in self.model.params}
         self.mean=ck['mean']; self.std=ck['std']
+        self.failure_baseline=None
+        if 'blind_transfer_after_close' in ck.files and bool(ck['blind_transfer_after_close'].item()):
+            from .failure_baseline import BlindTransfer
+            self.failure_baseline=BlindTransfer()
+    def reset(self):
+        if self.failure_baseline: self.failure_baseline.reset()
     def act(self,observation):
         out,_=self.model.forward((np.asarray(observation,np.float32)-self.mean)/self.std)
-        return np.r_[np.clip(out[:3],-1,1),1. if out[3]>0 else -1.].astype(np.float32)
+        action=np.r_[np.clip(out[:3],-1,1),1. if out[3]>0 else -1.].astype(np.float32)
+        return self.failure_baseline.act(observation,action) if self.failure_baseline else action
 
 def train(dataset,output,epochs=180,seed=7,action_kind="gripper",std_floor=.02):
     rng=np.random.default_rng(seed); train_eps=[]; val_eps=[]; train_seeds=[]; val_seeds=[]

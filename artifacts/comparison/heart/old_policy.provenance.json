@@ -1,0 +1,21 @@
+{
+  "display_name": "Old version",
+  "kind": "synthetic_degraded_baseline",
+  "historical_checkpoint": false,
+  "parent_checkpoint": "artifacts\\policy_recovery.npz",
+  "parent_sha256": "317f08f24f58980c8a03a2f26fef6ce53f07376e1840a6cbab7947cd731fbad8",
+  "checkpoint_sha256": "ff1becf840712ad281792f2a3d9dcb61d20ff3086ee48a8bcb94310f713de766",
+  "modifications": [
+    "Perceived heart position shifted +52 mm along Y through observation calibration",
+    "Relative-position inputs shifted consistently; movement and grasp weights unchanged",
+    "Demo task sequencer lifts, transfers, releases and retracts after closure without checking grasp confirmation"
+  ],
+  "purpose": "Controlled failure demonstration; not evidence of historical policy performance",
+  "failure_mode": "missed_grasp_with_blind_transfer",
+  "target_offset_m": [
+    0,
+    0.052,
+    0
+  ],
+  "controller": "biased learned approach plus explicit blind-transfer demo sequencer"
+}

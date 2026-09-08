@@ -1,0 +1,60 @@
+﻿import { chromium } from '@playwright/test';
+import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
+const browser = await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+try {
+  const page=await browser.newPage({viewport:{width:1440,height:1100}});
+  page.setDefaultTimeout(90000);
+  const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(process.env.SHOWCASE_URL || 'http://127.0.0.1:3002/showcase',{waitUntil:'networkidle'});
+  await page.locator('canvas').waitFor({timeout:60000});
+  await page.locator('.motion-canvas[data-scene-ready="true"]').waitFor();
+  await page.getByRole('button',{name:'Play playback',exact:true}).click();
+  await page.waitForTimeout(700);
+  assert.ok(Number(await page.getByRole('slider').inputValue())>0);
+  await page.getByRole('button',{name:'Pause playback',exact:true}).click();
+  const paused=Number(await page.getByRole('slider').inputValue());
+  await page.waitForTimeout(150); assert.equal(Number(await page.getByRole('slider').inputValue()),paused);
+  await page.getByRole('slider').focus(); await page.keyboard.press('End');
+  assert.match(await page.locator('.playback-note').innerText(),/Release & settle/);
+  await page.getByRole('button',{name:'Restart playback'}).click();
+  assert.equal(await page.getByRole('slider').inputValue(),'0');
+  await page.getByRole('button',{name:'Simulation geometry',exact:true}).click(); await page.locator('canvas').waitFor();
+  await page.getByRole('button',{name:'Original simulation',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('video')?.readyState>=2);
+  const videoDuration=await page.locator('video').evaluate(v=>v.duration); assert.ok(videoDuration>5);
+  await page.getByRole('button',{name:'Surgical context',exact:true}).click(); await page.locator('canvas').waitFor();
+  await page.getByRole('button',{name:'Operative field',exact:true}).click();
+  await page.getByRole('button',{name:'Room view',exact:true}).click();
+  const upload = page.getByLabel('Load surgical scene GLB');
+  await upload.setInputFiles({name:'broken.glb',mimeType:'model/gltf-binary',buffer:Buffer.from('invalid')});
+  await page.getByRole('status').filter({hasText:'Model could not load'}).waitFor();
+  // A self-contained GLB verifies the actual loader and recorded-pose binding path.
+  const fixture = {asset:{version:'2.0'},scene:0,scenes:[{nodes:[0]}],nodes:[{name:'motion__object_collision'}]};
+  const json = Buffer.from(JSON.stringify(fixture));
+  const padded = Buffer.alloc(Math.ceil(json.length/4)*4, 0x20); json.copy(padded);
+  const glb = Buffer.alloc(20+padded.length);
+  glb.writeUInt32LE(0x46546c67,0); glb.writeUInt32LE(2,4); glb.writeUInt32LE(glb.length,8);
+  glb.writeUInt32LE(padded.length,12); glb.writeUInt32LE(0x4e4f534a,16); padded.copy(glb,20);
+  await upload.setInputFiles({name:'binding.glb',mimeType:'model/gltf-binary',buffer:glb});
+  await page.getByRole('status').filter({hasText:'1 motion bindings'}).waitFor();
+  await page.getByRole('button',{name:'Reset scene',exact:true}).click();
+  await page.locator('.motion-canvas[data-scene-ready="true"]').waitFor();
+  await page.waitForTimeout(600);
+  await mkdir('artifacts/showcase',{recursive:true});
+  await page.screenshot({path:'artifacts/showcase/desktop.png',fullPage:true});
+  await page.getByRole('button',{name:'Patient',exact:true}).click();
+  await page.waitForTimeout(500);
+  await page.screenshot({path:'artifacts/showcase/patient.png',fullPage:true});
+  await page.getByRole('button',{name:'Operative field',exact:true}).click();
+  await page.waitForTimeout(500);
+  await page.screenshot({path:'artifacts/showcase/operative.png',fullPage:true});
+  await page.getByRole('button',{name:'Room view',exact:true}).click();
+  for(const url of ['/motion/heart.json','/motion/import_soren.py','/motion/UNREAL.md']) {
+    const r=await page.request.get(new URL(url,page.url()).href); assert.equal(r.status(),200,url);
+  }
+  await page.setViewportSize({width:390,height:844}); await page.waitForTimeout(300);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
+  await page.screenshot({path:'artifacts/showcase/mobile.png',fullPage:true});
+  assert.deepEqual(errors,[]); console.log('Showcase passed: 3D rendering, play/pause, seek/restart, view switching, video decode, downloads, mobile layout; no page errors.');
+} finally { await browser.close(); }

@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     ".wrangler/**",
     "test-results/**",
     "playwright-report/**",
+    "upstream/**",
+    "artifacts/asset-source/**",
     ".next/**",
     "dist/**",
     "out/**",

@@ -11,7 +11,7 @@ def dump(path,obj):
     p=Path(path); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(json.dumps(obj,indent=2))
 
 
-def rollout(seed,policy=None,video=None,noise=0):
+def rollout(seed,policy=None,video=None,noise=0,label=None):
     env=StitchEnv(); obs=env.reset(seed); rng=np.random.default_rng(seed+900000)
     if policy is None:
         from .teacher import Teacher
@@ -42,7 +42,8 @@ def rollout(seed,policy=None,video=None,noise=0):
                 frame=Image.fromarray(renderer.render()); draw=ImageDraw.Draw(frame)
                 draw.rectangle((0,0,960,66),fill='black')
                 phase='TENSION / CLOSE' if env.clear else 'RECEIVER PULL' if env.caught else 'DRIVE / RECEIVE'
-                draw.text((12,8),f'{"SCRIPTED" if policy is None else "LEARNED POLICY"} | {phase} | wound gap {env.gap*1000:.2f} mm',fill='white')
+                title=label or ('SCRIPTED' if policy is None else 'LEARNED POLICY')
+                draw.text((12,8),f'{title} | {phase} | wound gap {env.gap*1000:.2f} mm',fill='white')
                 draw.text((12,28),f'entry {env.entered} | exit {env.exited} | caught {env.caught} | donor {env.donor} | receiver {env.receiver}',fill='white')
                 draw.text((12,48),'Simplified puncture + assisted jaws + tensioned thread surrogate / no knot',fill='white')
                 writer.append_data(np.asarray(frame))

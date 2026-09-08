@@ -99,3 +99,21 @@ Reward composition changes training incentives without changing the environment'
 For hosted execution, deploy the frontend through Sites with the existing `DB` and `ARTIFACTS` bindings, configure matching `LAB_WORKER_TOKEN` secrets, and run the Python worker on a compute host pointed at the deployed URL. Hosted UI requests require the `lab_access` cookie matching `LAB_ACCESS_TOKEN`; keep deployment private and integrate organizational authentication before multi-user use. No cloud compute or hosted deployment is automatically provisioned by the local launcher.
 
 The original command-line workflows remain available: [BOOTSTRAP.md](BOOTSTRAP.md), [RECOVERY.md](RECOVERY.md), and [stitch/README.md](stitch/README.md).
+
+## Recorded heart-policy showcase (no Isaac Sim required)
+
+For the revised suturing use case, see [across-wound needle transfer and closure](stitch/README.md): opposing entry/exit points, receiving jaws, donor release, and physical closure under thread tension in a simplified CPU MuJoCo model. The earlier channel-only experiment is preserved in `suturing/`; it does not perform wound closure.
+
+Open `/showcase` to play measured motion from the trained heart policy. The page includes an interactive 3D surgical-context prototype, the original simulation geometry, the native MuJoCo MP4, a scrubber and speed controls, recorded outcome metrics, and Unreal export downloads. Compare Current version and Old version in either showcase.
+
+```powershell
+.\.venv\Scripts\python.exe -m bootstrap.export_motion --video
+npm ci
+npm run dev -- --port 3000
+```
+
+Use the actual port printed by the server; `npm run lab` serves `http://127.0.0.1:3210/showcase` and `http://127.0.0.1:3210/suturing`. See [Unreal handoff and motion schema](unreal/README.md). The checked-in export is a successful 5.55-second rollout of seed 30000 with 0.71 mm placement error. It is measured policy execution, not generated choreography.
+
+`unreal/SorenPlayback.uproject` and `unreal/import_soren.py` provide a UE 5.7 Sequencer import path. Unreal is not installed here, so no Unreal render or editor execution is claimed. The patient/drapes are decorative proxy geometry; photorealism needs licensed models, art direction and an Unreal workstation. There is no tissue simulation or real-person recording.
+
+Verification: `npm run typecheck`, `npm run build`, `node scripts/test-showcase.mjs` (set `SHOWCASE_URL` if needed), and `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. The browser check saves desktop/mobile screenshots under `artifacts/showcase/`.

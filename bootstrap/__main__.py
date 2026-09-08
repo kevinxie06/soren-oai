@@ -9,8 +9,9 @@ def dump(path, value):
     path=Path(path); path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(value,indent=2))
 
-def rollout(seed, policy=None, video=None):
+def rollout(seed, policy=None, video=None, label=None):
     env=ExtractionEnv(); obs=env.reset(seed)
+    if policy is not None and hasattr(policy,'reset'): policy.reset()
     if policy is None:
         from .teacher import Teacher
         teacher=Teacher()
@@ -26,13 +27,15 @@ def rollout(seed, policy=None, video=None):
             action=teacher.act(env) if policy is None else policy.act(obs)
             obs,_,done,truncated,info=env.step(action)
             observations.append(obs); actions.append(action); states.append(env.state())
-            labels.append(info['termination']); stages.append(teacher.stage if policy is None else 'learned')
+            labels.append(info['termination']); stages.append(teacher.stage if policy is None else
+                (policy.failure_baseline.stage if getattr(policy,'failure_baseline',None) else 'learned'))
             if renderer:
                 from PIL import Image, ImageDraw
                 renderer.update_scene(env.data,camera='overview')
                 frame=Image.fromarray(renderer.render()); draw=ImageDraw.Draw(frame)
                 draw.rectangle((0,0,800,30),fill='black')
-                draw.text((10,8),f'{"SCRIPTED TEACHER" if policy is None else "LEARNED POLICY"} | seed {seed} | step {env.steps} | {info["termination"]}',fill='white')
+                title=label or ('SCRIPTED TEACHER' if policy is None else 'LEARNED POLICY')
+                draw.text((10,8),f'{title} | seed {seed} | step {env.steps} | {info["termination"]}',fill='white')
                 writer.append_data(np.asarray(frame))
             if done or truncated: break
     finally:

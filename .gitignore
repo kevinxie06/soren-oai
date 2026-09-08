@@ -49,3 +49,13 @@ __pycache__/
 test-results/
 playwright-report/
 !.env.example
+# Downloaded source checkouts
+upstream/
+# Reproducible licensed source meshes; runtime GLB and credits live in public/models.
+artifacts/asset-source/
+
+# Unreal generated workspace data
+unreal/Binaries/
+unreal/DerivedDataCache/
+unreal/Intermediate/
+unreal/Saved/

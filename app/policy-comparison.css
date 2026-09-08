@@ -1,0 +1,10 @@
+.policy-comparison{padding:12px 16px;border-bottom:1px solid #ffffff18;background:#101d24}
+.policy-version-options{display:flex;gap:8px}
+.policy-comparison .policy-version-options button{flex:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:5px 12px;border:1px solid #344d50;border-radius:6px;padding:10px 12px;background:transparent;color:#adc0c1;font:12px system-ui;cursor:pointer;text-align:left}
+.policy-comparison .policy-version-options button[aria-pressed=true]{background:#254039;color:#dcf0e6;border-color:#6b9b86}
+.policy-comparison .policy-version-options button[aria-pressed=true]:last-child{background:#49302b;border-color:#ad7866;color:#ffe1d1}
+.policy-version-options button span{font-size:10px;opacity:.85}
+.policy-version-options button:focus-visible{outline:2px solid #b3ddc9;outline-offset:3px}
+.policy-comparison small{display:block;margin-top:8px;font:10px/1.5 system-ui;color:#93a6a9}
+.result-pill.failed,.suture-result.failed{background:#402d2b;color:#efb9a9}
+@media(max-width:600px){.policy-comparison{padding:10px}.policy-version-options button{font-size:11px;padding:9px}.policy-version-options button span{font-size:9px}}

@@ -1,0 +1,50 @@
+{
+  "success": false,
+  "termination": "timeout",
+  "drops": 0,
+  "unwanted_collisions": 0,
+  "placement_error": 0.2883282513556176,
+  "cleared": false,
+  "released": false,
+  "steps": 240,
+  "scene": {
+    "seed": 30000,
+    "object_xy": [
+      -0.008772126365656151,
+      0.005085744658765094
+    ],
+    "object_yaw": -0.11517915663080103,
+    "tray_xy": [
+      0.2774767756707317,
+      -0.029479446090839235
+    ],
+    "ee_xy": [
+      -0.005219747087870364,
+      0.006400338986840087
+    ]
+  },
+  "simulator_version": "gantry-v1",
+  "checkpoint_sha256": "ff1becf840712ad281792f2a3d9dcb61d20ff3086ee48a8bcb94310f713de766",
+  "comparison_provenance": {
+    "display_name": "Old version",
+    "kind": "synthetic_degraded_baseline",
+    "historical_checkpoint": false,
+    "parent_checkpoint": "artifacts\\policy_recovery.npz",
+    "parent_sha256": "317f08f24f58980c8a03a2f26fef6ce53f07376e1840a6cbab7947cd731fbad8",
+    "checkpoint_sha256": "ff1becf840712ad281792f2a3d9dcb61d20ff3086ee48a8bcb94310f713de766",
+    "modifications": [
+      "Perceived heart position shifted +52 mm along Y through observation calibration",
+      "Relative-position inputs shifted consistently; movement and grasp weights unchanged",
+      "Demo task sequencer lifts, transfers, releases and retracts after closure without checking grasp confirmation"
+    ],
+    "purpose": "Controlled failure demonstration; not evidence of historical policy performance",
+    "failure_mode": "missed_grasp_with_blind_transfer",
+    "target_offset_m": [
+      0,
+      0.052,
+      0
+    ],
+    "controller": "biased learned approach plus explicit blind-transfer demo sequencer"
+  },
+  "ever_grasped": false
+}

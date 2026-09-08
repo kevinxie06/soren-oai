@@ -1,5 +1,7 @@
 # Across-wound needle transfer and closure
 
+**Three.js presentation:** open `/suturing` on the frontend development server. See [rendering setup and fidelity notes](../app/suturing/README.md). Export the measured learned rollout with `python -m stitch.export_motion`.
+
 This replaces the earlier channel-only demonstration with a single stitch sequence: a semicircular needle travels across a longitudinal wound, emerges at the opposite marked point, is caught by opposing receiving jaws, is released by the donor, and is pulled clear. A policy-controlled thread tension then physically draws two spring-mounted wound edges together. The wound runs along world Y; the entry-to-exit line runs along X, perpendicular to it.
 
 ## Verified results

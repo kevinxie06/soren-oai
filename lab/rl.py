@@ -95,7 +95,33 @@ class TrainingProgress(BaseCallback):
         self.progress = progress
         self.check = check
         self.history = []
+        self.updates = []
+        self.episode_terms = {}
         self.start = start
+
+    def capture_update(self):
+        """Read SB3's logged metrics after train(), including the final update."""
+        values = self.logger.name_to_value
+        if "train/n_updates" not in values:
+            return
+        update = int(values["train/n_updates"])
+        if self.updates and self.updates[-1]["optimizer_epochs"] == update:
+            return
+        row = dict(step=self.num_timesteps, optimizer_epochs=update)
+        for name in [
+            "approx_kl", "clip_fraction", "value_loss", "policy_gradient_loss",
+            "entropy_loss", "explained_variance", "loss", "std", "learning_rate",
+        ]:
+            value = values.get("train/" + name)
+            if value is not None and np.isfinite(value):
+                row[name] = float(value)
+        self.updates.append(row)
+
+    def _on_rollout_start(self):
+        self.capture_update()
+
+    def _on_training_end(self):
+        self.capture_update()
 
     def _on_step(self):
         self.check()
@@ -105,6 +131,8 @@ class TrainingProgress(BaseCallback):
                 f"PPO: {self.num_timesteps - self.start:,} / {self.budget:,} new transitions",
             )
         for info in self.locals.get("infos", []):
+            for key, value in info.get("reward_terms", {}).items():
+                self.episode_terms[key] = self.episode_terms.get(key, 0.0) + float(value)
             if "episode" in info:
                 self.history.append(
                     dict(
@@ -112,8 +140,10 @@ class TrainingProgress(BaseCallback):
                         return_value=float(info["episode"]["r"]),
                         length=int(info["episode"]["l"]),
                         success=bool(info.get("success")),
+                        reward_terms=self.episode_terms.copy(),
                     )
                 )
+                self.episode_terms.clear()
         return True
 
 
@@ -149,6 +179,9 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
             raise ValueError("Checkpoint task mismatch")
         source.mean = np.asarray(model.soren_mean, np.float32)
         source.std = np.asarray(model.soren_std, np.float32)
+        # Resume weights/optimizer, with an explicitly seeded new sampling stream.
+        model.seed = seed
+        model.set_random_seed(seed)
     probe = (
         np.random.default_rng(seed)
         .normal(size=(32, len(source.mean)))
@@ -173,6 +206,11 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
         training_seeds="random seeds >=1100000000; evaluation seeds <1000000000",
     )
     start = model.num_timesteps if resume else 0
+    actor_before = torch.cat([
+        p.detach().flatten().clone()
+        for module in [model.policy.mlp_extractor.policy_net, model.policy.action_net]
+        for p in module.parameters()
+    ])
     callback = TrainingProgress(steps, progress, check, start)
     try:
         model.learn(
@@ -183,7 +221,13 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
         out = Path(output)
         out.mkdir(parents=True, exist_ok=True)
         model.save(out / "policy.zip")
+        actor_after = torch.cat([
+            p.detach().flatten()
+            for module in [model.policy.mlp_extractor.policy_net, model.policy.action_net]
+            for p in module.parameters()
+        ])
         report = dict(
+            schema="soren-training-v2",
             algorithm="PPO",
             task=source.task.id,
             steps=model.num_timesteps,
@@ -196,11 +240,20 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
             new_steps=model.num_timesteps - start,
             reward=reward,
             history=callback.history,
+            updates=callback.updates,
+            actor_parameter_delta_l2=float(torch.linalg.vector_norm(actor_after - actor_before)),
             action_parity_verified=True,
-            learning_rate=1e-5,
-            n_steps=256,
-            batch_size=64,
-            n_epochs=4,
+            learning_rate=float(model.lr_schedule(1)),
+            n_steps=model.n_steps,
+            batch_size=model.batch_size,
+            n_epochs=model.n_epochs,
+            gamma=model.gamma,
+            gae_lambda=model.gae_lambda,
+            clip_range=float(model.clip_range(1)),
+            target_kl=model.target_kl,
+            ent_coef=model.ent_coef,
+            vf_coef=model.vf_coef,
+            max_grad_norm=model.max_grad_norm,
             observation_normalization="frozen baseline statistics saved in checkpoint",
         )
         dump(out / "training.json", report)

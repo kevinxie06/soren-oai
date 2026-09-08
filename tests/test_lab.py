@@ -111,6 +111,19 @@ class RLTests(unittest.TestCase):
             )
             self.assertEqual(report["steps"], 1024)
             self.assertTrue(report["action_parity_verified"])
+            self.assertEqual(report["schema"], "soren-training-v2")
+            self.assertEqual([row["step"] for row in report["updates"]], [256, 512, 768, 1024])
+            self.assertGreater(report["actor_parameter_delta_l2"], 0)
+            self.assertEqual(report["gamma"], 0.99)
+            self.assertEqual(report["clip_range"], 0.2)
+            for row in report["updates"]:
+                self.assertGreaterEqual(row["approx_kl"], 0)
+                self.assertTrue(0 <= row["clip_fraction"] <= 1)
+                self.assertTrue(np.isfinite(list(row.values())).all())
+            for episode in report["history"]:
+                self.assertAlmostEqual(
+                    sum(episode["reward_terms"].values()), episode["return_value"], places=4
+                )
             candidate = CandidatePolicy(Path(tmp) / "policy.zip")
             original = BaselinePolicy()
             raw = first * env.std + env.mean
@@ -131,7 +144,7 @@ class RLTests(unittest.TestCase):
                 plan["scenarios"],
                 plan["reward"],
                 1024,
-                7,
+                19,
                 resumed_dir,
                 lambda *_: None,
                 lambda: None,
@@ -140,6 +153,13 @@ class RLTests(unittest.TestCase):
             self.assertEqual(resumed["steps"], 2048)
             self.assertEqual(resumed["previous_steps"], 1024)
             self.assertEqual(resumed["parent_sha256"], report["checkpoint_sha256"])
+            self.assertEqual(resumed["seed"], 19)
+            self.assertEqual([row["step"] for row in resumed["updates"]], [1280, 1536, 1792, 2048])
+            self.assertGreater(resumed["actor_parameter_delta_l2"], 0)
+            loaded = CandidatePolicy(resumed_dir / "policy.zip")
+            self.assertEqual(loaded.model.seed, 19)
+            persisted = json.loads((resumed_dir / "training.json").read_text())
+            self.assertEqual(persisted["updates"], resumed["updates"])
 
 
 if __name__ == "__main__":

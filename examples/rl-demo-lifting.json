@@ -1,0 +1,47 @@
+{
+  "specification": {
+    "version": "soren-study-v1",
+    "task": "lifting",
+    "package_id": "lifting-surrogate-v1",
+    "policy_id": "artifacts/policy_recovery.npz",
+    "purpose": "improve",
+    "question": "Can PPO improve lifting and placement from the negative cavity corner to the far positive-Y tray?",
+    "ranges": {
+      "object_x_mm": [
+        -22,
+        -16
+      ],
+      "object_y_mm": [
+        -22,
+        -16
+      ],
+      "object_yaw_deg": [
+        -8.5,
+        -8.5
+      ],
+      "tray_x_mm": [
+        320,
+        320
+      ],
+      "tray_y_mm": [
+        45,
+        45
+      ]
+    },
+    "episodes": 5,
+    "steps": 32768,
+    "seed": 31,
+    "evidence_id": "exploratory-simulator-v1"
+  },
+  "training": {
+    "steps": 32768,
+    "seed": 31,
+    "reward": {
+      "completion": 20,
+      "milestones": 2,
+      "placement": 3,
+      "smoothness": 0.01,
+      "failure": 10
+    }
+  }
+}

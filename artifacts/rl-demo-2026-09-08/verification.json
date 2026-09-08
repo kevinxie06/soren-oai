@@ -1,0 +1,26 @@
+[
+  {
+    "experiment_id": "d933746a-16f7-4f6b-803c-1157291c363d",
+    "scenario": "scene-02",
+    "matched_manifests": true,
+    "first_episode_baseline_failed": true,
+    "first_episode_candidate_succeeded": true,
+    "recordings_and_motion_accessible": true
+  },
+  {
+    "experiment_id": "d3dea018-bf04-4a57-9af5-6fdd2660302b",
+    "scenario": "scene-09",
+    "matched_manifests": true,
+    "first_episode_baseline_failed": true,
+    "first_episode_candidate_succeeded": true,
+    "recordings_and_motion_accessible": true
+  },
+  {
+    "experiment_id": "72517cad-6c41-4099-9b5c-19142baca9fc",
+    "scenario": "scene-01",
+    "matched_manifests": true,
+    "first_episode_baseline_failed": true,
+    "first_episode_candidate_succeeded": true,
+    "recordings_and_motion_accessible": true
+  }
+]

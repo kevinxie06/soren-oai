@@ -1,0 +1,51 @@
+{
+  "specification": {
+    "version": "soren-study-v1",
+    "task": "stitch",
+    "package_id": "stitch-surrogate-v1",
+    "policy_id": "artifacts/stitch/policy.npz",
+    "purpose": "improve",
+    "question": "Can PPO improve needle transfer and closure with an initially offset needle?",
+    "ranges": {
+      "gap_mm": [
+        7,
+        8
+      ],
+      "stiffness": [
+        70,
+        70
+      ],
+      "radius_mm": [
+        14,
+        14
+      ],
+      "offset_x_mm": [
+        2,
+        3
+      ],
+      "offset_y_mm": [
+        2.5,
+        2.5
+      ],
+      "offset_z_mm": [
+        3.5,
+        3.5
+      ]
+    },
+    "episodes": 5,
+    "steps": 32768,
+    "seed": 31,
+    "evidence_id": "exploratory-simulator-v1"
+  },
+  "training": {
+    "steps": 32768,
+    "seed": 31,
+    "reward": {
+      "completion": 20,
+      "milestones": 2,
+      "closure": 3,
+      "smoothness": 0.01,
+      "failure": 10
+    }
+  }
+}

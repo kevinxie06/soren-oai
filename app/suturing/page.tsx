@@ -30,7 +30,7 @@ export default function SuturingPage(){
   function switchSource(value:string){setPlaying(false);video.current?.pause();setSource(value);if(value!=='video')setAngle(value==='geometry'?'macro':'room');}
   const stages=['Align needle','Drive across wound','Receive & pull through','Tension & close'];
   return <main className="suture-app">
-    <header className="suture-header"><Link href="/showcase" className="suture-logo">soren<span>PROCEDURE STUDIO</span></Link><nav><Link href="/showcase"><ChevronLeft size={14}/> Heart extraction</Link><span className="suture-tag">POLICY PLAYBACK <i/></span></nav></header>
+    <header className="suture-header"><Link href="/" className="suture-logo">soren<span>PROCEDURE STUDIO</span></Link><nav aria-label="Procedure navigation"><Link href="/showcase">Heart extraction</Link><Link href="/"><ChevronLeft size={14}/> Policy lab</Link><span className="suture-tag">POLICY PLAYBACK <i/></span></nav></header>
     <div className="suture-layout"><section data-procedure-player className="suture-stage">
       <PolicyComparison task="stitch" value={version} onChange={next=>{video.current?.pause();setPlaying(false);setTime(0);cursor.current=0;setMotion(null);setError("");setVersion(next);}}/>
       <div className="suture-stage-top"><div className="suture-source"><button aria-pressed={source==='render'} onClick={()=>switchSource('render')}>Surgical rendering</button><button aria-pressed={source==='geometry'} onClick={()=>switchSource('geometry')}>Simulation geometry</button><button aria-pressed={source==='video'} onClick={()=>switchSource('video')}>Original simulation</button></div><span className="suture-seed">RECORDED / {motion?.scene.seed??'—'}</span></div>

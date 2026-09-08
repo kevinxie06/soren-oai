@@ -227,9 +227,52 @@ strong {
   letter-spacing: 1.4px;
   color: #7b8e85;
 }
-.sidebar nav {
+.sidebar .experiment-nav {
   overflow-y: auto;
   flex: 1;
+}
+.procedure-nav {
+  flex-shrink: 0;
+  border-top: 1px solid var(--line);
+  margin-top: 18px;
+  padding: 18px 4px;
+}
+.procedure-nav h2 {
+  margin: 0 6px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a5bab0;
+}
+.procedure-nav p {
+  margin: 7px 6px 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.procedure-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 6px;
+  border-radius: 5px;
+  color: #c9ebd7;
+  font-size: 12px;
+}
+.procedure-links a:hover {
+  background: #23322a;
+}
+.procedure-links a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.procedure-links svg {
+  flex-shrink: 0;
+}
+.procedure-links svg:last-child {
+  margin-left: auto;
 }
 .experiment-link {
   width: 100%;
@@ -1276,7 +1319,7 @@ progress::-webkit-progress-value {
   }
   .workspace-label,
   .sidebar-caption,
-  .sidebar nav,
+  .sidebar .experiment-nav,
   .sidebar-bottom {
     display: none;
   }
@@ -1284,6 +1327,22 @@ progress::-webkit-progress-value {
     margin: 0;
     font-size: 11px;
     align-self: center;
+  }
+  .procedure-nav {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    padding: 12px 0 0;
+  }
+  .procedure-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .procedure-links a {
+    background: #1d2b25;
+    padding: 10px 8px;
+    font-size: 11px;
+    gap: 6px;
   }
   .topbar {
     height: 46px;

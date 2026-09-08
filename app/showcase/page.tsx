@@ -55,7 +55,7 @@ export default function Showcase() {
     if (video.current) { if (next) void video.current.play().catch(() => setPlaying(false)); else video.current.pause(); }
   }
   return <div className="showcase">
-    <header className="showcase-header"><Link href="/" className="showcase-brand">soren <span>/ procedure playback</span></Link><Link href="/suturing">Suturing playback →</Link><Link href="/"><ArrowLeft size={15} /> Workspace</Link></header>
+    <header className="showcase-header"><Link href="/" className="showcase-brand">soren <span>/ procedure playback</span></Link><Link href="/suturing">Suturing playback →</Link><Link href="/"><ArrowLeft size={15} /> Policy lab</Link></header>
     <main className="showcase-main">
       <div className="showcase-heading"><div><p className="eyebrow">POLICY SHOWCASE / 01</p><h1>From learned motion<br />to a surgical scene.</h1><p>Heart extraction · recorded policy execution</p></div><span className="recorded-badge">● RECORDED · NOT LIVE</span></div>
       {error && <p role="alert">{error}. Run <code>python -m bootstrap.export_motion --video</code>.</p>}

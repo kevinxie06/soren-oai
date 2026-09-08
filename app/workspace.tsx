@@ -634,7 +634,7 @@ export default function Workspace() {
         <div className="sidebar-caption">
           EXPERIMENTS <span>{experiments.length}</span>
         </div>
-        <nav aria-label="Experiments">
+        <nav className="experiment-nav" aria-label="Experiments">
           {experiments.map((e) => (
             <button
               key={e.id}
@@ -648,6 +648,22 @@ export default function Workspace() {
               <span>{e.title}</span>
             </button>
           ))}
+        </nav>
+        <nav className="procedure-nav" aria-labelledby="procedure-nav-title">
+          <h2 id="procedure-nav-title">Procedure playbacks</h2>
+          <p>Watch and compare policy versions.</p>
+          <div className="procedure-links">
+            <Link href="/showcase">
+              <Play size={15} aria-hidden="true" />
+              <span>Heart extraction</span>
+              <ChevronRight size={14} aria-hidden="true" />
+            </Link>
+            <Link href="/suturing">
+              <Play size={15} aria-hidden="true" />
+              <span>Suturing</span>
+              <ChevronRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
         </nav>
         <div className="sidebar-bottom">
           <div className="connection">

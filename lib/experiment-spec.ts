@@ -11,6 +11,7 @@ export interface ExperimentSpecification {
   purpose: StudyPurpose;
   question: string;
   ranges: Record<string, ParameterRange>;
+  environments: number;
   episodes: number;
   steps: number;
   seed: number;
@@ -217,6 +218,7 @@ export function defaultSpecification(
     ranges: Object.fromEntries(
       pkg.parameters.map((p) => [p.key, [...p.initial] as ParameterRange]),
     ),
+    environments: 16,
     episodes: 3,
     steps: 8192,
     seed: 7,
@@ -230,7 +232,8 @@ export function validateSpecification(value: unknown): ExperimentSpecification {
   };
   if (!value || typeof value !== "object" || Array.isArray(value))
     return fail("An experiment specification is required.");
-  const s = value as ExperimentSpecification;
+  // Stored studies created before count configuration retain the original default.
+  const s = { environments: 16, ...value } as ExperimentSpecification;
   if (s.task !== "stitch" && s.task !== "lifting")
     return fail("Choose a supported task package.");
   const pkg = taskPackages[s.task];
@@ -255,6 +258,8 @@ export function validateSpecification(value: unknown): ExperimentSpecification {
     s.question.length > 4000
   )
     return fail("Use 10–4,000 characters for the research question.");
+  if (!Number.isSafeInteger(s.environments) || s.environments < 1)
+    return fail("Choose a positive whole number of environments.");
   if (!Number.isInteger(s.episodes) || s.episodes < 1 || s.episodes > 20)
     return fail("Choose 1–20 episodes per environment.");
   if (![1024, 8192, 32768, 131072].includes(s.steps))
@@ -287,10 +292,11 @@ export function validateSpecification(value: unknown): ExperimentSpecification {
       );
     ranges[p.key] = [...r];
   }
-  if (!Object.values(ranges).some(([lo, hi]) => hi - lo >= 0.001))
-    return fail(
-      "Vary at least one parameter to build 16 distinct environments.",
-    );
+  if (
+    s.environments > 1 &&
+    !Object.values(ranges).some(([lo, hi]) => hi - lo >= 0.001)
+  )
+    return fail("Vary at least one parameter to build distinct environments.");
   return {
     version: s.version,
     task: s.task,
@@ -299,6 +305,7 @@ export function validateSpecification(value: unknown): ExperimentSpecification {
     purpose: s.purpose,
     question: s.question.trim(),
     ranges,
+    environments: s.environments,
     episodes: s.episodes,
     steps: s.steps,
     seed: s.seed,
@@ -306,9 +313,20 @@ export function validateSpecification(value: unknown): ExperimentSpecification {
   };
 }
 export function coverageLabel(spec: ExperimentSpecification) {
-  return Object.values(spec.ranges).filter(([lo, hi]) => lo !== hi).length === 2
-    ? "4 × 4 parameter grid"
-    : "16 stratified parameter combinations";
+  const count = spec.environments ?? 16;
+  if (!Number.isSafeInteger(count) || count < 1)
+    return "Choose an environment count";
+  if (count === 1) return "1 parameter configuration";
+  const side = Math.sqrt(count);
+  return Object.values(spec.ranges).filter(([lo, hi]) => lo !== hi).length ===
+    2 && Number.isInteger(side)
+    ? `${side} × ${side} parameter grid`
+    : `${count} stratified parameter combinations`;
+}
+function coprimeStride(stride: number, count: number): number {
+  const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
+  while (gcd(stride, count) !== 1) stride++;
+  return stride;
 }
 export function buildStudy(value: unknown): {
   specification: ExperimentSpecification;
@@ -320,17 +338,25 @@ export function buildStudy(value: unknown): {
   const varying = pkg.parameters.filter(
     (p) => s.ranges[p.key][0] !== s.ranges[p.key][1],
   );
-  const strides = [1, 5, 7, 11, 13, 3];
-  const scenarios = Array.from({ length: 16 }, (_, i) => {
+  const count = s.environments;
+  const side = Math.sqrt(count);
+  const grid = varying.length === 2 && Number.isInteger(side) && count > 1;
+  const strides = [1, 5, 7, 11, 13, 3].map((stride) =>
+    coprimeStride(stride, count),
+  );
+  const scenarios = Array.from({ length: count }, (_, i) => {
     const parameters = Object.fromEntries(
       pkg.parameters.map((p, j) => {
         const [lo, hi] = s.ranges[p.key];
         const position = varying.indexOf(p);
         const t =
-          varying.length === 2
-            ? (position === 0 ? Math.floor(i / 4) : i % 4) / 3
-            : ((i * strides[j] + s.seed * (j + 1)) % 16) / 15;
-        return [p.key, Number((lo + (hi - lo) * t).toFixed(6))];
+          count === 1
+            ? 0.5
+            : grid
+              ? (position === 0 ? Math.floor(i / side) : i % side) / (side - 1)
+              : ((i * strides[j] + s.seed * (j + 1)) % count) / (count - 1);
+        const value = lo + (hi - lo) * t;
+        return [p.key, count === 16 ? Number(value.toFixed(6)) : value];
       }),
     );
     return {

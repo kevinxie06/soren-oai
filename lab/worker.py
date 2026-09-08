@@ -160,11 +160,12 @@ class Execution:
                 else:
                     plan = template_plan(self.experiment["prompt"], task)
                 plan = validate_plan(plan, task)
+                scenario_count = len(plan["scenarios"])
                 for index, scenario in enumerate(plan["scenarios"]):
                     self.check()
                     self.update(
-                        0.1 + 0.85 * index / 16,
-                        f"Validating and rendering scenario {index + 1} / 16",
+                        0.1 + 0.85 * index / scenario_count,
+                        f"Validating and rendering scenario {index + 1} / {scenario_count}",
                     )
                     path = self.folder / f"{scenario['id']}.jpg"
                     thumbnail(scenario, path)
@@ -174,7 +175,7 @@ class Execution:
                 dump(self.folder / "plan.json", plan)
                 result = {
                     "plan_artifact": self.upload(self.folder / "plan.json"),
-                    "scenario_count": 16,
+                    "scenario_count": scenario_count,
                     "task": task,
                     "provider": plan["provider"],
                     "model": plan["model"],
@@ -196,12 +197,13 @@ class Execution:
                     policy = BaselinePolicy(task=task)
                 outcomes = []
                 total = len(plan["scenarios"]) * episodes
+                scenario_count = len(plan["scenarios"])
                 for index, scenario in enumerate(plan["scenarios"]):
                     for episode in range(episodes):
                         self.check()
                         self.update(
                             len(outcomes) / total,
-                            f"{kind.capitalize()}: scene {index + 1}/16 · episode {episode + 1}/{episodes}",
+                            f"{kind.capitalize()}: scene {index + 1}/{scenario_count} · episode {episode + 1}/{episodes}",
                         )
                         folder = self.folder / scenario["id"] / str(episode)
                         result = rollout(

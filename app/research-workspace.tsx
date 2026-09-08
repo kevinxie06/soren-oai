@@ -40,7 +40,7 @@ export function ResearchPrimer({ task }: { task: TaskKind }) {
           <span>01 / DISTRIBUTION</span>
           <strong>Choose what varies</strong>
           <p>
-            Generate 16 executable scenarios for{" "}
+            Choose how many executable scenarios to generate for{" "}
             {task === "lifting"
               ? "object lifting"
               : "needle transfer and closure"}

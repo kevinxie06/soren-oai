@@ -44,8 +44,8 @@ def validate_plan(plan, task=None):
         raise ValueError("Invalid plan description")
     validate_reward(p["reward"], task)
     scenarios = p["scenarios"]
-    if not isinstance(scenarios, list) or len(scenarios) != 16:
-        raise ValueError("Exactly 16 scenarios are required")
+    if not isinstance(scenarios, list) or not scenarios:
+        raise ValueError("At least one scenario is required")
     seen, seeds = set(), []
     for i, s in enumerate(scenarios):
         if s.get("task", task) != task:

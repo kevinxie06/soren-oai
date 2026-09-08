@@ -55,6 +55,13 @@ test("invalid units, ranges, unsupported evidence, policy, and budgets are rejec
     { evidence_id: "clinically validated" },
     { purpose: "deployment" },
     { question: "short" },
+    { environments: 0 },
+    { environments: -1 },
+    { environments: 1.5 },
+    { environments: "8" },
+    { environments: null },
+    { environments: NaN },
+    { environments: Infinity },
     { episodes: 0 },
     { episodes: 21 },
     { episodes: 1.2 },
@@ -80,6 +87,7 @@ test("review fingerprints detect question, budget, seed, policy purpose and enve
   assert.equal((await reviewStudy(spec)).fingerprint, original.fingerprint);
   for (const patch of [
     { question: "A different research question" },
+    { environments: 7 },
     { episodes: 5 },
     { seed: 8 },
     { purpose: "improve" },
@@ -120,4 +128,55 @@ test("execution can add rendering assets but cannot change a reviewed plan", () 
     change(changed);
     assert.equal(matchesReviewedPlan(changed, plan), false);
   }
+});
+
+for (const task of ["stitch", "lifting"]) {
+  for (const count of [1, 2, 5, 7, 9, 17, 32, 100]) {
+    test(`${task}: generates ${count} distinct environments with reproducible coverage`, () => {
+      const spec = { ...defaultSpecification(task), environments: count };
+      // A single varying parameter catches strides that repeat for non-coprime counts.
+      for (const parameter of taskPackages[task].parameters) {
+        const ranges = Object.fromEntries(
+          Object.entries(spec.ranges).map(([key, [lo]]) => [key, [lo, lo]]),
+        );
+        ranges[parameter.key] = parameter.bounds;
+        const input = { ...spec, ranges };
+        const { plan } = buildStudy(input);
+        assert.equal(plan.scenarios.length, count);
+        assert.deepEqual(buildStudy(input).plan, plan);
+        assert.equal(
+          new Set(plan.scenarios.map((scene) => scene[parameter.key])).size,
+          count,
+        );
+        for (const scene of plan.scenarios) {
+          for (const [key, [lo, hi]] of Object.entries(ranges)) {
+            assert.ok(scene[key] >= lo && scene[key] <= hi);
+          }
+        }
+      }
+    });
+  }
+}
+test("square counts use matching grids, and one environment supports fixed parameters", () => {
+  const spec = { ...defaultSpecification(), environments: 9 };
+  assert.equal(coverageLabel(spec), "3 × 3 parameter grid");
+  const { plan } = buildStudy(spec);
+  assert.equal(
+    new Set(plan.scenarios.map((s) => `${s.gap_mm},${s.stiffness}`)).size,
+    9,
+  );
+  assert.equal(new Set(plan.scenarios.map((s) => s.gap_mm)).size, 3);
+  assert.equal(new Set(plan.scenarios.map((s) => s.stiffness)).size, 3);
+  spec.environments = 1;
+  for (const range of Object.values(spec.ranges)) range[1] = range[0];
+  assert.equal(buildStudy(spec).plan.scenarios.length, 1);
+});
+test("stored specifications without an environment count still default to 16", () => {
+  const spec = defaultSpecification();
+  delete spec.environments;
+  assert.equal(validateSpecification(spec).environments, 16);
+  assert.deepEqual(
+    buildStudy(spec).plan,
+    buildStudy(defaultSpecification()).plan,
+  );
 });

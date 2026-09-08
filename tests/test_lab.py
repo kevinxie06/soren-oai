@@ -26,8 +26,8 @@ class ExperimentTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 validate_plan(bad)
         bad = copy.deepcopy(self.plan)
-        bad["scenarios"].pop()
-        with self.assertRaisesRegex(ValueError, "16"):
+        bad["scenarios"] = []
+        with self.assertRaisesRegex(ValueError, "At least one"):
             validate_plan(bad)
 
     def test_reproducible_paired_configs_and_separate_training_seeds(self):

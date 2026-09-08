@@ -90,15 +90,19 @@ export default function ExperimentComposer({
   initial?: ExperimentSpecification;
   onCreated: (id: string) => Promise<void>;
 }) {
-  const [spec, setSpec] = useState<ExperimentSpecification>(
-    () => initial ?? defaultSpecification(),
-  );
+  const [spec, setSpec] = useState<ExperimentSpecification>(() => ({
+    ...defaultSpecification(),
+    ...initial,
+  }));
   const [review, setReview] = useState<ReviewedStudy | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const reviewHeading = useRef<HTMLHeadingElement>(null);
   const question = useRef<HTMLTextAreaElement>(null);
   const pkg = taskPackages[spec.task];
+  const validCount =
+    Number.isSafeInteger(spec.environments) && spec.environments > 0;
+  const totalEpisodes = validCount ? spec.episodes * spec.environments : "—";
   function update(patch: Partial<ExperimentSpecification>) {
     setSpec((s) => ({ ...s, ...patch }));
     setReview(null);
@@ -188,6 +192,7 @@ export default function ExperimentComposer({
                     setSpec({
                       ...next,
                       purpose: spec.purpose,
+                      environments: spec.environments,
                       episodes: spec.episodes,
                       steps: spec.steps,
                       seed: spec.seed,
@@ -243,12 +248,29 @@ export default function ExperimentComposer({
               Your question records intent. The settings below define what the
               simulator tests.
             </p>
+            <div className="study-budgets">
+              <label>
+                Number of environments
+                <input
+                  type="number"
+                  min={1}
+                  step={1}
+                  required
+                  value={
+                    Number.isNaN(spec.environments) ? "" : spec.environments
+                  }
+                  onChange={(e) =>
+                    update({ environments: e.target.valueAsNumber })
+                  }
+                />
+              </label>
+            </div>
             <details className="study-settings">
               <summary>
                 <SlidersHorizontal size={14} />
                 Study settings
                 <span>
-                  {coverageLabel(spec)} · {spec.episodes * 16} episodes
+                  {coverageLabel(spec)} · {totalEpisodes} episodes
                 </span>
                 <ChevronDown size={13} />
               </summary>
@@ -379,7 +401,10 @@ export default function ExperimentComposer({
               </div>
             </details>
             <div className="study-submit">
-              <span>16 environments · exploratory simulation</span>
+              <span>
+                {validCount ? spec.environments : "—"} environments ·
+                exploratory simulation
+              </span>
               <button className="primary" type="submit" disabled={busy}>
                 {busy ? (
                   <LoaderCircle size={14} className="spin" />
@@ -414,11 +439,11 @@ export default function ExperimentComposer({
           <p className="review-question">{review.specification.question}</p>
           <div className="study-review-stats">
             <div>
-              <strong>16</strong>
+              <strong>{spec.environments}</strong>
               <span>environments</span>
             </div>
             <div>
-              <strong>{spec.episodes * 16}</strong>
+              <strong>{totalEpisodes}</strong>
               <span>baseline episodes</span>
             </div>
             <div>

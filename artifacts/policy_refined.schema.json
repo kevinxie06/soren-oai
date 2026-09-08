@@ -1,0 +1,51 @@
+{
+  "observation": [
+    "ee_x",
+    "ee_y",
+    "ee_z",
+    "object_x",
+    "object_y",
+    "object_z",
+    "tray_x",
+    "tray_y",
+    "tray_z",
+    "object_minus_ee_x",
+    "object_minus_ee_y",
+    "object_minus_ee_z",
+    "tray_minus_object_x",
+    "tray_minus_object_y",
+    "tray_minus_object_z",
+    "ee_velocity_x",
+    "ee_velocity_y",
+    "ee_velocity_z",
+    "object_velocity_x",
+    "object_velocity_y",
+    "object_velocity_z",
+    "closed",
+    "attached",
+    "cleared",
+    "released",
+    "object_quaternion_w",
+    "object_quaternion_x",
+    "object_quaternion_y",
+    "object_quaternion_z",
+    "object_angular_velocity_x",
+    "object_angular_velocity_y",
+    "object_angular_velocity_z"
+  ],
+  "observation_dtype": "float32",
+  "action": [
+    "delta_x / 0.012m",
+    "delta_y / 0.012m",
+    "delta_z / 0.012m",
+    "close if >0 else open"
+  ],
+  "bounds": [
+    -1,
+    1
+  ],
+  "frame": "world right-handed XYZ; Z up",
+  "control_hz": 20.0,
+  "orientation": "fixed gripper identity; object quaternion wxyz",
+  "simulator": "gantry-v1"
+}

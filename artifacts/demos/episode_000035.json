@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "termination": "success",
+  "drops": 0,
+  "unwanted_collisions": 0,
+  "placement_error": 8.065960089787488e-11,
+  "cleared": true,
+  "released": true,
+  "steps": 116,
+  "scene": {
+    "seed": 35,
+    "object_xy": [
+      -0.007130219409116118,
+      -0.0018261955314524715
+    ],
+    "object_yaw": 0.13050205525494382,
+    "tray_xy": [
+      0.31627779870228245,
+      -0.036289321768081396
+    ],
+    "ee_xy": [
+      -0.02495539892092973,
+      -0.002335603170302042
+    ]
+  },
+  "simulator_version": "gantry-v1",
+  "controller_version": "geometry-teacher-v1"
+}

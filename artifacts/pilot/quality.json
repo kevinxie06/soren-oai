@@ -1,0 +1,30 @@
+{
+  "successful_episodes": 10,
+  "failed_episodes": 0,
+  "frames": 1105,
+  "finite": true,
+  "bounded_actions": true,
+  "valid_boundaries": true,
+  "lengths": [
+    106,
+    114,
+    109,
+    114,
+    106,
+    107,
+    110,
+    111,
+    116,
+    112
+  ],
+  "stages": [
+    "approach",
+    "grasp",
+    "lift",
+    "release",
+    "transport",
+    "verify"
+  ],
+  "unwanted_collisions": 0,
+  "drops": 0
+}

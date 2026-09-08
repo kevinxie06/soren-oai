@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded source checkouts; reproducible pins are in needle_lift/config.json
+upstream/

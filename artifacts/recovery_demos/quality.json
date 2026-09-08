@@ -1,0 +1,17 @@
+{
+  "base_episodes": 120,
+  "recovery_successes": 120,
+  "recovery_failures": 0,
+  "frames": 26884,
+  "finite": true,
+  "bounded": true,
+  "valid_boundaries": true,
+  "frames_with_expert_correction": 5749,
+  "seed_start": 1000,
+  "episodes_attempted": 120,
+  "roll_in_steps_range": [
+    15,
+    85
+  ],
+  "checkpoint_sha256": "6742fc4850d9afe6d7046a7bc71b13e029977438ca1901c82fdb234ba6ede9c0"
+}

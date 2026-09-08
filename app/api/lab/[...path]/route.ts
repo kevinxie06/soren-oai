@@ -318,9 +318,34 @@ async function handle(request: Request) {
         seed?: number;
         reward?: RewardSpec;
         resume?: boolean;
+        scenario_id?: string;
+        commands?: (number[] | null)[];
+        correction_job_id?: string;
       };
       if (!e.plan)
         return json({ error: "Generate valid scenarios first." }, 409);
+      if (b.kind === "manual") {
+        const size = e.task === "lifting" ? 4 : 7;
+        if (!e.plan.scenarios.some(s => s.id === b.scenario_id) ||
+            !Array.isArray(b.commands) || b.commands.length < 1 || b.commands.length > 500 ||
+            b.commands.some(a => a !== null && (!Array.isArray(a) || a.length !== size ||
+              a.some(v => typeof v !== "number" || !Number.isFinite(v) || Math.abs(v) > 1))))
+          return json({error: "Invalid scenario or manual controls."}, 400);
+        return json({job_id: await enqueue(e.id, "manual", {
+          scenario_id: b.scenario_id, commands: b.commands,
+        })}, 201);
+      }
+      let correction: string | undefined;
+      if (b.correction_job_id !== undefined) {
+        if (b.kind !== "train" || typeof b.correction_job_id !== "string")
+          return json({error: "Corrections are only used for training."}, 400);
+        const row = await db.prepare("SELECT result FROM jobs WHERE id=? AND experiment_id=? AND kind='manual' AND status='completed'")
+          .bind(b.correction_job_id, e.id).first<{result: string}>();
+        const result = row ? JSON.parse(row.result) : null;
+        if (!result?.info?.success || !result.manual_steps || result.task !== (e.task ?? "stitch"))
+          return json({error: "Finish a successful manual attempt before updating."}, 409);
+        correction = result.correction;
+      }
       if (!["baseline", "train", "candidate"].includes(b.kind))
         return json({ error: "Unsupported job kind" }, 400);
       let episodes = b.episodes ?? e.specification?.episodes ?? 3;
@@ -379,6 +404,8 @@ async function handle(request: Request) {
             reward,
             checkpoint,
             baseline_job_id: baselineJobId,
+            correction,
+            correction_job_id: b.correction_job_id,
           }),
         },
         201,

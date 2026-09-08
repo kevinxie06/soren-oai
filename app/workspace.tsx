@@ -1,4 +1,5 @@
 "use client";
+import ManualControl from "./manual-control";
 import ExperimentComposer, { StudyRecord } from "./experiment-composer";
 import type { ExperimentSpecification } from "@/lib/experiment-spec";
 import { SceneThumbnail, SimulationPlayer } from "./scenario-rendering";
@@ -1376,6 +1377,7 @@ export default function Workspace() {
                             scenario={scenario}
                             baseline={base}
                           />
+                          <ManualControl key={`manual-${selected}-${scenario.id}`} experimentId={selected} scenario={scenario} reward={weights ?? plan.reward} />
                         </div>
                       )}
                     </section>
@@ -1640,6 +1642,7 @@ export default function Workspace() {
                                   baseline: "Baseline evaluation",
                                   train: "PPO training",
                                   candidate: "Candidate evaluation",
+                                  manual: "Operator simulation",
                                 }[j.kind]
                               }
                             </strong>

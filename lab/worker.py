@@ -291,6 +291,14 @@ class Execution:
                 result["report"] = self.upload(self.folder / "evaluation.json")
                 self.check()
                 self.post("complete", dict(result=result))
+            elif kind == "manual":
+                from .manual import replay
+                scenario = next(s for s in self.experiment["plan"]["scenarios"] if s["id"] == data["scenario_id"])
+                result = replay(scenario, data["commands"], self.folder, self.check)
+                result["image"] = self.upload(self.folder / "manual.jpg")
+                result["correction"] = self.upload(self.folder / "correction.npz")
+                self.check()
+                self.post("complete", dict(result=result))
             elif kind == "train":
                 from .rl import train
 
@@ -301,6 +309,10 @@ class Execution:
                     resume.write_bytes(
                         self.client.request("/artifacts/" + data["checkpoint"])
                     )
+                correction = None
+                if data.get("correction"):
+                    correction = self.folder / "correction.npz"
+                    correction.write_bytes(self.client.request("/artifacts/" + data["correction"]))
                 result = train(
                     validate_plan(self.experiment["plan"], task)["scenarios"],
                     data["reward"],
@@ -310,7 +322,9 @@ class Execution:
                     self.update,
                     self.check,
                     resume=resume,
+                    correction=correction,
                 )
+                result["correction_job_id"] = data.get("correction_job_id")
                 result["checkpoint"] = self.upload(self.folder / "policy.zip")
                 result["report"] = self.upload(self.folder / "training.json")
                 self.check()

@@ -147,7 +147,7 @@ class TrainingProgress(BaseCallback):
         return True
 
 
-def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
+def train(scenarios, reward, steps, seed, output, progress, check, resume=None, correction=None):
     from stable_baselines3.common.monitor import Monitor
 
     torch.set_num_threads(1)
@@ -211,6 +211,35 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
         for module in [model.policy.mlp_extractor.policy_net, model.policy.action_net]
         for p in module.parameters()
     ])
+    correction_report = None
+    if correction:
+        with np.load(correction, allow_pickle=False) as demo:
+            if str(demo["task"]) != source.task.id:
+                raise ValueError("Correction task mismatch")
+            mask = demo["manual"].astype(bool)
+            observations = demo["observations"][mask]
+            targets = demo["actions"][mask]
+        if len(targets) == 0 or not np.isfinite(observations).all() or not np.isfinite(targets).all():
+            raise ValueError("Correction must contain finite operator actions")
+        x = torch.as_tensor((observations - source.mean) / source.std, dtype=torch.float32)
+        y = torch.as_tensor(targets, dtype=torch.float32)
+        losses = []
+        for _ in range(100):
+            check()
+            predicted = model.policy.get_distribution(x).distribution.mean
+            loss = torch.nn.functional.mse_loss(predicted[:, :3], y[:, :3])
+            if source.task.id == "lifting":
+                loss = loss + torch.nn.functional.binary_cross_entropy_with_logits(predicted[:, 3], (y[:, 3] > 0).float())
+            else:
+                loss = loss + torch.nn.functional.mse_loss(predicted[:, 3:], y[:, 3:])
+            model.policy.optimizer.zero_grad()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.policy.parameters(), 0.5)
+            model.policy.optimizer.step()
+            losses.append(float(loss.detach()))
+        correction_report = dict(sha256=digest(correction), samples=len(targets),
+                                 updates=100, initial_loss=losses[0], final_loss=losses[-1])
+        model.soren_metadata["operator_correction"] = correction_report
     callback = TrainingProgress(steps, progress, check, start)
     try:
         model.learn(
@@ -228,7 +257,8 @@ def train(scenarios, reward, steps, seed, output, progress, check, resume=None):
         ])
         report = dict(
             schema="soren-training-v2",
-            algorithm="PPO",
+            algorithm="Operator behavior cloning + PPO" if correction else "PPO",
+            operator_correction=correction_report,
             task=source.task.id,
             steps=model.num_timesteps,
             requested_steps=steps,

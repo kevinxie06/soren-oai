@@ -63,14 +63,21 @@ try {
 } catch (error) {
   if (error.message?.startsWith("Port ")) throw error;
 }
-start(process.platform === "win32" ? "npm.cmd" : "npm", [
+const frontendArgs = [
   "run",
   "dev",
   "--",
   "--port",
   String(port),
   "--strictPort",
-]);
+];
+if (process.platform === "win32") {
+  start(process.env.ComSpec || "cmd.exe", [
+    "/d", "/s", "/c", `npm.cmd ${frontendArgs.join(" ")}`,
+  ]);
+} else {
+  start("npm", frontendArgs);
+}
 let ready = false;
 for (let i = 0; i < 120 && !stopping; i++) {
   try {

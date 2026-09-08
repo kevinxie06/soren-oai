@@ -1,6 +1,6 @@
 import type { ExperimentSpecification } from "./experiment-spec";
 export type JobKind =
-  "generate" | "baseline" | "train" | "candidate" | "refine";
+  "generate" | "baseline" | "train" | "candidate" | "refine" | "manual";
 export type JobStatus =
   "queued" | "running" | "completed" | "failed" | "cancelled";
 export type TaskKind = "stitch" | "lifting";
@@ -75,6 +75,8 @@ export interface Job {
   error: string | null;
   created_at: number;
   data: {
+    scenario_id?: string;
+    commands?: (number[] | null)[];
     episodes?: number;
     steps?: number;
     seed?: number;

@@ -41,9 +41,6 @@ yarn-error.log*
 __pycache__/
 *.pyc
 *.tsbuildinfo
-smoke-report.json
 
 # Python policy bootstrapping
 .venv/
-# Downloaded source checkouts; reproducible pins are in needle_lift/config.json
-upstream/

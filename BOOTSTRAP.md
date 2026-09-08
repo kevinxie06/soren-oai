@@ -93,7 +93,3 @@ The handoff consists of `policy.npz` (weights and normalization), `policy.traini
 For later RL, wrap `ExtractionEnv` or implement an adapter with these exact observation and action meanings. Initialize an equivalent MLP from `w0/b0`, `w1/b1`, `w2/b2`; arrays use `input @ weight + bias` (transpose weights for frameworks whose Linear layers store output-by-input). Preserve normalization. Gripper output is a logit; movement outputs are linear before clipping. Choose your RL algorithm's stochastic action distribution explicitly, especially for binary gripper commands. The checkpoint is **not** claimed compatible with arbitrary RL frameworks; no RL trainer or framework adapter is implemented here.
 
 Remaining limits: assisted grasp, custom fixed-orientation gantry, state access, narrow scene variation, simple collision geometry and short settling checks. Generalization to an articulated arm, real grippers, camera observations, moving objects or clinical tasks is untested.
-
-## Needle-lift source package
-
-NVIDIA source/assets and a separate launch adapter are in [needle_lift](needle_lift/README.md). This package is **blocked**, not a second working learned policy: no pretrained needle checkpoint was found and this Windows/Intel machine cannot run the supported Isaac stack. See its source audit and actual upstream launch failure before planning backend availability.

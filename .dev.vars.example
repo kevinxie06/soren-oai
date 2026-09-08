@@ -1,0 +1,6 @@
+# The launcher generates .dev.vars with a random local worker token.
+# For hosted operation, configure the same worker token on Sites and the Python host.
+LAB_WORKER_TOKEN=replace-with-a-random-64-character-token
+# Hosted UI access requires a lab_access cookie carrying this secret.
+# Keep hosted deployments private; replace this gate with organization SSO before multi-user use.
+LAB_ACCESS_TOKEN=replace-with-a-separate-random-token

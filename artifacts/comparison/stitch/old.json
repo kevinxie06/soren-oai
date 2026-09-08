@@ -1,0 +1,51 @@
+{
+  "success": false,
+  "termination": "donor_overtravel",
+  "steps": 107,
+  "entered": true,
+  "exited": true,
+  "caught": false,
+  "receiver_holding": false,
+  "donor_holding": true,
+  "needle_clear": false,
+  "wound_gap_m": 0.007570101466898954,
+  "initial_gap_m": 0.007570101466898954,
+  "tension_n": 0.0,
+  "entry_error_m": 3.998724693697445e-06,
+  "exit_error_m": 0.0007342162732407928,
+  "unwanted_collisions": 0,
+  "scene": {
+    "seed": 30000,
+    "center": [
+      -0.003987330166207341,
+      0.0018493616940963974,
+      0.024
+    ],
+    "radius": 0.01246427791158932,
+    "gap": 0.007570101466898954,
+    "initial_offset": [
+      -0.0019652964060559493,
+      -0.0006263696505444437,
+      0.004884020339210406
+    ],
+    "tissue_stiffness": 71.03026584856343
+  },
+  "task_version": "opposing-jaw-stitch-v1",
+  "noise": 0,
+  "noise_seed": 930000,
+  "controller": "learned",
+  "checkpoint_sha256": "dfeda813d1478a7b5d1446faf661a8bf3e5fc98f8fb2e0fed80cd1ddaaf21cbb",
+  "comparison_provenance": {
+    "display_name": "Old version",
+    "kind": "synthetic_degraded_baseline",
+    "historical_checkpoint": false,
+    "parent_checkpoint": "artifacts\\stitch\\policy.npz",
+    "parent_sha256": "b41dd08023400cd7c942a131b284f3b1b4a5edf6de9c3ff39b8231dd2ec863b5",
+    "checkpoint_sha256": "dfeda813d1478a7b5d1446faf661a8bf3e5fc98f8fb2e0fed80cd1ddaaf21cbb",
+    "modifications": [
+      "Receiving jaw forced open",
+      "Thread tension output disabled"
+    ],
+    "purpose": "Controlled failure demonstration; not evidence of historical policy performance"
+  }
+}

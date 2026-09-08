@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "termination": "success",
+  "steps": 244,
+  "entry_error_m": 5.075411866467789e-06,
+  "exit_error_m": 2.568445913607842e-06,
+  "maximum_depth_m": 0.026117191789438717,
+  "unwanted_collisions": 0,
+  "peak_contact_force_n": 0.0,
+  "needle_clear": true,
+  "scene": {
+    "seed": 20000,
+    "center": [
+      0.0009644193713113369,
+      0.009647965141412935,
+      0.03823660847192749
+    ],
+    "radius": 0.026118499253814993,
+    "initial_offset": [
+      0.0022118795200754375,
+      -0.004113604591166758,
+      0.004311084004893683
+    ],
+    "initial_theta": 2.638990858279226
+  },
+  "simulator_version": "needle-channel-v1",
+  "controller": "learned",
+  "checkpoint_sha256": "028eefa26cffcc0ba3aecdd9587f6c2d5cb070f547cb3436b8031d79deb61c3d"
+}

@@ -1,0 +1,50 @@
+import {chromium} from '@playwright/test';
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+try{
+ const page=await browser.newPage({viewport:{width:1500,height:1100}});page.setDefaultTimeout(90000);
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto(process.env.SUTURING_URL||'http://127.0.0.1:3002/suturing');
+ await page.locator('canvas').waitFor();await page.waitForFunction(()=>document.querySelector('canvas')?.dataset.gap);
+ await page.getByTestId('room-status').filter({hasText:'Scanned patient'}).waitFor();
+ assert.equal(await page.locator('canvas').getAttribute('data-camera'),'room');
+ await mkdir('artifacts/stitch/showcase',{recursive:true});
+ await page.waitForTimeout(1500);await page.screenshot({path:'artifacts/stitch/showcase/start.png',fullPage:true});
+ for(const [button,file] of [['Patient','patient'],['Operative field','field'],['Macro','macro']]){
+   await page.getByRole('button',{name:button,exact:true}).click();await page.waitForTimeout(700);await page.screenshot({path:`artifacts/stitch/showcase/${file}.png`,fullPage:true});
+ }
+ await page.getByRole('button',{name:'Play playback',exact:true}).click();await page.waitForTimeout(800);
+ await page.getByRole('button',{name:'Pause playback',exact:true}).click();
+ assert.ok(Number(await page.getByRole('slider').inputValue())>0);
+ const paused=await page.getByRole('slider').inputValue();await page.waitForTimeout(200);assert.equal(await page.getByRole('slider').inputValue(),paused);
+ await page.getByRole('slider').focus();await page.keyboard.press('End');
+ await page.waitForFunction(()=>Number(document.querySelector('canvas')?.dataset.gap)<.0007);
+ assert.match(await page.locator('.suture-phase').innerText(),/Tension & close/);
+ await page.screenshot({path:'artifacts/stitch/showcase/closed.png',fullPage:true});
+ await page.getByRole('button',{name:'Overhead',exact:true}).click();await page.waitForTimeout(700);await page.screenshot({path:'artifacts/stitch/showcase/overhead.png',fullPage:true});
+ await page.getByRole('button',{name:'Restart playback',exact:true}).click();assert.equal(await page.getByRole('slider').inputValue(),'0');
+ await page.waitForFunction(()=>Number(document.querySelector('canvas')?.dataset.gap)>.007);
+ await page.getByRole('button',{name:'Simulation geometry',exact:true}).click();await page.locator('canvas').waitFor();
+ await page.waitForFunction(()=>document.querySelector('canvas')?.dataset.camera==='macro');
+ await page.screenshot({path:'artifacts/stitch/showcase/geometry.png',fullPage:true});
+ await page.getByRole('button',{name:'Original simulation',exact:true}).click();await page.waitForFunction(()=>document.querySelector('video')?.readyState>=2);
+ assert.ok(await page.locator('video').evaluate(v=>v.duration)>10);
+ await page.getByRole('button',{name:'Surgical rendering',exact:true}).click();await page.locator('canvas').waitFor();
+ await page.getByTestId('room-status').filter({hasText:'Scanned patient'}).waitFor();
+ const upload=page.getByLabel('Load surgical scene GLB');
+ await upload.setInputFiles({name:'broken.glb',mimeType:'model/gltf-binary',buffer:Buffer.from('invalid')});
+ await page.getByTestId('room-status').filter({hasText:'Model could not load'}).waitFor();
+ const json=Buffer.from(JSON.stringify({asset:{version:'2.0'},scene:0,scenes:[{nodes:[0]}],nodes:[{name:'motion__needle'}]}));
+ const padded=Buffer.concat([json,Buffer.alloc((4-json.length%4)%4,0x20)]),glb=Buffer.alloc(20+padded.length);
+ glb.writeUInt32LE(0x46546c67,0);glb.writeUInt32LE(2,4);glb.writeUInt32LE(glb.length,8);glb.writeUInt32LE(padded.length,12);glb.writeUInt32LE(0x4e4f534a,16);padded.copy(glb,20);
+ await upload.setInputFiles({name:'binding.glb',mimeType:'model/gltf-binary',buffer:glb});await page.getByTestId('room-status').filter({hasText:'1 motion bindings'}).waitFor();
+ await page.getByRole('button',{name:'Reset scene',exact:true}).click();await page.getByTestId('room-status').filter({hasText:'Scanned patient'}).waitFor();
+ await page.getByRole('button',{name:'Macro',exact:true}).click();await page.setViewportSize({width:390,height:844});await page.waitForTimeout(700);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
+ await page.screenshot({path:'artifacts/stitch/showcase/mobile.png',fullPage:true});
+ await page.getByRole('combobox',{name:'Playback speed'}).selectOption('2');
+ for(const path of ['/motion/stitch.json','/motion/stitch-robot.json','/motion/stitch.mp4','/motion/stitch.vtt'])assert.equal((await page.request.get(new URL(path,page.url()).href)).status(),200);
+ assert.deepEqual(errors,[]);console.log('PASS: room/patient/robot, five cameras, simulation geometry, GLB error/load/reset, recorded gap, playback/seek, video, 2x speed, downloads, mobile; no browser errors.');
+}finally{await browser.close();}

@@ -45,5 +45,13 @@ smoke-report.json
 
 # Python policy bootstrapping
 .venv/
-# Downloaded source checkouts; reproducible pins are in needle_lift/config.json
+# Downloaded source checkouts
 upstream/
+# Reproducible licensed source meshes; runtime GLB and credits live in public/models.
+artifacts/asset-source/
+
+# Unreal generated workspace data
+unreal/Binaries/
+unreal/DerivedDataCache/
+unreal/Intermediate/
+unreal/Saved/

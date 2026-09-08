@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\katie\OneDrive\Documents\GitHub\soren-oai\upstream\i4h-workflows-v0.5.0\workflows\robotic_surgery\scripts\simulation\scripts\reinforcement_learning\rsl_rl\play.py", line 12, in <module>
-    from isaaclab.app import AppLauncher
-ModuleNotFoundError: No module named 'isaaclab'

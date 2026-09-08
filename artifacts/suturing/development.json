@@ -1,0 +1,1649 @@
+{
+  "scripted": {
+    "successes": 30,
+    "episodes": 30,
+    "success_rate": 1.0,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "mean_entry_error_m": 3.0694802553854484e-09,
+    "mean_exit_error_m": 2.649177013406649e-09,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 2.9448885933980318e-09,
+        "exit_error_m": 5.748968464475146e-09,
+        "maximum_depth_m": 0.02329552716895637,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10000,
+          "center": [
+            0.0006008544838966498,
+            -0.0018312203396056628,
+            0.04374275677231397
+          ],
+          "radius": 0.023295528108340034,
+          "initial_offset": [
+            -0.0039611123396819554,
+            0.003435833653805403,
+            0.00644140454903511
+          ],
+          "initial_theta": 2.555287620410461
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 252,
+        "entry_error_m": 5.876728187415026e-09,
+        "exit_error_m": 7.693685410981033e-10,
+        "maximum_depth_m": 0.024181811432779515,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10001,
+          "center": [
+            0.007733031233812738,
+            0.003107285594918338,
+            0.04138484851410432
+          ],
+          "radius": 0.024181812893820494,
+          "initial_offset": [
+            -0.0023618163562433756,
+            -0.002698713882757744,
+            0.004170674527739806
+          ],
+          "initial_theta": 2.4432358678752006
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 3.5822008206953804e-09,
+        "exit_error_m": 1.5937065694915376e-09,
+        "maximum_depth_m": 0.022048713722092987,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10002,
+          "center": [
+            0.004866692379456573,
+            -0.005999640757058891,
+            0.04349420241599283
+          ],
+          "radius": 0.022048714748167265,
+          "initial_offset": [
+            0.001756478017247611,
+            0.004644501430858776,
+            0.006021300757145452
+          ],
+          "initial_theta": 2.5664528107974762
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 247,
+        "entry_error_m": 5.3802926454349365e-09,
+        "exit_error_m": 3.781798728341723e-10,
+        "maximum_depth_m": 0.023475955065001948,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10003,
+          "center": [
+            0.0067738271633735365,
+            0.005714982588328279,
+            0.047980626121157416
+          ],
+          "radius": 0.023475956255722772,
+          "initial_offset": [
+            0.000762310445712123,
+            -0.002257741417507474,
+            0.006123679119411112
+          ],
+          "initial_theta": 2.5979619873951276
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 249,
+        "entry_error_m": 1.385926240091151e-09,
+        "exit_error_m": 1.1164026231247348e-09,
+        "maximum_depth_m": 0.02417912398663181,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10004,
+          "center": [
+            0.012218495353697418,
+            -0.004751602715591849,
+            0.042595747283040615
+          ],
+          "radius": 0.024179123993660904,
+          "initial_offset": [
+            -0.002360755738849735,
+            -0.0031336518253344573,
+            0.006180063724676535
+          ],
+          "initial_theta": 2.5315567071029648
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 252,
+        "entry_error_m": 6.269630516142488e-09,
+        "exit_error_m": 1.851414195563894e-10,
+        "maximum_depth_m": 0.026408156038738036,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10005,
+          "center": [
+            -0.010393966075016317,
+            -0.004119881616336269,
+            0.04775917256510515
+          ],
+          "radius": 0.026408158794084917,
+          "initial_offset": [
+            0.00021404294525333156,
+            -0.001350778373195259,
+            0.00780751772608061
+          ],
+          "initial_theta": 2.4700305654564687
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 249,
+        "entry_error_m": 3.5175835924605714e-09,
+        "exit_error_m": 3.4030094922532506e-09,
+        "maximum_depth_m": 0.02643942687163369,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10006,
+          "center": [
+            -0.012975108163203884,
+            0.005191011818933708,
+            0.04212810852137326
+          ],
+          "radius": 0.026439429599899936,
+          "initial_offset": [
+            -0.000559953911497285,
+            -0.0033374911370388986,
+            0.00697166497044559
+          ],
+          "initial_theta": 2.5534970842551847
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 245,
+        "entry_error_m": 9.39091863300101e-10,
+        "exit_error_m": 4.8180982190060284e-09,
+        "maximum_depth_m": 0.02676932995492688,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10007,
+          "center": [
+            0.011638899387186354,
+            -0.01075205814119453,
+            0.04186335478524628
+          ],
+          "radius": 0.026769331572530038,
+          "initial_offset": [
+            -0.0008486086196049219,
+            0.003076611508486045,
+            0.00533466526340651
+          ],
+          "initial_theta": 2.637084324502778
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 3.495468914316291e-10,
+        "exit_error_m": 4.770024930600414e-09,
+        "maximum_depth_m": 0.02716037760272011,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10008,
+          "center": [
+            0.0027501508231229654,
+            -0.0011556611294868246,
+            0.04435607665821108
+          ],
+          "radius": 0.02716037844225722,
+          "initial_offset": [
+            0.005181627125002608,
+            0.00038992872890889103,
+            0.005530518768285692
+          ],
+          "initial_theta": 2.5502782177917336
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 246,
+        "entry_error_m": 1.0524925965482712e-09,
+        "exit_error_m": 5.180970930052098e-10,
+        "maximum_depth_m": 0.02462417946258012,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10009,
+          "center": [
+            0.0008042302049375075,
+            0.0014684249424201067,
+            0.044037358441570806
+          ],
+          "radius": 0.024624180183470352,
+          "initial_offset": [
+            0.003127643841339298,
+            -0.0006761606681886124,
+            0.008156381564119672
+          ],
+          "initial_theta": 2.63779396182962
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 246,
+        "entry_error_m": 3.0006877260735365e-09,
+        "exit_error_m": 3.454537253477774e-09,
+        "maximum_depth_m": 0.02796852864240797,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10010,
+          "center": [
+            -0.013468753709672033,
+            -0.011005664906458278,
+            0.04526064528947088
+          ],
+          "radius": 0.02796853035987039,
+          "initial_offset": [
+            0.005431172868005528,
+            -0.0016530883400009012,
+            0.007727902435642557
+          ],
+          "initial_theta": 2.639914753952489
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 2.1775690278724724e-09,
+        "exit_error_m": 3.1656165536131375e-09,
+        "maximum_depth_m": 0.02330108053389528,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10011,
+          "center": [
+            -2.9189166996412136e-05,
+            0.008799920102213237,
+            0.04103662913188559
+          ],
+          "radius": 0.023301081877422535,
+          "initial_offset": [
+            0.0005437684460231395,
+            0.002435145119273202,
+            0.009652483108201422
+          ],
+          "initial_theta": 2.617252872599755
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 251,
+        "entry_error_m": 2.9830758974114246e-09,
+        "exit_error_m": 2.0344971662228373e-09,
+        "maximum_depth_m": 0.02261941584793689,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10012,
+          "center": [
+            -0.014701259321755575,
+            -0.007210164923402383,
+            0.046514318499449606
+          ],
+          "radius": 0.0226194168875426,
+          "initial_offset": [
+            -0.0032192294435223227,
+            0.0013534428464482932,
+            0.005872307467435331
+          ],
+          "initial_theta": 2.4839233024444614
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 246,
+        "entry_error_m": 6.115198871586847e-09,
+        "exit_error_m": 2.9284478904323397e-09,
+        "maximum_depth_m": 0.024949641375148057,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10013,
+          "center": [
+            -0.0020253348497435535,
+            0.001630744136347612,
+            0.04464816677936537
+          ],
+          "radius": 0.02494964183776987,
+          "initial_offset": [
+            -0.0015872174400407323,
+            0.0009502145900879251,
+            0.0047853419429540345
+          ],
+          "initial_theta": 2.6071364813521605
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 252,
+        "entry_error_m": 5.953105307321405e-09,
+        "exit_error_m": 3.3991989171339165e-09,
+        "maximum_depth_m": 0.027582879166634,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10014,
+          "center": [
+            -0.013485887622564599,
+            0.008859917591924275,
+            0.04155511438060831
+          ],
+          "radius": 0.027582879346522343,
+          "initial_offset": [
+            -0.0026691456439580665,
+            0.0059050418897402,
+            0.007356571187114396
+          ],
+          "initial_theta": 2.4874476440223554
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 252,
+        "entry_error_m": 4.269758682035052e-09,
+        "exit_error_m": 1.2295748620660962e-09,
+        "maximum_depth_m": 0.024004630700830355,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10015,
+          "center": [
+            -0.0006044519629087308,
+            -0.004594166625552881,
+            0.040175331414218474
+          ],
+          "radius": 0.024004631735068227,
+          "initial_offset": [
+            -0.005375913728870374,
+            -0.0025418402286719,
+            0.006568905060658091
+          ],
+          "initial_theta": 2.473587693418895
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 249,
+        "entry_error_m": 5.197798455536251e-09,
+        "exit_error_m": 2.949903698049039e-09,
+        "maximum_depth_m": 0.02405639788628279,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10016,
+          "center": [
+            -0.013977823761938525,
+            -0.0025335459037121675,
+            0.04039586922224004
+          ],
+          "radius": 0.024056398047168515,
+          "initial_offset": [
+            -0.002700349036407464,
+            0.004689055179384758,
+            0.005285931481870984
+          ],
+          "initial_theta": 2.5388106494802742
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 3.5788977684192425e-10,
+        "exit_error_m": 1.5774561448744784e-09,
+        "maximum_depth_m": 0.02395189421448326,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10017,
+          "center": [
+            0.003610044825337142,
+            -0.005345901713237058,
+            0.044210419810365185
+          ],
+          "radius": 0.023951894336750337,
+          "initial_offset": [
+            -0.0021758963253912583,
+            -0.001370749992572154,
+            0.0057742454426940185
+          ],
+          "initial_theta": 2.55433732237307
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 250,
+        "entry_error_m": 2.894079555865181e-09,
+        "exit_error_m": 2.236938672489641e-09,
+        "maximum_depth_m": 0.02576139822843911,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10018,
+          "center": [
+            -0.002116519267560582,
+            -0.004457493659247471,
+            0.0418010889634669
+          ],
+          "radius": 0.025761399807835542,
+          "initial_offset": [
+            0.0059705973346006035,
+            0.005655553487959257,
+            0.004381056063042942
+          ],
+          "initial_theta": 2.511525723866273
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 254,
+        "entry_error_m": 3.1822705720552236e-09,
+        "exit_error_m": 4.522426801101265e-09,
+        "maximum_depth_m": 0.022760222355479306,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10019,
+          "center": [
+            0.006144447759510858,
+            0.0006307654176041788,
+            0.040458053045980415
+          ],
+          "radius": 0.02276022258697707,
+          "initial_offset": [
+            0.0032288844982296186,
+            -0.0023435963104098856,
+            0.009414463838427683
+          ],
+          "initial_theta": 2.464881232475085
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 249,
+        "entry_error_m": 1.6661192842049033e-09,
+        "exit_error_m": 3.7650150271767435e-09,
+        "maximum_depth_m": 0.02274704621604795,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10020,
+          "center": [
+            -0.014214859193932141,
+            0.011415104574064232,
+            0.04186299198444475
+          ],
+          "radius": 0.022747047783044268,
+          "initial_offset": [
+            -0.005012643412784583,
+            0.0019102381915166566,
+            0.007154454841129088
+          ],
+          "initial_theta": 2.558961620491897
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 1.5990757537553968e-09,
+        "exit_error_m": 5.376761379877193e-10,
+        "maximum_depth_m": 0.0248483740514331,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10021,
+          "center": [
+            -0.012070809148860443,
+            -0.005277844667442495,
+            0.04635438216158308
+          ],
+          "radius": 0.02484837412716633,
+          "initial_offset": [
+            0.0019142049397128241,
+            0.00385823446502828,
+            0.007087183254861722
+          ],
+          "initial_theta": 2.5755725934114597
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 248,
+        "entry_error_m": 7.577395776808826e-10,
+        "exit_error_m": 4.30948124408026e-10,
+        "maximum_depth_m": 0.023211873591030274,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10022,
+          "center": [
+            0.007820497451799243,
+            0.005713503651598003,
+            0.04556060956977095
+          ],
+          "radius": 0.02321187493493454,
+          "initial_offset": [
+            -0.005659700746872916,
+            0.004387805435187049,
+            0.009552349591403948
+          ],
+          "initial_theta": 2.606117567370528
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 254,
+        "entry_error_m": 6.9172324188016e-09,
+        "exit_error_m": 2.1015931148116174e-09,
+        "maximum_depth_m": 0.026826252623686264,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10023,
+          "center": [
+            0.005740746992712795,
+            0.00564189999386213,
+            0.045529011268412765
+          ],
+          "radius": 0.02682625403500322,
+          "initial_offset": [
+            0.0022097539990050784,
+            0.005141314560628035,
+            0.009713226181950765
+          ],
+          "initial_theta": 2.4462290387187275
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 251,
+        "entry_error_m": 5.887591275621773e-09,
+        "exit_error_m": 4.145876487601785e-09,
+        "maximum_depth_m": 0.02226519728433589,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10024,
+          "center": [
+            -0.01711881720452595,
+            0.0017755653919666152,
+            0.04450498959813099
+          ],
+          "radius": 0.022265197542977403,
+          "initial_offset": [
+            0.004230124450777341,
+            0.005761915353509641,
+            0.0053247092553039286
+          ],
+          "initial_theta": 2.470740905199074
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 245,
+        "entry_error_m": 3.4516002174467264e-09,
+        "exit_error_m": 6.3349420952041324e-09,
+        "maximum_depth_m": 0.02563783643328549,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10025,
+          "center": [
+            0.004333722248287299,
+            0.011663879817477345,
+            0.04595885366049333
+          ],
+          "radius": 0.025637837353650356,
+          "initial_offset": [
+            -0.0028628661770985268,
+            0.0013886991903810288,
+            0.004253854892362225
+          ],
+          "initial_theta": 2.6008990041132103
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 253,
+        "entry_error_m": 1.6944101538518552e-09,
+        "exit_error_m": 1.423514653375868e-09,
+        "maximum_depth_m": 0.025245343195095474,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10026,
+          "center": [
+            0.01515073790800699,
+            -0.010522961801863897,
+            0.04658401996901833
+          ],
+          "radius": 0.025245343558114395,
+          "initial_offset": [
+            0.00247304327467103,
+            -0.0058795403381224735,
+            0.007091749577343591
+          ],
+          "initial_theta": 2.4505785017038964
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 250,
+        "entry_error_m": 3.145278551497377e-10,
+        "exit_error_m": 4.523636680520138e-09,
+        "maximum_depth_m": 0.02496425615388895,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10027,
+          "center": [
+            -0.008282304720235991,
+            -0.010971689342429326,
+            0.04659015654131439
+          ],
+          "radius": 0.02496425713640937,
+          "initial_offset": [
+            0.0019052505599176806,
+            0.0005035388442237764,
+            0.005043229487293976
+          ],
+          "initial_theta": 2.48978741653402
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 247,
+        "entry_error_m": 1.5133963943148032e-09,
+        "exit_error_m": 1.2489808961374527e-09,
+        "maximum_depth_m": 0.02408630235255488,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10028,
+          "center": [
+            -0.009031992314017894,
+            0.007469575865839847,
+            0.03978435025720068
+          ],
+          "radius": 0.02408630235644555,
+          "initial_offset": [
+            -0.005910895340890947,
+            0.0024786761231915273,
+            0.006570056841673426
+          ],
+          "initial_theta": 2.5937725710591164
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 251,
+        "entry_error_m": 8.52898911218869e-10,
+        "exit_error_m": 4.163532000070469e-09,
+        "maximum_depth_m": 0.025658326572255932,
+        "unwanted_collisions": 0,
+        "peak_contact_force_n": 0.0,
+        "needle_clear": true,
+        "scene": {
+          "seed": 10029,
+          "center": [
+            -0.016139982536416995,
+            0.011493952137756166,
+            0.04032241343116803
+          ],
+          "radius": 0.02565832690482107,
+          "initial_offset": [
+            0.0047393532314268134,
+            -0.0021204187245291457,
+            0.005836889987874122
+          ],
+          "initial_theta": 2.474781737145204
+        },
+        "simulator_version": "needle-channel-v1"
+      }
+    ]
+  },
+  "learned": {
+    "successes": 0,
+    "episodes": 30,
+    "success_rate": 0.0,
+    "unwanted_collisions": 1448,
+    "peak_contact_force_n": 0.4416448988571459,
+    "mean_entry_error_m": null,
+    "mean_exit_error_m": null,
+    "rollouts": [
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 78,
+        "entry_error_m": 3.635271857871016e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023058743607379226,
+        "unwanted_collisions": 52,
+        "peak_contact_force_n": 0.4361414854701766,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10000,
+          "center": [
+            0.0006008544838966498,
+            -0.0018312203396056628,
+            0.04374275677231397
+          ],
+          "radius": 0.023295528108340034,
+          "initial_offset": [
+            -0.0039611123396819554,
+            0.003435833653805403,
+            0.00644140454903511
+          ],
+          "initial_theta": 2.555287620410461
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 82,
+        "entry_error_m": 3.938118988839962e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023621714915941394,
+        "unwanted_collisions": 52,
+        "peak_contact_force_n": 0.41163900144006754,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10001,
+          "center": [
+            0.007733031233812738,
+            0.003107285594918338,
+            0.04138484851410432
+          ],
+          "radius": 0.024181812893820494,
+          "initial_offset": [
+            -0.0023618163562433756,
+            -0.002698713882757744,
+            0.004170674527739806
+          ],
+          "initial_theta": 2.4432358678752006
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 79,
+        "entry_error_m": 4.224203469784789e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022571131936019458,
+        "unwanted_collisions": 91,
+        "peak_contact_force_n": 0.4338926649607128,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10002,
+          "center": [
+            0.004866692379456573,
+            -0.005999640757058891,
+            0.04349420241599283
+          ],
+          "radius": 0.022048714748167265,
+          "initial_offset": [
+            0.001756478017247611,
+            0.004644501430858776,
+            0.006021300757145452
+          ],
+          "initial_theta": 2.5664528107974762
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 75,
+        "entry_error_m": 3.09104292462857e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022645761494739743,
+        "unwanted_collisions": 12,
+        "peak_contact_force_n": 0.18010275689561397,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10003,
+          "center": [
+            0.0067738271633735365,
+            0.005714982588328279,
+            0.047980626121157416
+          ],
+          "radius": 0.023475956255722772,
+          "initial_offset": [
+            0.000762310445712123,
+            -0.002257741417507474,
+            0.006123679119411112
+          ],
+          "initial_theta": 2.5979619873951276
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 77,
+        "entry_error_m": 4.260563591382785e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022871656901899583,
+        "unwanted_collisions": 12,
+        "peak_contact_force_n": 0.09162539731130508,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10004,
+          "center": [
+            0.012218495353697418,
+            -0.004751602715591849,
+            0.042595747283040615
+          ],
+          "radius": 0.024179123993660904,
+          "initial_offset": [
+            -0.002360755738849735,
+            -0.0031336518253344573,
+            0.006180063724676535
+          ],
+          "initial_theta": 2.5315567071029648
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 83,
+        "entry_error_m": 5.123784971377901e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02269508354767038,
+        "unwanted_collisions": 11,
+        "peak_contact_force_n": 0.18923285948074964,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10005,
+          "center": [
+            -0.010393966075016317,
+            -0.004119881616336269,
+            0.04775917256510515
+          ],
+          "radius": 0.026408158794084917,
+          "initial_offset": [
+            0.00021404294525333156,
+            -0.001350778373195259,
+            0.00780751772608061
+          ],
+          "initial_theta": 2.4700305654564687
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 75,
+        "entry_error_m": 2.1744772102831666e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02395724529114265,
+        "unwanted_collisions": 48,
+        "peak_contact_force_n": 0.39236863395307964,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10006,
+          "center": [
+            -0.012975108163203884,
+            0.005191011818933708,
+            0.04212810852137326
+          ],
+          "radius": 0.026439429599899936,
+          "initial_offset": [
+            -0.000559953911497285,
+            -0.0033374911370388986,
+            0.00697166497044559
+          ],
+          "initial_theta": 2.5534970842551847
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 70,
+        "entry_error_m": 4.774359571049426e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023018604569921178,
+        "unwanted_collisions": 55,
+        "peak_contact_force_n": 0.40762721302246185,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10007,
+          "center": [
+            0.011638899387186354,
+            -0.01075205814119453,
+            0.04186335478524628
+          ],
+          "radius": 0.026769331572530038,
+          "initial_offset": [
+            -0.0008486086196049219,
+            0.003076611508486045,
+            0.00533466526340651
+          ],
+          "initial_theta": 2.637084324502778
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 73,
+        "entry_error_m": 4.2053486116716676e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022987802290333422,
+        "unwanted_collisions": 44,
+        "peak_contact_force_n": 0.3821373543981844,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10008,
+          "center": [
+            0.0027501508231229654,
+            -0.0011556611294868246,
+            0.04435607665821108
+          ],
+          "radius": 0.02716037844225722,
+          "initial_offset": [
+            0.005181627125002608,
+            0.00038992872890889103,
+            0.005530518768285692
+          ],
+          "initial_theta": 2.5502782177917336
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 75,
+        "entry_error_m": 3.6191503711387453e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023233392418668345,
+        "unwanted_collisions": 60,
+        "peak_contact_force_n": 0.4416448988571459,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10009,
+          "center": [
+            0.0008042302049375075,
+            0.0014684249424201067,
+            0.044037358441570806
+          ],
+          "radius": 0.024624180183470352,
+          "initial_offset": [
+            0.003127643841339298,
+            -0.0006761606681886124,
+            0.008156381564119672
+          ],
+          "initial_theta": 2.63779396182962
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 70,
+        "entry_error_m": 4.0419578854365544e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02288437547559258,
+        "unwanted_collisions": 40,
+        "peak_contact_force_n": 0.32439232268326706,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10010,
+          "center": [
+            -0.013468753709672033,
+            -0.011005664906458278,
+            0.04526064528947088
+          ],
+          "radius": 0.02796853035987039,
+          "initial_offset": [
+            0.005431172868005528,
+            -0.0016530883400009012,
+            0.007727902435642557
+          ],
+          "initial_theta": 2.639914753952489
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 80,
+        "entry_error_m": 3.980327553928081e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023960846972804945,
+        "unwanted_collisions": 27,
+        "peak_contact_force_n": 0.2569575448972164,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10011,
+          "center": [
+            -2.9189166996412136e-05,
+            0.008799920102213237,
+            0.04103662913188559
+          ],
+          "radius": 0.023301081877422535,
+          "initial_offset": [
+            0.0005437684460231395,
+            0.002435145119273202,
+            0.009652483108201422
+          ],
+          "initial_theta": 2.617252872599755
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 88,
+        "entry_error_m": 4.7040620220525387e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022798823653518638,
+        "unwanted_collisions": 65,
+        "peak_contact_force_n": 0.4277760165380288,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10012,
+          "center": [
+            -0.014701259321755575,
+            -0.007210164923402383,
+            0.046514318499449606
+          ],
+          "radius": 0.0226194168875426,
+          "initial_offset": [
+            -0.0032192294435223227,
+            0.0013534428464482932,
+            0.005872307467435331
+          ],
+          "initial_theta": 2.4839233024444614
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 74,
+        "entry_error_m": 3.419769356729081e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023337490175887633,
+        "unwanted_collisions": 48,
+        "peak_contact_force_n": 0.4136438192929886,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10013,
+          "center": [
+            -0.0020253348497435535,
+            0.001630744136347612,
+            0.04464816677936537
+          ],
+          "radius": 0.02494964183776987,
+          "initial_offset": [
+            -0.0015872174400407323,
+            0.0009502145900879251,
+            0.0047853419429540345
+          ],
+          "initial_theta": 2.6071364813521605
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 77,
+        "entry_error_m": 2.7056948996317608e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023931978329532512,
+        "unwanted_collisions": 66,
+        "peak_contact_force_n": 0.323216245192278,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10014,
+          "center": [
+            -0.013485887622564599,
+            0.008859917591924275,
+            0.04155511438060831
+          ],
+          "radius": 0.027582879346522343,
+          "initial_offset": [
+            -0.0026691456439580665,
+            0.0059050418897402,
+            0.007356571187114396
+          ],
+          "initial_theta": 2.4874476440223554
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 81,
+        "entry_error_m": 2.9860075728532327e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023771031285107415,
+        "unwanted_collisions": 39,
+        "peak_contact_force_n": 0.30123595516743307,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10015,
+          "center": [
+            -0.0006044519629087308,
+            -0.004594166625552881,
+            0.040175331414218474
+          ],
+          "radius": 0.024004631735068227,
+          "initial_offset": [
+            -0.005375913728870374,
+            -0.0025418402286719,
+            0.006568905060658091
+          ],
+          "initial_theta": 2.473587693418895
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 81,
+        "entry_error_m": 3.3030214801133376e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.024273947121851974,
+        "unwanted_collisions": 26,
+        "peak_contact_force_n": 0.2338620983831981,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10016,
+          "center": [
+            -0.013977823761938525,
+            -0.0025335459037121675,
+            0.04039586922224004
+          ],
+          "radius": 0.024056398047168515,
+          "initial_offset": [
+            -0.002700349036407464,
+            0.004689055179384758,
+            0.005285931481870984
+          ],
+          "initial_theta": 2.5388106494802742
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 76,
+        "entry_error_m": 3.796433941297762e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02284259217393871,
+        "unwanted_collisions": 12,
+        "peak_contact_force_n": 0.10225081338143255,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10017,
+          "center": [
+            0.003610044825337142,
+            -0.005345901713237058,
+            0.044210419810365185
+          ],
+          "radius": 0.023951894336750337,
+          "initial_offset": [
+            -0.0021758963253912583,
+            -0.001370749992572154,
+            0.0057742454426940185
+          ],
+          "initial_theta": 2.55433732237307
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 77,
+        "entry_error_m": 3.806107407163749e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023505394508641274,
+        "unwanted_collisions": 36,
+        "peak_contact_force_n": 0.3399466338492507,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10018,
+          "center": [
+            -0.002116519267560582,
+            -0.004457493659247471,
+            0.0418010889634669
+          ],
+          "radius": 0.025761399807835542,
+          "initial_offset": [
+            0.0059705973346006035,
+            0.005655553487959257,
+            0.004381056063042942
+          ],
+          "initial_theta": 2.511525723866273
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 95,
+        "entry_error_m": 5.261964551636168e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023376254165168562,
+        "unwanted_collisions": 52,
+        "peak_contact_force_n": 0.38039403589617565,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10019,
+          "center": [
+            0.006144447759510858,
+            0.0006307654176041788,
+            0.040458053045980415
+          ],
+          "radius": 0.02276022258697707,
+          "initial_offset": [
+            0.0032288844982296186,
+            -0.0023435963104098856,
+            0.009414463838427683
+          ],
+          "initial_theta": 2.464881232475085
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 84,
+        "entry_error_m": 2.7536720273696005e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02448298244729186,
+        "unwanted_collisions": 70,
+        "peak_contact_force_n": 0.40487676499353925,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10020,
+          "center": [
+            -0.014214859193932141,
+            0.011415104574064232,
+            0.04186299198444475
+          ],
+          "radius": 0.022747047783044268,
+          "initial_offset": [
+            -0.005012643412784583,
+            0.0019102381915166566,
+            0.007154454841129088
+          ],
+          "initial_theta": 2.558961620491897
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 75,
+        "entry_error_m": 2.798895090051888e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02309034891160245,
+        "unwanted_collisions": 72,
+        "peak_contact_force_n": 0.40545761893744336,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10021,
+          "center": [
+            -0.012070809148860443,
+            -0.005277844667442495,
+            0.04635438216158308
+          ],
+          "radius": 0.02484837412716633,
+          "initial_offset": [
+            0.0019142049397128241,
+            0.00385823446502828,
+            0.007087183254861722
+          ],
+          "initial_theta": 2.5755725934114597
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 77,
+        "entry_error_m": 4.47073054218763e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022945126877323006,
+        "unwanted_collisions": 52,
+        "peak_contact_force_n": 0.3930905635023336,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10022,
+          "center": [
+            0.007820497451799243,
+            0.005713503651598003,
+            0.04556060956977095
+          ],
+          "radius": 0.02321187493493454,
+          "initial_offset": [
+            -0.005659700746872916,
+            0.004387805435187049,
+            0.009552349591403948
+          ],
+          "initial_theta": 2.606117567370528
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 78,
+        "entry_error_m": 2.405347158321826e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023201471506772372,
+        "unwanted_collisions": 55,
+        "peak_contact_force_n": 0.43019965197510746,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10023,
+          "center": [
+            0.005740746992712795,
+            0.00564189999386213,
+            0.045529011268412765
+          ],
+          "radius": 0.02682625403500322,
+          "initial_offset": [
+            0.0022097539990050784,
+            0.005141314560628035,
+            0.009713226181950765
+          ],
+          "initial_theta": 2.4462290387187275
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 86,
+        "entry_error_m": 3.469716841608721e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.02341572852378793,
+        "unwanted_collisions": 56,
+        "peak_contact_force_n": 0.39288786117024976,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10024,
+          "center": [
+            -0.01711881720452595,
+            0.0017755653919666152,
+            0.04450498959813099
+          ],
+          "radius": 0.022265197542977403,
+          "initial_offset": [
+            0.004230124450777341,
+            0.005761915353509641,
+            0.0053247092553039286
+          ],
+          "initial_theta": 2.470740905199074
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 73,
+        "entry_error_m": 3.423044506409689e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.023589091131979437,
+        "unwanted_collisions": 48,
+        "peak_contact_force_n": 0.3737924787318547,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10025,
+          "center": [
+            0.004333722248287299,
+            0.011663879817477345,
+            0.04595885366049333
+          ],
+          "radius": 0.025637837353650356,
+          "initial_offset": [
+            -0.0028628661770985268,
+            0.0013886991903810288,
+            0.004253854892362225
+          ],
+          "initial_theta": 2.6008990041132103
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 79,
+        "entry_error_m": 4.4583688842144e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022361103461420142,
+        "unwanted_collisions": 33,
+        "peak_contact_force_n": 0.33959431694850556,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10026,
+          "center": [
+            0.01515073790800699,
+            -0.010522961801863897,
+            0.04658401996901833
+          ],
+          "radius": 0.025245343558114395,
+          "initial_offset": [
+            0.00247304327467103,
+            -0.0058795403381224735,
+            0.007091749577343591
+          ],
+          "initial_theta": 2.4505785017038964
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 77,
+        "entry_error_m": 3.343994233841409e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.022838684343101528,
+        "unwanted_collisions": 84,
+        "peak_contact_force_n": 0.4120269539249941,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10027,
+          "center": [
+            -0.008282304720235991,
+            -0.010971689342429326,
+            0.04659015654131439
+          ],
+          "radius": 0.02496425713640937,
+          "initial_offset": [
+            0.0019052505599176806,
+            0.0005035388442237764,
+            0.005043229487293976
+          ],
+          "initial_theta": 2.48978741653402
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 80,
+        "entry_error_m": 1.3930989924387016e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.024637625355906526,
+        "unwanted_collisions": 117,
+        "peak_contact_force_n": 0.41021194522551185,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10028,
+          "center": [
+            -0.009031992314017894,
+            0.007469575865839847,
+            0.03978435025720068
+          ],
+          "radius": 0.02408630235644555,
+          "initial_offset": [
+            -0.005910895340890947,
+            0.0024786761231915273,
+            0.006570056841673426
+          ],
+          "initial_theta": 2.5937725710591164
+        },
+        "simulator_version": "needle-channel-v1"
+      },
+      {
+        "success": false,
+        "termination": "unwanted_contact",
+        "steps": 82,
+        "entry_error_m": 2.56839582573252e-05,
+        "exit_error_m": null,
+        "maximum_depth_m": 0.024790034701101048,
+        "unwanted_collisions": 13,
+        "peak_contact_force_n": 0.1890373242429638,
+        "needle_clear": false,
+        "scene": {
+          "seed": 10029,
+          "center": [
+            -0.016139982536416995,
+            0.011493952137756166,
+            0.04032241343116803
+          ],
+          "radius": 0.02565832690482107,
+          "initial_offset": [
+            0.0047393532314268134,
+            -0.0021204187245291457,
+            0.005836889987874122
+          ],
+          "initial_theta": 2.474781737145204
+        },
+        "simulator_version": "needle-channel-v1"
+      }
+    ]
+  },
+  "checkpoint_sha256": "7eb047368a67e2faeeb18ca720057f9f585f06e510855d3f8c7d3e4527ae762c",
+  "seed_range": [
+    10000,
+    10029
+  ]
+}

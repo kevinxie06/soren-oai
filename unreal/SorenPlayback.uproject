@@ -1,0 +1,12 @@
+﻿{
+  "FileVersion": 3,
+  "EngineAssociation": "5.7",
+  "Category": "Visualization",
+  "Description": "Recorded MuJoCo policy playback; decorative surgical context",
+  "Plugins": [
+    { "Name": "PythonScriptPlugin", "Enabled": true },
+    { "Name": "EditorScriptingUtilities", "Enabled": true },
+    { "Name": "SequencerScripting", "Enabled": true },
+    { "Name": "MovieRenderPipeline", "Enabled": true }
+  ]
+}

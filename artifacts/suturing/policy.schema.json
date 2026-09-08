@@ -1,0 +1,56 @@
+{
+  "observation": [
+    "center_x",
+    "center_y",
+    "center_z",
+    "theta",
+    "velocity_x",
+    "velocity_y",
+    "velocity_z",
+    "angular_velocity",
+    "goal_minus_center_x",
+    "goal_minus_center_y",
+    "goal_minus_center_z",
+    "goal_minus_theta",
+    "radius",
+    "sin_theta",
+    "cos_theta",
+    "tip_x",
+    "tip_y",
+    "tip_z",
+    "entry_x",
+    "entry_y",
+    "entry_z",
+    "exit_x",
+    "exit_y",
+    "exit_z",
+    "entered",
+    "exited",
+    "maximum_depth"
+  ],
+  "action": [
+    "delta_center_x",
+    "delta_center_y",
+    "delta_center_z",
+    "delta_needle_rotation"
+  ],
+  "scale": [
+    0.002,
+    0.002,
+    0.002,
+    0.04
+  ],
+  "bounds": [
+    -1,
+    1
+  ],
+  "control_hz": 20.0,
+  "units": [
+    "m",
+    "m",
+    "m",
+    "rad"
+  ],
+  "frame": "world XYZ; rotation around negative world Y",
+  "task": "needle-channel-v1"
+}

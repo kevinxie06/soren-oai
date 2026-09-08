@@ -1,0 +1,6 @@
+.procedure-camera-controls{position:absolute;z-index:4;bottom:16px;left:16px;right:16px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none}
+.procedure-camera-controls>div{display:flex;flex-wrap:wrap;gap:4px;pointer-events:auto}
+.procedure-camera-controls button{display:inline-flex;align-items:center;gap:5px;border:1px solid #456660;background:#102825e8;color:#d6e9e4;border-radius:6px;padding:7px 9px;font:inherit;font-size:11px;cursor:pointer}
+.procedure-camera-controls button[aria-pressed=true]{background:#b9e2ce;color:#163b31;border-color:#b9e2ce}
+.procedure-camera-controls button:focus-visible{outline:2px solid white;outline-offset:2px}
+@media(max-width:600px){.procedure-camera-controls{left:8px;right:8px;gap:4px}.procedure-camera-controls button{padding:6px;font-size:10px}}

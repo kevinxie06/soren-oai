@@ -9,6 +9,9 @@ import tseslint from "typescript-eslint";
 
 const eslintConfig = defineConfig([
   globalIgnores([
+    ".venv/**",
+    "upstream/**",
+    "artifacts/asset-source/**",
     ".next/**",
     "dist/**",
     "out/**",

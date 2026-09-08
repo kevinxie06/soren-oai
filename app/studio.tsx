@@ -80,6 +80,7 @@ export default function Studio() {
           <span className="version">LOCAL</span>
         </Link>
         <div className="top-actions">
+          <Link href="/showcase" className="host-badge">Heart policy showcase ?</Link>
           <span className="host-badge">
             <Monitor size={13} /> Local workspace
           </span>

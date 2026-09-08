@@ -1,0 +1,2249 @@
+{
+  "scripted": {
+    "successes": 30,
+    "episodes": 30,
+    "success_rate": 1.0,
+    "catches": 30,
+    "lost_needles": 0,
+    "unwanted_collisions": 0,
+    "mean_final_gap_m": 0.00042303155504767496,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004614904583839898,
+        "initial_gap_m": 0.006863685405560023,
+        "tension_n": 0.23153209090232849,
+        "entry_error_m": 3.0666861023259696e-07,
+        "exit_error_m": 2.4657813308542886e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10000,
+          "center": [
+            0.0003338080466092491,
+            -0.0012208135597371076,
+            0.024
+          ],
+          "radius": 0.014297102708925587,
+          "gap": 0.006863685405560023,
+          "initial_offset": [
+            -0.0019805561698409777,
+            0.0017179168269027016,
+            0.004220702274517555
+          ],
+          "tissue_stiffness": 73.6305033179332
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910000,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 184,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004621300275638178,
+        "initial_gap_m": 0.007454541929213663,
+        "tension_n": 0.2931727945804596,
+        "entry_error_m": 1.4707497493406683e-06,
+        "exit_error_m": 7.540113255988246e-10,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10001,
+          "center": [
+            0.004296128463229298,
+            0.0020715237299455593,
+            0.024
+          ],
+          "radius": 0.01335393940564173,
+          "gap": 0.007454541929213663,
+          "initial_offset": [
+            -0.0011809081781216878,
+            -0.001349356941378872,
+            0.003085337263869903
+          ],
+          "tissue_stiffness": 84.83567857145927
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910001,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005563789303718886,
+        "initial_gap_m": 0.006032476498778177,
+        "tension_n": 0.2005648970603943,
+        "entry_error_m": 8.661310073162524e-07,
+        "exit_error_m": 2.981402104362818e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10002,
+          "center": [
+            0.0027037179885869844,
+            -0.003999760504705927,
+            0.024
+          ],
+          "radius": 0.014197680966397133,
+          "gap": 0.006032476498778177,
+          "initial_offset": [
+            0.0008782390086238055,
+            0.002322250715429388,
+            0.004010650378572726
+          ],
+          "tissue_stiffness": 72.51398427923168
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910002,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00027874694260543974,
+        "initial_gap_m": 0.006983970837148516,
+        "tension_n": 0.23152665495872496,
+        "entry_error_m": 3.222221963154027e-07,
+        "exit_error_m": 1.4478841910137152e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10003,
+          "center": [
+            0.0037632373129853,
+            0.003809988392218853,
+            0.024
+          ],
+          "radius": 0.015992250448462968,
+          "gap": 0.006983970837148516,
+          "initial_offset": [
+            0.0003811552228560615,
+            -0.001128870708753737,
+            0.004061839559705556
+          ],
+          "tissue_stiffness": 69.36306661946654
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910003,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00041266431994285875,
+        "initial_gap_m": 0.007452749329107271,
+        "tension_n": 0.2713182270526886,
+        "entry_error_m": 4.752367849585532e-07,
+        "exit_error_m": 2.7833985671854578e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10004,
+          "center": [
+            0.006788052974276345,
+            -0.003167735143727899,
+            0.024
+          ],
+          "radius": 0.013838298913216246,
+          "gap": 0.007452749329107271,
+          "initial_offset": [
+            -0.0011803778694248674,
+            -0.0015668259126672287,
+            0.004090031862338268
+          ],
+          "tissue_stiffness": 76.00359464868285
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910004,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00047243154856809084,
+        "initial_gap_m": 0.008938772529389946,
+        "tension_n": 0.3438750386238098,
+        "entry_error_m": 8.939039137804296e-07,
+        "exit_error_m": 5.396598584672674e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10005,
+          "center": [
+            -0.0057744255972312876,
+            -0.002746587744224179,
+            0.024
+          ],
+          "radius": 0.01590366902604206,
+          "gap": 0.008938772529389946,
+          "initial_offset": [
+            0.00010702147262666578,
+            -0.0006753891865976295,
+            0.004903758863040305
+          ],
+          "tissue_stiffness": 82.15620881333246
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910005,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004135764042342942,
+        "initial_gap_m": 0.008959619733266623,
+        "tension_n": 0.3105875372886658,
+        "entry_error_m": 1.7249696978335176e-06,
+        "exit_error_m": 3.0145960363409108e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10006,
+          "center": [
+            -0.007208393424002158,
+            0.0034606745459558053,
+            0.024
+          ],
+          "radius": 0.013651243408549304,
+          "gap": 0.008959619733266623,
+          "initial_offset": [
+            -0.0002799769557486425,
+            -0.0016687455685194493,
+            0.004485832485222795
+          ],
+          "tissue_stiffness": 73.80955693346083
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910006,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0006370153343577684,
+        "initial_gap_m": 0.00917955438168669,
+        "tension_n": 0.279414564371109,
+        "entry_error_m": 5.471774858824275e-07,
+        "exit_error_m": 5.858003512826393e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10007,
+          "center": [
+            0.006466055215103529,
+            -0.007168038760796353,
+            0.024
+          ],
+          "radius": 0.013545341914098513,
+          "gap": 0.00917955438168669,
+          "initial_offset": [
+            -0.00042430430980246094,
+            0.0015383057542430224,
+            0.003667332631703255
+          ],
+          "tissue_stiffness": 65.45083290870151
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910007,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00040113117785648723,
+        "initial_gap_m": 0.009440252294838147,
+        "tension_n": 0.33067306280136105,
+        "entry_error_m": 2.1823787836941027e-06,
+        "exit_error_m": 1.2699717631681207e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10008,
+          "center": [
+            0.001527861568401647,
+            -0.000770440752991217,
+            0.024
+          ],
+          "radius": 0.014542430663284433,
+          "gap": 0.009440252294838147,
+          "initial_offset": [
+            0.002590813562501304,
+            0.00019496436445444552,
+            0.003765259384142846
+          ],
+          "tissue_stiffness": 74.13144357980595
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910008,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0006013528601982797,
+        "initial_gap_m": 0.007749453455646903,
+        "tension_n": 0.2343088924884796,
+        "entry_error_m": 3.498208487314471e-07,
+        "exit_error_m": 5.616308673336845e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10009,
+          "center": [
+            0.00044679455829861603,
+            0.0009789499616134033,
+            0.024
+          ],
+          "radius": 0.014414943376628324,
+          "gap": 0.007749453455646903,
+          "initial_offset": [
+            0.001563821920669649,
+            -0.0003380803340943062,
+            0.005078190782059837
+          ],
+          "tissue_stiffness": 65.37986917601734
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910009,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00018121216773170357,
+        "initial_gap_m": 0.009979020239913592,
+        "tension_n": 0.3326934099197388,
+        "entry_error_m": 7.899795458322515e-07,
+        "exit_error_m": 4.6406325266909465e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10010,
+          "center": [
+            -0.007482640949817796,
+            -0.007337109937638852,
+            0.024
+          ],
+          "radius": 0.014904258115788353,
+          "gap": 0.009979020239913592,
+          "initial_offset": [
+            0.002715586434002764,
+            -0.0008265441700004506,
+            0.004863951217821278
+          ],
+          "tissue_stiffness": 65.1677899637304
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910010,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00040468943737275234,
+        "initial_gap_m": 0.006867387918281689,
+        "tension_n": 0.2128715693950653,
+        "entry_error_m": 1.6949168618016677e-06,
+        "exit_error_m": 3.3009920595572506e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10011,
+          "center": [
+            -1.6216203886896402e-05,
+            0.00586661340147549,
+            0.024
+          ],
+          "radius": 0.013214651652754235,
+          "gap": 0.006867387918281689,
+          "initial_offset": [
+            0.00027188422301156973,
+            0.001217572559636601,
+            0.005826241554100711
+          ],
+          "tissue_stiffness": 67.43397809900384
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910011,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005730732863222943,
+        "initial_gap_m": 0.006412944591695066,
+        "tension_n": 0.23354421257972716,
+        "entry_error_m": 3.351682007454829e-07,
+        "exit_error_m": 7.444275577916937e-11,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10012,
+          "center": [
+            -0.008167366289864208,
+            -0.004806776615601589,
+            0.024
+          ],
+          "radius": 0.015405727399779842,
+          "gap": 0.006412944591695066,
+          "initial_offset": [
+            -0.0016096147217611614,
+            0.0006767214232241466,
+            0.003936153733717666
+          ],
+          "tissue_stiffness": 80.76693511453318
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910012,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00037579309783919825,
+        "initial_gap_m": 0.00796642789184658,
+        "tension_n": 0.2550016164779663,
+        "entry_error_m": 1.540861311460331e-06,
+        "exit_error_m": 8.78354887955124e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10013,
+          "center": [
+            -0.0011251860276353075,
+            0.001087162757565074,
+            0.024
+          ],
+          "radius": 0.014659266711746147,
+          "gap": 0.00796642789184658,
+          "initial_offset": [
+            -0.0007936087200203661,
+            0.00047510729504396257,
+            0.0033926709714770173
+          ],
+          "tissue_stiffness": 68.44561722376324
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910013,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.000275854597899269,
+        "initial_gap_m": 0.009721919564348227,
+        "tension_n": 0.3795345067977905,
+        "entry_error_m": 2.170134427780984e-06,
+        "exit_error_m": 8.297126792913834e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10014,
+          "center": [
+            -0.007492159790313666,
+            0.0059066117279495175,
+            0.024
+          ],
+          "radius": 0.013422045752243324,
+          "gap": 0.009721919564348227,
+          "initial_offset": [
+            -0.0013345728219790332,
+            0.0029525209448701,
+            0.004678285593557198
+          ],
+          "tissue_stiffness": 80.41450095674378
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910014,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002688912018571927,
+        "initial_gap_m": 0.007336421156712151,
+        "tension_n": 0.2941344916820526,
+        "entry_error_m": 4.843224016561783e-07,
+        "exit_error_m": 1.6876876458848944e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10015,
+          "center": [
+            -0.0003358066460604058,
+            -0.0030627777503685876,
+            0.024
+          ],
+          "radius": 0.012870132565687392,
+          "gap": 0.007336421156712151,
+          "initial_offset": [
+            -0.002687956864435187,
+            -0.00127092011433595,
+            0.004284452530329046
+          ],
+          "tissue_stiffness": 81.80049601708984
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910015,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00021079523399996237,
+        "initial_gap_m": 0.007370932031445678,
+        "tension_n": 0.27871847748756406,
+        "entry_error_m": 2.393879778391753e-06,
+        "exit_error_m": 4.659727192643515e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10016,
+          "center": [
+            -0.007765457645521404,
+            -0.0016890306024747786,
+            0.024
+          ],
+          "radius": 0.012958347688896017,
+          "gap": 0.007370932031445678,
+          "initial_offset": [
+            -0.001350174518203732,
+            0.002344527589692379,
+            0.003642965740935492
+          ],
+          "tissue_stiffness": 75.2782004109519
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910016,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00022143236667158082,
+        "initial_gap_m": 0.007301262891166891,
+        "tension_n": 0.26817684173583983,
+        "entry_error_m": 4.536893963124436e-07,
+        "exit_error_m": 4.329027417787623e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10017,
+          "center": [
+            0.0020055804585206345,
+            -0.0035639344754913723,
+            0.024
+          ],
+          "radius": 0.014484167924146073,
+          "gap": 0.007301262891166891,
+          "initial_offset": [
+            -0.0010879481626956291,
+            -0.000685374996286077,
+            0.0038871227213470093
+          ],
+          "tissue_stiffness": 73.72553312167231
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910017,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004951103318971747,
+        "initial_gap_m": 0.008507599871890361,
+        "tension_n": 0.30961371660232545,
+        "entry_error_m": 0.0001033096140510291,
+        "exit_error_m": 3.5295865397078074e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10018,
+          "center": [
+            -0.0011758440375336573,
+            -0.0029716624394983135,
+            0.024
+          ],
+          "radius": 0.013520435585386759,
+          "gap": 0.008507599871890361,
+          "initial_offset": [
+            0.0029852986673003018,
+            0.0028277767439796285,
+            0.003190528031521471
+          ],
+          "tissue_stiffness": 78.00669297235204
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910018,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005873777894491033,
+        "initial_gap_m": 0.006506815057984716,
+        "tension_n": 0.24277989864349364,
+        "entry_error_m": 1.3004947937644419e-06,
+        "exit_error_m": 8.679477865591867e-10,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10019,
+          "center": [
+            0.003413582088617145,
+            0.0004205102784027859,
+            0.024
+          ],
+          "radius": 0.012983221218392165,
+          "gap": 0.006506815057984716,
+          "initial_offset": [
+            0.0016144422491148093,
+            -0.0011717981552049428,
+            0.0057072319192138414
+          ],
+          "tissue_stiffness": 82.67114211147081
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910019,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005639697193508706,
+        "initial_gap_m": 0.006498031855362845,
+        "tension_n": 0.21450582146644592,
+        "entry_error_m": 1.8712685202895882e-06,
+        "exit_error_m": 5.646305253209638e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10020,
+          "center": [
+            -0.00789714399662897,
+            0.007610069716042823,
+            0.024
+          ],
+          "radius": 0.013545196793777902,
+          "gap": 0.006498031855362845,
+          "initial_offset": [
+            -0.0025063217063922916,
+            0.0009551190957583283,
+            0.004577227420564544
+          ],
+          "tissue_stiffness": 73.26310330978963
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910020,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00040419957482058615,
+        "initial_gap_m": 0.007898916084777554,
+        "tension_n": 0.2634611427783966,
+        "entry_error_m": 1.748306711244597e-06,
+        "exit_error_m": 1.8080882051990654e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10021,
+          "center": [
+            -0.006706005082700246,
+            -0.0035185631116283304,
+            0.024
+          ],
+          "radius": 0.015341752864633231,
+          "gap": 0.007898916084777554,
+          "initial_offset": [
+            0.0009571024698564121,
+            0.00192911723251414,
+            0.004543591627430861
+          ],
+          "tissue_stiffness": 71.60200601783333
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910021,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00041499156558138465,
+        "initial_gap_m": 0.006807916623289694,
+        "tension_n": 0.2138372540473938,
+        "entry_error_m": 1.6372930856399526e-06,
+        "exit_error_m": 2.8496878468065034e-11,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10022,
+          "center": [
+            0.004344720806555135,
+            0.0038090024343986686,
+            0.024
+          ],
+          "radius": 0.015024243827908379,
+          "gap": 0.006807916623289694,
+          "initial_offset": [
+            -0.002829850373436458,
+            0.0021939027175935247,
+            0.005776174795701974
+          ],
+          "tissue_stiffness": 68.54750862192651
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910022,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0003209882307244217,
+        "initial_gap_m": 0.009217502690002146,
+        "tension_n": 0.3730477452278137,
+        "entry_error_m": 1.7534401217163055e-06,
+        "exit_error_m": 4.907869433773415e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10023,
+          "center": [
+            0.0031893038848404415,
+            0.003761266662574753,
+            0.024
+          ],
+          "radius": 0.015011604507365106,
+          "gap": 0.009217502690002146,
+          "initial_offset": [
+            0.0011048769995025392,
+            0.0025706572803140173,
+            0.005856613090975383
+          ],
+          "tissue_stiffness": 84.53636148710656
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910023,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005054883052374075,
+        "initial_gap_m": 0.006176798361984937,
+        "tension_n": 0.23541977405548095,
+        "entry_error_m": 1.033712054735882e-05,
+        "exit_error_m": 3.689947146445771e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10024,
+          "center": [
+            -0.009510454002514417,
+            0.001183710261311078,
+            0.024
+          ],
+          "radius": 0.014601995839252398,
+          "gap": 0.006176798361984937,
+          "initial_offset": [
+            0.0021150622253886704,
+            0.0028809576767548205,
+            0.0036623546276519643
+          ],
+          "tissue_stiffness": 82.08517483907191
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910024,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005081359928429292,
+        "initial_gap_m": 0.00842522490243357,
+        "tension_n": 0.2699079215526581,
+        "entry_error_m": 1.5707620679093125e-06,
+        "exit_error_m": 3.4984885058375603e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10025,
+          "center": [
+            0.0024076234712707215,
+            0.00777591987831823,
+            0.024
+          ],
+          "radius": 0.015183541464197332,
+          "gap": 0.00842522490243357,
+          "initial_offset": [
+            -0.0014314330885492634,
+            0.0006943495951905144,
+            0.0031269274461811127
+          ],
+          "tissue_stiffness": 69.06936494765826
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910025,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005383519333787847,
+        "initial_gap_m": 0.008163562372076263,
+        "tension_n": 0.3225708603858948,
+        "entry_error_m": 3.2532873176692673e-06,
+        "exit_error_m": 3.2782139572362645e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10026,
+          "center": [
+            0.008417076615559438,
+            -0.0070153078679092646,
+            0.024
+          ],
+          "radius": 0.015433607987607333,
+          "gap": 0.008163562372076263,
+          "initial_offset": [
+            0.001236521637335515,
+            -0.0029397701690612368,
+            0.0045458747886717955
+          ],
+          "tissue_stiffness": 84.10141518858966
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910026,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0003431496698141131,
+        "initial_gap_m": 0.007976171424272913,
+        "tension_n": 0.3025074005126953,
+        "entry_error_m": 8.563400715432229e-07,
+        "exit_error_m": 6.697024861751499e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10027,
+          "center": [
+            -0.004601280400131107,
+            -0.00731445956161955,
+            0.024
+          ],
+          "radius": 0.015436062616525758,
+          "gap": 0.007976171424272913,
+          "initial_offset": [
+            0.0009526252799588403,
+            0.0002517694221118882,
+            0.003521614743646988
+          ],
+          "tissue_stiffness": 80.18052370557731
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910027,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00020346517861739074,
+        "initial_gap_m": 0.007390868237630369,
+        "tension_n": 0.26011966466903685,
+        "entry_error_m": 6.060517576089678e-06,
+        "exit_error_m": 1.8626809062186056e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10028,
+          "center": [
+            -0.0050177735077877195,
+            0.00497971724389323,
+            0.024
+          ],
+          "radius": 0.012713740102880273,
+          "gap": 0.007390868237630369,
+          "initial_offset": [
+            -0.0029554476704454734,
+            0.0012393380615957636,
+            0.0042850284208367125
+          ],
+          "tissue_stiffness": 69.78200825306769
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910028,
+        "controller": "scripted"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005970589659392116,
+        "initial_gap_m": 0.008438884603214047,
+        "tension_n": 0.3183567881584167,
+        "entry_error_m": 1.301966895785748e-06,
+        "exit_error_m": 1.9162426385249676e-09,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10029,
+          "center": [
+            -0.00896665696467611,
+            0.007662634758504112,
+            0.024
+          ],
+          "radius": 0.012928965372467214,
+          "gap": 0.008438884603214047,
+          "initial_offset": [
+            0.0023696766157134067,
+            -0.0010602093622645728,
+            0.003918444993937061
+          ],
+          "tissue_stiffness": 81.68109164445892
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910029,
+        "controller": "scripted"
+      }
+    ]
+  },
+  "learned": {
+    "successes": 30,
+    "episodes": 30,
+    "success_rate": 1.0,
+    "catches": 30,
+    "lost_needles": 0,
+    "unwanted_collisions": 0,
+    "mean_final_gap_m": 0.000388677589890957,
+    "rollouts": [
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 197,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0003836556610062932,
+        "initial_gap_m": 0.006863685405560023,
+        "tension_n": 0.23370085358619688,
+        "entry_error_m": 4.761425814896773e-06,
+        "exit_error_m": 5.92999230654377e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10000,
+          "center": [
+            0.0003338080466092491,
+            -0.0012208135597371076,
+            0.024
+          ],
+          "radius": 0.014297102708925587,
+          "gap": 0.006863685405560023,
+          "initial_offset": [
+            -0.0019805561698409777,
+            0.0017179168269027016,
+            0.004220702274517555
+          ],
+          "tissue_stiffness": 73.6305033179332
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910000,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0006207449494523248,
+        "initial_gap_m": 0.007454541929213663,
+        "tension_n": 0.28810810446739193,
+        "entry_error_m": 1.38105378486374e-05,
+        "exit_error_m": 5.413630148642479e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10001,
+          "center": [
+            0.004296128463229298,
+            0.0020715237299455593,
+            0.024
+          ],
+          "radius": 0.01335393940564173,
+          "gap": 0.007454541929213663,
+          "initial_offset": [
+            -0.0011809081781216878,
+            -0.001349356941378872,
+            0.003085337263869903
+          ],
+          "tissue_stiffness": 84.83567857145927
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910001,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005315661771627565,
+        "initial_gap_m": 0.006032476498778177,
+        "tension_n": 0.19599838256835936,
+        "entry_error_m": 9.969279909717599e-06,
+        "exit_error_m": 8.349140658028835e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10002,
+          "center": [
+            0.0027037179885869844,
+            -0.003999760504705927,
+            0.024
+          ],
+          "radius": 0.014197680966397133,
+          "gap": 0.006032476498778177,
+          "initial_offset": [
+            0.0008782390086238055,
+            0.002322250715429388,
+            0.004010650378572726
+          ],
+          "tissue_stiffness": 72.51398427923168
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910002,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004183150807627097,
+        "initial_gap_m": 0.006983970837148516,
+        "tension_n": 0.2244340181350708,
+        "entry_error_m": 1.592694474887877e-05,
+        "exit_error_m": 5.7596862203515615e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10003,
+          "center": [
+            0.0037632373129853,
+            0.003809988392218853,
+            0.024
+          ],
+          "radius": 0.015992250448462968,
+          "gap": 0.006983970837148516,
+          "initial_offset": [
+            0.0003811552228560615,
+            -0.001128870708753737,
+            0.004061839559705556
+          ],
+          "tissue_stiffness": 69.36306661946654
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910003,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002600463077065563,
+        "initial_gap_m": 0.007452749329107271,
+        "tension_n": 0.2753159701824188,
+        "entry_error_m": 9.90520793800398e-06,
+        "exit_error_m": 6.885014006511075e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10004,
+          "center": [
+            0.006788052974276345,
+            -0.003167735143727899,
+            0.024
+          ],
+          "radius": 0.013838298913216246,
+          "gap": 0.007452749329107271,
+          "initial_offset": [
+            -0.0011803778694248674,
+            -0.0015668259126672287,
+            0.004090031862338268
+          ],
+          "tissue_stiffness": 76.00359464868285
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910004,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005316296431168554,
+        "initial_gap_m": 0.008938772529389946,
+        "tension_n": 0.3425170540809631,
+        "entry_error_m": 3.035982596921552e-07,
+        "exit_error_m": 1.1763882706321173e-05,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10005,
+          "center": [
+            -0.0057744255972312876,
+            -0.002746587744224179,
+            0.024
+          ],
+          "radius": 0.01590366902604206,
+          "gap": 0.008938772529389946,
+          "initial_offset": [
+            0.00010702147262666578,
+            -0.0006753891865976295,
+            0.004903758863040305
+          ],
+          "tissue_stiffness": 82.15620881333246
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910005,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002750974807239192,
+        "initial_gap_m": 0.008959619733266623,
+        "tension_n": 0.32189862728118895,
+        "entry_error_m": 8.206721441607782e-06,
+        "exit_error_m": 7.1534004980005725e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10006,
+          "center": [
+            -0.007208393424002158,
+            0.0034606745459558053,
+            0.024
+          ],
+          "radius": 0.013651243408549304,
+          "gap": 0.008959619733266623,
+          "initial_offset": [
+            -0.0002799769557486425,
+            -0.0016687455685194493,
+            0.004485832485222795
+          ],
+          "tissue_stiffness": 73.80955693346083
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910006,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005507046143588372,
+        "initial_gap_m": 0.00917955438168669,
+        "tension_n": 0.2796160876750946,
+        "entry_error_m": 5.156210525118429e-06,
+        "exit_error_m": 5.12972818124857e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10007,
+          "center": [
+            0.006466055215103529,
+            -0.007168038760796353,
+            0.024
+          ],
+          "radius": 0.013545341914098513,
+          "gap": 0.00917955438168669,
+          "initial_offset": [
+            -0.00042430430980246094,
+            0.0015383057542430224,
+            0.003667332631703255
+          ],
+          "tissue_stiffness": 65.45083290870151
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910007,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00029452567973327,
+        "initial_gap_m": 0.009440252294838147,
+        "tension_n": 0.338289213180542,
+        "entry_error_m": 2.475879716420301e-05,
+        "exit_error_m": 8.97847592962261e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10008,
+          "center": [
+            0.001527861568401647,
+            -0.000770440752991217,
+            0.024
+          ],
+          "radius": 0.014542430663284433,
+          "gap": 0.009440252294838147,
+          "initial_offset": [
+            0.002590813562501304,
+            0.00019496436445444552,
+            0.003765259384142846
+          ],
+          "tissue_stiffness": 74.13144357980595
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910008,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00031350257270549003,
+        "initial_gap_m": 0.007749453455646903,
+        "tension_n": 0.247891366481781,
+        "entry_error_m": 6.489798690636662e-06,
+        "exit_error_m": 4.4905215032640145e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10009,
+          "center": [
+            0.00044679455829861603,
+            0.0009789499616134033,
+            0.024
+          ],
+          "radius": 0.014414943376628324,
+          "gap": 0.007749453455646903,
+          "initial_offset": [
+            0.001563821920669649,
+            -0.0003380803340943062,
+            0.005078190782059837
+          ],
+          "tissue_stiffness": 65.37986917601734
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910009,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002312064958345482,
+        "initial_gap_m": 0.009979020239913592,
+        "tension_n": 0.3238424062728882,
+        "entry_error_m": 6.380462530490737e-06,
+        "exit_error_m": 1.5959958716534245e-05,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10010,
+          "center": [
+            -0.007482640949817796,
+            -0.007337109937638852,
+            0.024
+          ],
+          "radius": 0.014904258115788353,
+          "gap": 0.009979020239913592,
+          "initial_offset": [
+            0.002715586434002764,
+            -0.0008265441700004506,
+            0.004863951217821278
+          ],
+          "tissue_stiffness": 65.1677899637304
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910010,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 203,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00025613883954136735,
+        "initial_gap_m": 0.006867387918281689,
+        "tension_n": 0.22511363625526426,
+        "entry_error_m": 1.6807459131753775e-05,
+        "exit_error_m": 7.821470327807559e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10011,
+          "center": [
+            -1.6216203886896402e-05,
+            0.00586661340147549,
+            0.024
+          ],
+          "radius": 0.013214651652754235,
+          "gap": 0.006867387918281689,
+          "initial_offset": [
+            0.00027188422301156973,
+            0.001217572559636601,
+            0.005826241554100711
+          ],
+          "tissue_stiffness": 67.43397809900384
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910011,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0003860036258342796,
+        "initial_gap_m": 0.006412944591695066,
+        "tension_n": 0.24698499441146848,
+        "entry_error_m": 1.3562636096994286e-05,
+        "exit_error_m": 6.891082499600905e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10012,
+          "center": [
+            -0.008167366289864208,
+            -0.004806776615601589,
+            0.024
+          ],
+          "radius": 0.015405727399779842,
+          "gap": 0.006412944591695066,
+          "initial_offset": [
+            -0.0016096147217611614,
+            0.0006767214232241466,
+            0.003936153733717666
+          ],
+          "tissue_stiffness": 80.76693511453318
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910012,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00027793358088288624,
+        "initial_gap_m": 0.00796642789184658,
+        "tension_n": 0.2629921495914459,
+        "entry_error_m": 2.305184797899505e-06,
+        "exit_error_m": 5.257404646326496e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10013,
+          "center": [
+            -0.0011251860276353075,
+            0.001087162757565074,
+            0.024
+          ],
+          "radius": 0.014659266711746147,
+          "gap": 0.00796642789184658,
+          "initial_offset": [
+            -0.0007936087200203661,
+            0.00047510729504396257,
+            0.0033926709714770173
+          ],
+          "tissue_stiffness": 68.44561722376324
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910013,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0003484234960651148,
+        "initial_gap_m": 0.009721919564348227,
+        "tension_n": 0.37571150064468384,
+        "entry_error_m": 2.471883557261118e-05,
+        "exit_error_m": 1.0241725623418162e-05,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10014,
+          "center": [
+            -0.007492159790313666,
+            0.0059066117279495175,
+            0.024
+          ],
+          "radius": 0.013422045752243324,
+          "gap": 0.009721919564348227,
+          "initial_offset": [
+            -0.0013345728219790332,
+            0.0029525209448701,
+            0.004678285593557198
+          ],
+          "tissue_stiffness": 80.41450095674378
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910014,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 199,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005912979173807917,
+        "initial_gap_m": 0.007336421156712151,
+        "tension_n": 0.2725309252738953,
+        "entry_error_m": 6.4883749890723826e-06,
+        "exit_error_m": 8.58032189015557e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10015,
+          "center": [
+            -0.0003358066460604058,
+            -0.0030627777503685876,
+            0.024
+          ],
+          "radius": 0.012870132565687392,
+          "gap": 0.007336421156712151,
+          "initial_offset": [
+            -0.002687956864435187,
+            -0.00127092011433595,
+            0.004284452530329046
+          ],
+          "tissue_stiffness": 81.80049601708984
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910015,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 279,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004342181179567122,
+        "initial_gap_m": 0.007370932031445678,
+        "tension_n": 0.2555508255958557,
+        "entry_error_m": 7.190334214909909e-06,
+        "exit_error_m": 7.261653123212392e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10016,
+          "center": [
+            -0.007765457645521404,
+            -0.0016890306024747786,
+            0.024
+          ],
+          "radius": 0.012958347688896017,
+          "gap": 0.007370932031445678,
+          "initial_offset": [
+            -0.001350174518203732,
+            0.002344527589692379,
+            0.003642965740935492
+          ],
+          "tissue_stiffness": 75.2782004109519
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910016,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00019618824014341375,
+        "initial_gap_m": 0.007301262891166891,
+        "tension_n": 0.27230100631713866,
+        "entry_error_m": 1.0609505754456284e-05,
+        "exit_error_m": 7.273399019630232e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10017,
+          "center": [
+            0.0020055804585206345,
+            -0.0035639344754913723,
+            0.024
+          ],
+          "radius": 0.014484167924146073,
+          "gap": 0.007301262891166891,
+          "initial_offset": [
+            -0.0010879481626956291,
+            -0.000685374996286077,
+            0.0038871227213470093
+          ],
+          "tissue_stiffness": 73.72553312167231
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910017,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00037343824747017307,
+        "initial_gap_m": 0.008507599871890361,
+        "tension_n": 0.3140954732894897,
+        "entry_error_m": 0.0001528842871603073,
+        "exit_error_m": 7.066284316846205e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10018,
+          "center": [
+            -0.0011758440375336573,
+            -0.0029716624394983135,
+            0.024
+          ],
+          "radius": 0.013520435585386759,
+          "gap": 0.008507599871890361,
+          "initial_offset": [
+            0.0029852986673003018,
+            0.0028277767439796285,
+            0.003190528031521471
+          ],
+          "tissue_stiffness": 78.00669297235204
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910018,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0006698111486798742,
+        "initial_gap_m": 0.006506815057984716,
+        "tension_n": 0.23831262588500976,
+        "entry_error_m": 1.14481111381179e-05,
+        "exit_error_m": 6.654151283323971e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10019,
+          "center": [
+            0.003413582088617145,
+            0.0004205102784027859,
+            0.024
+          ],
+          "radius": 0.012983221218392165,
+          "gap": 0.006506815057984716,
+          "initial_offset": [
+            0.0016144422491148093,
+            -0.0011717981552049428,
+            0.0057072319192138414
+          ],
+          "tissue_stiffness": 82.67114211147081
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910019,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00017774038855386705,
+        "initial_gap_m": 0.006498031855362845,
+        "tension_n": 0.24192797541618347,
+        "entry_error_m": 1.2429557843271436e-05,
+        "exit_error_m": 9.092902181295867e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10020,
+          "center": [
+            -0.00789714399662897,
+            0.007610069716042823,
+            0.024
+          ],
+          "radius": 0.013545196793777902,
+          "gap": 0.006498031855362845,
+          "initial_offset": [
+            -0.0025063217063922916,
+            0.0009551190957583283,
+            0.004577227420564544
+          ],
+          "tissue_stiffness": 73.26310330978963
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910020,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 189,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002639164495645669,
+        "initial_gap_m": 0.007898916084777554,
+        "tension_n": 0.2739751160144806,
+        "entry_error_m": 5.953449807766619e-06,
+        "exit_error_m": 9.407599578295055e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10021,
+          "center": [
+            -0.006706005082700246,
+            -0.0035185631116283304,
+            0.024
+          ],
+          "radius": 0.015341752864633231,
+          "gap": 0.007898916084777554,
+          "initial_offset": [
+            0.0009571024698564121,
+            0.00192911723251414,
+            0.004543591627430861
+          ],
+          "tissue_stiffness": 71.60200601783333
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910021,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00041440281757833004,
+        "initial_gap_m": 0.006807916623289694,
+        "tension_n": 0.21502232551574707,
+        "entry_error_m": 1.1406463424870007e-05,
+        "exit_error_m": 7.792188387742808e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10022,
+          "center": [
+            0.004344720806555135,
+            0.0038090024343986686,
+            0.024
+          ],
+          "radius": 0.015024243827908379,
+          "gap": 0.006807916623289694,
+          "initial_offset": [
+            -0.002829850373436458,
+            0.0021939027175935247,
+            0.005776174795701974
+          ],
+          "tissue_stiffness": 68.54750862192651
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910022,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 187,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.00043903843131532123,
+        "initial_gap_m": 0.009217502690002146,
+        "tension_n": 0.37019126415252684,
+        "entry_error_m": 1.649478477944333e-05,
+        "exit_error_m": 6.893353107422937e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10023,
+          "center": [
+            0.0031893038848404415,
+            0.003761266662574753,
+            0.024
+          ],
+          "radius": 0.015011604507365106,
+          "gap": 0.009217502690002146,
+          "initial_offset": [
+            0.0011048769995025392,
+            0.0025706572803140173,
+            0.005856613090975383
+          ],
+          "tissue_stiffness": 84.53636148710656
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910023,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.000316237412463739,
+        "initial_gap_m": 0.006176798361984937,
+        "tension_n": 0.23900445699691772,
+        "entry_error_m": 4.840876687822664e-05,
+        "exit_error_m": 4.167360026779285e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10024,
+          "center": [
+            -0.009510454002514417,
+            0.001183710261311078,
+            0.024
+          ],
+          "radius": 0.014601995839252398,
+          "gap": 0.006176798361984937,
+          "initial_offset": [
+            0.0021150622253886704,
+            0.0028809576767548205,
+            0.0036623546276519643
+          ],
+          "tissue_stiffness": 82.08517483907191
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910024,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 185,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002591000122220497,
+        "initial_gap_m": 0.00842522490243357,
+        "tension_n": 0.28606488704681393,
+        "entry_error_m": 1.5362312211445624e-05,
+        "exit_error_m": 7.083239240897092e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10025,
+          "center": [
+            0.0024076234712707215,
+            0.00777591987831823,
+            0.024
+          ],
+          "radius": 0.015183541464197332,
+          "gap": 0.00842522490243357,
+          "initial_offset": [
+            -0.0014314330885492634,
+            0.0006943495951905144,
+            0.0031269274461811127
+          ],
+          "tissue_stiffness": 69.06936494765826
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910025,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0004399600767484805,
+        "initial_gap_m": 0.008163562372076263,
+        "tension_n": 0.32286611795425413,
+        "entry_error_m": 1.3400672070001576e-05,
+        "exit_error_m": 7.870523020798533e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10026,
+          "center": [
+            0.008417076615559438,
+            -0.0070153078679092646,
+            0.024
+          ],
+          "radius": 0.015433607987607333,
+          "gap": 0.008163562372076263,
+          "initial_offset": [
+            0.001236521637335515,
+            -0.0029397701690612368,
+            0.0045458747886717955
+          ],
+          "tissue_stiffness": 84.10141518858966
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910026,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 188,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.000612413002928892,
+        "initial_gap_m": 0.007976171424272913,
+        "tension_n": 0.2919714152812958,
+        "entry_error_m": 7.137565943601464e-06,
+        "exit_error_m": 1.1315123937301517e-05,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10027,
+          "center": [
+            -0.004601280400131107,
+            -0.00731445956161955,
+            0.024
+          ],
+          "radius": 0.015436062616525758,
+          "gap": 0.007976171424272913,
+          "initial_offset": [
+            0.0009526252799588403,
+            0.0002517694221118882,
+            0.003521614743646988
+          ],
+          "tissue_stiffness": 80.18052370557731
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910027,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 194,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0002412587021242401,
+        "initial_gap_m": 0.007390868237630369,
+        "tension_n": 0.2536148250102997,
+        "entry_error_m": 8.536792137145187e-06,
+        "exit_error_m": 5.061101479123814e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10028,
+          "center": [
+            -0.0050177735077877195,
+            0.00497971724389323,
+            0.024
+          ],
+          "radius": 0.012713740102880273,
+          "gap": 0.007390868237630369,
+          "initial_offset": [
+            -0.0029554476704454734,
+            0.0012393380615957636,
+            0.0042850284208367125
+          ],
+          "tissue_stiffness": 69.78200825306769
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910028,
+        "controller": "learned"
+      },
+      {
+        "success": true,
+        "termination": "success",
+        "steps": 186,
+        "entered": true,
+        "exited": true,
+        "caught": true,
+        "receiver_holding": true,
+        "donor_holding": false,
+        "needle_clear": true,
+        "wound_gap_m": 0.0005518125267110503,
+        "initial_gap_m": 0.008438884603214047,
+        "tension_n": 0.32055734395980834,
+        "entry_error_m": 1.3618996556664214e-05,
+        "exit_error_m": 5.266743652894394e-06,
+        "unwanted_collisions": 0,
+        "scene": {
+          "seed": 10029,
+          "center": [
+            -0.00896665696467611,
+            0.007662634758504112,
+            0.024
+          ],
+          "radius": 0.012928965372467214,
+          "gap": 0.008438884603214047,
+          "initial_offset": [
+            0.0023696766157134067,
+            -0.0010602093622645728,
+            0.003918444993937061
+          ],
+          "tissue_stiffness": 81.68109164445892
+        },
+        "task_version": "opposing-jaw-stitch-v1",
+        "noise": 0,
+        "noise_seed": 910029,
+        "controller": "learned"
+      }
+    ]
+  },
+  "checkpoint_sha256": "b41dd08023400cd7c942a131b284f3b1b4a5edf6de9c3ff39b8231dd2ec863b5",
+  "seed_range": [
+    10000,
+    10029
+  ]
+}

@@ -177,3 +177,22 @@ Implementation was built and transport-tested on an Apple Silicon Mac. GPU execu
 - **HTTPS page blocked:** use the documented `http://localhost:3000` development path. Public HTTPS deployment needs secured streaming infrastructure in addition to hosting the frontend.
 
 References: [Isaac Sim streaming](https://docs.isaacsim.omniverse.nvidia.com/6.0.1/installation/manual_livestream_clients.html), [WebRTC SDK](https://docs.omniverse.nvidia.com/ov-web-sdk/latest/web-streaming-library/overview.html), [NVIDIA's standalone livestream sample](https://github.com/isaac-sim/IsaacSim/blob/main/source/standalone_examples/api/isaacsim.simulation_app/livestream.py).
+
+
+## Recorded heart-policy showcase (no Isaac Sim required)
+
+For the revised suturing use case, see [across-wound needle transfer and closure](stitch/README.md): opposing entry/exit points, receiving jaws, donor release, and physical closure under thread tension in a simplified CPU MuJoCo model. The earlier channel-only experiment is preserved in `suturing/`; it does not perform wound closure.
+
+Open `/showcase` to play measured motion from the trained heart policy. The page includes an interactive 3D surgical-context prototype, the original simulation geometry, the native MuJoCo MP4, a scrubber and speed controls, recorded outcome metrics, and Unreal export downloads. The root live Isaac workspace stays separate; neither view is passed off as the other.
+
+```powershell
+.\.venv\Scripts\python.exe -m bootstrap.export_motion --video
+npm ci
+npm run dev -- --port 3000
+```
+
+Use the actual port printed by the server; the verified local session is `http://127.0.0.1:3002/showcase`. See [Unreal handoff and motion schema](unreal/README.md). The checked-in export is a successful 5.55-second rollout of seed 30000 with 0.71 mm placement error. It is measured policy execution, not generated choreography.
+
+`unreal/SorenPlayback.uproject` and `unreal/import_soren.py` provide a UE 5.7 Sequencer import path. Unreal is not installed here, so no Unreal render or editor execution is claimed. The patient/drapes are decorative proxy geometry; photorealism needs licensed models, art direction and an Unreal workstation. There is no tissue simulation or real-person recording.
+
+Verification: `npm run typecheck`, `npm run build`, `node scripts/test-showcase.mjs` (set `SHOWCASE_URL` if needed), and `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. The browser check saves desktop/mobile screenshots under `artifacts/showcase/`.

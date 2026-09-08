@@ -1,0 +1,13 @@
+{
+  "source_sha256": "3ffab909a065202b92fc996fe284067b8b3c0e14e70ee9db548949f066ee10f7",
+  "sample_count": 241,
+  "max_position_error_m": 9.488835289927739e-07,
+  "max_orientation_error_rad": 1.717170468767052e-06,
+  "joint_limits_satisfied": true,
+  "base_position_m": [
+    0.65,
+    -0.28,
+    -0.12
+  ],
+  "note": "Kinematic presentation fit only. Collisions, dynamics and hardware suitability are not validated."
+}

@@ -1,0 +1,8 @@
+{
+  "successful_episodes": 264,
+  "failed_recovery_episodes": 36,
+  "frames": 72327,
+  "finite": true,
+  "bounded": true,
+  "valid_boundaries": true
+}

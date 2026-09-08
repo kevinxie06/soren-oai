@@ -1,0 +1,13 @@
+{
+  "display_name": "Old version",
+  "kind": "synthetic_degraded_baseline",
+  "historical_checkpoint": false,
+  "parent_checkpoint": "artifacts\\stitch\\policy.npz",
+  "parent_sha256": "b41dd08023400cd7c942a131b284f3b1b4a5edf6de9c3ff39b8231dd2ec863b5",
+  "checkpoint_sha256": "dfeda813d1478a7b5d1446faf661a8bf3e5fc98f8fb2e0fed80cd1ddaaf21cbb",
+  "modifications": [
+    "Receiving jaw forced open",
+    "Thread tension output disabled"
+  ],
+  "purpose": "Controlled failure demonstration; not evidence of historical policy performance"
+}

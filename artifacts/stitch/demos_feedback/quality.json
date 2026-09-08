@@ -1,0 +1,8 @@
+{
+  "successful_episodes": 199,
+  "failed_episodes": 1,
+  "frames": 46522,
+  "finite": true,
+  "bounded": true,
+  "valid_boundaries": true
+}

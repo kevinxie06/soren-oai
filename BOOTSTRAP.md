@@ -94,6 +94,3 @@ For later RL, wrap `ExtractionEnv` or implement an adapter with these exact obse
 
 Remaining limits: assisted grasp, custom fixed-orientation gantry, state access, narrow scene variation, simple collision geometry and short settling checks. Generalization to an articulated arm, real grippers, camera observations, moving objects or clinical tasks is untested.
 
-## Needle-lift source package
-
-NVIDIA source/assets and a separate launch adapter are in [needle_lift](needle_lift/README.md). This package is **blocked**, not a second working learned policy: no pretrained needle checkpoint was found and this Windows/Intel machine cannot run the supported Isaac stack. See its source audit and actual upstream launch failure before planning backend availability.

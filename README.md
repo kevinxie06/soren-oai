@@ -36,3 +36,7 @@ npm test
 ```
 
 Windows commands are documented in [BOOTSTRAP.md](BOOTSTRAP.md).
+
+## Suturing policy prototype
+
+See [across-wound needle transfer and closure](stitch/README.md) for the learned policy, setup commands, and measured results: 98/100 fresh simulation successes. Opposing jaws receive the needle, and thread tension draws the wound edges together. Penetration and grasping are simplified; closure is held under tension, with no knot. The earlier channel-only experiment is preserved in suturing/.

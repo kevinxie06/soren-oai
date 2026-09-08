@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "termination": "success",
+  "steps": 231,
+  "entered": true,
+  "exited": true,
+  "caught": true,
+  "receiver_holding": true,
+  "donor_holding": false,
+  "needle_clear": true,
+  "wound_gap_m": 0.00046665575153348893,
+  "initial_gap_m": 0.00621863551572638,
+  "tension_n": 0.2060861885547638,
+  "entry_error_m": 4.8681721200619885e-05,
+  "exit_error_m": 3.8372359788085424e-09,
+  "unwanted_collisions": 0,
+  "scene": {
+    "seed": 1186,
+    "center": [
+      0.007224914304689382,
+      -0.0034077248950598717,
+      0.024
+    ],
+    "radius": 0.01570014535574912,
+    "gap": 0.00621863551572638,
+    "initial_offset": [
+      0.00016513299153990066,
+      -0.0029934981687797,
+      0.004483185835717871
+    ],
+    "tissue_stiffness": 72.71773362810823
+  },
+  "task_version": "opposing-jaw-stitch-v1",
+  "noise": 0.2,
+  "noise_seed": 901186,
+  "controller": "scripted",
+  "teacher_version": "opposing-jaw-teacher-v2-gap-feedback"
+}

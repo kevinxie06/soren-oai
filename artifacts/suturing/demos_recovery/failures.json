@@ -1,0 +1,1082 @@
+[
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 174,
+    "entry_error_m": 0.0007035289842227895,
+    "exit_error_m": 5.365984916208937e-06,
+    "maximum_depth_m": 0.02467518502869268,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1013,
+      "center": [
+        0.01060174495102276,
+        -0.010104492682217853,
+        0.044726595912967695
+      ],
+      "radius": 0.024685411044299835,
+      "initial_offset": [
+        0.002545361924851105,
+        -0.0031257532024557906,
+        0.007143574765089272
+      ],
+      "initial_theta": 2.527621310663486
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501013
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 33,
+    "entry_error_m": 0.00010558723225012352,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0006726559114759167,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1015,
+      "center": [
+        -0.005043494331573906,
+        0.0025696278865767665,
+        0.04441305119817779
+      ],
+      "radius": 0.022557611826873592,
+      "initial_offset": [
+        -0.005634126180268653,
+        -0.004240705119528856,
+        0.006108580247727564
+      ],
+      "initial_theta": 2.502819443657578
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501015
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 28,
+    "entry_error_m": 0.00033276198356504646,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.000268679747230334,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1023,
+      "center": [
+        -0.005800713119693055,
+        0.009741569641984242,
+        0.04709601951170363
+      ],
+      "radius": 0.0264833402932562,
+      "initial_offset": [
+        0.0038772278607462525,
+        -0.0027883613160315387,
+        0.004526205138384677
+      ],
+      "initial_theta": 2.5881287311608356
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501023
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 165,
+    "entry_error_m": 0.000338966002002267,
+    "exit_error_m": 0.0009132402263774676,
+    "maximum_depth_m": 0.023958669163364508,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1025,
+      "center": [
+        0.011560225197697754,
+        0.003096179878205294,
+        0.0396214494857259
+      ],
+      "radius": 0.02354637137842742,
+      "initial_offset": [
+        -0.002776406500986735,
+        0.001721818304545735,
+        0.007908339774089505
+      ],
+      "initial_theta": 2.6404305487084043
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501025
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 31,
+    "entry_error_m": 2.0267863779107463e-07,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0001043375444512995,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1026,
+      "center": [
+        -0.011853460947442013,
+        0.002282814349615702,
+        0.03994570136140935
+      ],
+      "radius": 0.022213336098661697,
+      "initial_offset": [
+        0.0008411094572891081,
+        -0.0001047903887464504,
+        0.0066019369744208635
+      ],
+      "initial_theta": 2.6070537078480633
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501026
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 179,
+    "entry_error_m": 0.00012749674558137444,
+    "exit_error_m": 8.813229562812039e-08,
+    "maximum_depth_m": 0.02679565644022016,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1040,
+      "center": [
+        0.011886849294172944,
+        0.006762614910111476,
+        0.045116631540352455
+      ],
+      "radius": 0.026094110693430143,
+      "initial_offset": [
+        -0.0035120880696278382,
+        0.003964985223069735,
+        0.008981781773726109
+      ],
+      "initial_theta": 2.5616075967923235
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501040
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 173,
+    "entry_error_m": 0.0007635864482653182,
+    "exit_error_m": 0.0012796032522184057,
+    "maximum_depth_m": 0.022715777138065715,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1050,
+      "center": [
+        -1.6967768700627134e-05,
+        -0.004850214924738009,
+        0.047960338992998966
+      ],
+      "radius": 0.02251148822725134,
+      "initial_offset": [
+        -0.0024786076296278896,
+        0.0033424366160236807,
+        0.009433478580854873
+      ],
+      "initial_theta": 2.5725643703362118
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501050
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 29,
+    "entry_error_m": 0.000521735271019771,
+    "exit_error_m": null,
+    "maximum_depth_m": 6.260179489780276e-05,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1063,
+      "center": [
+        0.01663885015791058,
+        0.007280475711519099,
+        0.0409850434064507
+      ],
+      "radius": 0.027717090878381,
+      "initial_offset": [
+        -0.0005465390130987543,
+        0.001251989128505781,
+        0.0091837852740633
+      ],
+      "initial_theta": 2.626203259768208
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501063
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 33,
+    "entry_error_m": 0.0002496794493132907,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0007317551161394251,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1075,
+      "center": [
+        0.010344696353263187,
+        0.011359802122699436,
+        0.03930479457284241
+      ],
+      "radius": 0.023554474137293675,
+      "initial_offset": [
+        -0.003566473696760308,
+        -0.0018979349969079394,
+        0.008316951184002337
+      ],
+      "initial_theta": 2.502236004926452
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501075
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 27,
+    "entry_error_m": 6.127406499214716e-05,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0005414555444973185,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1078,
+      "center": [
+        0.014206605031179518,
+        -0.008230448865123337,
+        0.039153162442222084
+      ],
+      "radius": 0.02429768623643872,
+      "initial_offset": [
+        -0.0004253539319150207,
+        -0.00299360970498287,
+        0.006637243003561289
+      ],
+      "initial_theta": 2.634983460603374
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501078
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 180,
+    "entry_error_m": 0.0003378205893742006,
+    "exit_error_m": 0.0008259454929614063,
+    "maximum_depth_m": 0.027736754683256835,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1082,
+      "center": [
+        0.007005068702922248,
+        -0.0036808520256766085,
+        0.041726602300185794
+      ],
+      "radius": 0.026673469237544756,
+      "initial_offset": [
+        -0.0005203217540197327,
+        -0.003162394039711,
+        0.004384993402399276
+      ],
+      "initial_theta": 2.4810498181576093
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501082
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 179,
+    "entry_error_m": 0.00022309499473784064,
+    "exit_error_m": 0.0007608730733719655,
+    "maximum_depth_m": 0.023146872798813563,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1083,
+      "center": [
+        -0.0034575008724922994,
+        0.007547262569195745,
+        0.038547799346949685
+      ],
+      "radius": 0.022528354311300056,
+      "initial_offset": [
+        0.0011263906063406293,
+        -0.0016258700243510999,
+        0.008689505994428203
+      ],
+      "initial_theta": 2.513349528575689
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501083
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 30,
+    "entry_error_m": 0.0004974390052960883,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0003749883181161928,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1100,
+      "center": [
+        -0.011032081695088751,
+        -0.0066444110762039765,
+        0.0452885174708158
+      ],
+      "radius": 0.02203134054284575,
+      "initial_offset": [
+        -0.0034627638315339244,
+        0.0006330680152813349,
+        0.005766858187373077
+      ],
+      "initial_theta": 2.58848554727266
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501100
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 175,
+    "entry_error_m": 0.00036203376537619574,
+    "exit_error_m": 0.00041074141620607156,
+    "maximum_depth_m": 0.02737257044441858,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1101,
+      "center": [
+        0.013973725119556333,
+        -0.010296845501800569,
+        0.046149580977541085
+      ],
+      "radius": 0.027373569972731947,
+      "initial_offset": [
+        -0.00028127138569910073,
+        0.0006424574406637944,
+        0.00821195367000107
+      ],
+      "initial_theta": 2.4699320896382577
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501101
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 33,
+    "entry_error_m": 6.375995345342426e-05,
+    "exit_error_m": null,
+    "maximum_depth_m": 4.864691468239868e-05,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1103,
+      "center": [
+        -0.009771684731543856,
+        0.005863348335752767,
+        0.04382124603345238
+      ],
+      "radius": 0.023058247466148613,
+      "initial_offset": [
+        0.004153163602339846,
+        0.0002776919347552741,
+        0.004406026432033026
+      ],
+      "initial_theta": 2.477589695541263
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501103
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 170,
+    "entry_error_m": 1.6900080644419796e-05,
+    "exit_error_m": 0.00018075659493595243,
+    "maximum_depth_m": 0.02545718167040328,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1105,
+      "center": [
+        0.005497538686416895,
+        0.000698522491000263,
+        0.04277645597741126
+      ],
+      "radius": 0.02446898764473586,
+      "initial_offset": [
+        0.0032108230077275753,
+        -0.0009437244982707978,
+        0.0070539527404105615
+      ],
+      "initial_theta": 2.613856499259332
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501105
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 35,
+    "entry_error_m": 0.0005949240483629865,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0001938261137885422,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1109,
+      "center": [
+        -0.0022191288588573332,
+        -0.006707514564532347,
+        0.03829912812566366
+      ],
+      "radius": 0.026518699345139087,
+      "initial_offset": [
+        -0.005027889758503842,
+        0.00019800353466707058,
+        0.009097648555924369
+      ],
+      "initial_theta": 2.485296669158382
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501109
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 32,
+    "entry_error_m": 0.0005621554533690549,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.00010465719714149863,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1112,
+      "center": [
+        0.003156135861645721,
+        0.0009242299576742302,
+        0.046638552245251465
+      ],
+      "radius": 0.02541778780151743,
+      "initial_offset": [
+        -0.001649281142263332,
+        0.001438847448928725,
+        0.009924581872328711
+      ],
+      "initial_theta": 2.53648154429183
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501112
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 178,
+    "entry_error_m": 8.455002036314994e-08,
+    "exit_error_m": 0.0005369084308545145,
+    "maximum_depth_m": 0.02278756890942647,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1115,
+      "center": [
+        -0.009665882762359291,
+        0.0036287234858152946,
+        0.04141692129666953
+      ],
+      "radius": 0.022054760142903185,
+      "initial_offset": [
+        0.0023107609403566123,
+        0.005304583998159838,
+        0.009513540273714313
+      ],
+      "initial_theta": 2.491369200215707
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501115
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 182,
+    "entry_error_m": 0.0009924718680744942,
+    "exit_error_m": 0.0005764034167683647,
+    "maximum_depth_m": 0.023585199970143498,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1119,
+      "center": [
+        0.007838321201300926,
+        0.006144835476084173,
+        0.047086891327755856
+      ],
+      "radius": 0.022583315599172274,
+      "initial_offset": [
+        0.005110698956519069,
+        -0.002139238058607539,
+        0.00958943190037655
+      ],
+      "initial_theta": 2.4510101982938597
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501119
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 29,
+    "entry_error_m": 2.8288459946287493e-08,
+    "exit_error_m": null,
+    "maximum_depth_m": 2.9873655987937286e-05,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1121,
+      "center": [
+        -0.013457015754693187,
+        0.0042076049708102935,
+        0.04772536589466435
+      ],
+      "radius": 0.024557432874285197,
+      "initial_offset": [
+        -0.0003714503036241733,
+        0.003728972683725844,
+        0.005489238205916568
+      ],
+      "initial_theta": 2.5547561860143184
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501121
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 178,
+    "entry_error_m": 6.499418379295286e-05,
+    "exit_error_m": 0.0008475003274475717,
+    "maximum_depth_m": 0.027681732076747834,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1129,
+      "center": [
+        -0.0005407359370946212,
+        0.005653098880144529,
+        0.04317677285211876
+      ],
+      "radius": 0.027107493989500082,
+      "initial_offset": [
+        0.004399681527564222,
+        -0.0022700217182101616,
+        0.008904284428275098
+      ],
+      "initial_theta": 2.5379682066111577
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501129
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 170,
+    "entry_error_m": 0.0005661746413451146,
+    "exit_error_m": 0.0009814105253024012,
+    "maximum_depth_m": 0.02658745732342202,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1130,
+      "center": [
+        -0.009842860767444502,
+        -0.0024282246605437756,
+        0.0441740170987838
+      ],
+      "radius": 0.026177952941857784,
+      "initial_offset": [
+        -0.0031633604460104985,
+        0.0031272880935158936,
+        0.009566108881394562
+      ],
+      "initial_theta": 2.6387297344457084
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501130
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 169,
+    "entry_error_m": 7.504961078767001e-05,
+    "exit_error_m": 5.016525161034212e-08,
+    "maximum_depth_m": 0.024686370511502003,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1134,
+      "center": [
+        0.0008098390300980071,
+        -0.0037206390095609575,
+        0.03870017274037698
+      ],
+      "radius": 0.024686371291071558,
+      "initial_offset": [
+        0.005245726861490083,
+        -0.0016123071813454277,
+        0.004415064047360355
+      ],
+      "initial_theta": 2.5932936384985106
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501134
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 37,
+    "entry_error_m": 0.0007973439019593646,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0003054506849157132,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1140,
+      "center": [
+        -0.01322933587571161,
+        -0.005339920200978844,
+        0.03921274058732092
+      ],
+      "radius": 0.0245543651518283,
+      "initial_offset": [
+        -0.0005205202906288326,
+        -0.0030375225378445354,
+        0.006964500800577084
+      ],
+      "initial_theta": 2.456511935320419
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501140
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 35,
+    "entry_error_m": 8.081012607017386e-08,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.00010935274194370098,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1141,
+      "center": [
+        -0.01160149373721353,
+        -0.0003320234857942146,
+        0.04656091212868511
+      ],
+      "radius": 0.026697520976978698,
+      "initial_offset": [
+        -0.004665337993165777,
+        -0.0026903400867338287,
+        0.0052064342864648686
+      ],
+      "initial_theta": 2.4861408016260866
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501141
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 32,
+    "entry_error_m": 0.0012000955168627178,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.00045295648743225864,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1152,
+      "center": [
+        -0.009713967864877753,
+        -0.007085556673301728,
+        0.04021333925678555
+      ],
+      "radius": 0.022578475332236763,
+      "initial_offset": [
+        0.0005706838463389648,
+        -0.0009046770005825865,
+        0.004791169588375726
+      ],
+      "initial_theta": 2.531193183115575
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501152
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 34,
+    "entry_error_m": 3.6660998132014105e-05,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.00019009149265793862,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1153,
+      "center": [
+        -0.011535877195998027,
+        0.006366795499583095,
+        0.04670089273652834
+      ],
+      "radius": 0.0252339130638176,
+      "initial_offset": [
+        -0.0017186647260230116,
+        0.004711350410556193,
+        0.0049809549631929795
+      ],
+      "initial_theta": 2.4482384937939976
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501153
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 176,
+    "entry_error_m": 1.5120385432512847e-07,
+    "exit_error_m": 0.00029544918389772564,
+    "maximum_depth_m": 0.026540293048074027,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1159,
+      "center": [
+        0.01326779577098779,
+        0.004199956707866968,
+        0.044204818965458206
+      ],
+      "radius": 0.025917972713747413,
+      "initial_offset": [
+        4.704948467756237e-05,
+        -0.0005594996632281631,
+        0.008773094512920625
+      ],
+      "initial_theta": 2.5324257562620214
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501159
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 35,
+    "entry_error_m": 0.0007100077798519739,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.00040065081993108376,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1174,
+      "center": [
+        0.0006273012451379519,
+        0.002122160476728632,
+        0.04466223329105185
+      ],
+      "radius": 0.026458227760584662,
+      "initial_offset": [
+        -0.001638297873657481,
+        -0.0040364743233815715,
+        0.008383317849053482
+      ],
+      "initial_theta": 2.48846616627471
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501174
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 180,
+    "entry_error_m": 0.0006348696934996215,
+    "exit_error_m": 0.0010681164940939377,
+    "maximum_depth_m": 0.026096304340474035,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1180,
+      "center": [
+        0.002842515087224457,
+        0.007706876245914398,
+        0.041751699894819985
+      ],
+      "radius": 0.02582023928947949,
+      "initial_offset": [
+        -0.0029703427225317375,
+        0.003927674898014228,
+        0.006303279680720366
+      ],
+      "initial_theta": 2.464397424605271
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501180
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 179,
+    "entry_error_m": 3.0109945977217584e-07,
+    "exit_error_m": 0.000699613336735375,
+    "maximum_depth_m": 0.028273333979672143,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1184,
+      "center": [
+        0.005207634707578568,
+        0.008215085452828487,
+        0.04132699956616863
+      ],
+      "radius": 0.027826190081588764,
+      "initial_offset": [
+        0.0011361471441652324,
+        -0.0019113648269312253,
+        0.005594888033777376
+      ],
+      "initial_theta": 2.464960508853518
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501184
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 36,
+    "entry_error_m": 0.0008048380250241566,
+    "exit_error_m": null,
+    "maximum_depth_m": 0.0005223253900824357,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1185,
+      "center": [
+        0.007916150373100776,
+        -0.009309658305037674,
+        0.04354160248767692
+      ],
+      "radius": 0.02558891381313968,
+      "initial_offset": [
+        -0.0014641447745557543,
+        -0.005765330363587082,
+        0.004827411358651725
+      ],
+      "initial_theta": 2.442699754079897
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501185
+  },
+  {
+    "success": false,
+    "termination": "invalid_entry",
+    "steps": 168,
+    "entry_error_m": 0.000337052198144537,
+    "exit_error_m": 0.00026236469088598943,
+    "maximum_depth_m": 0.025913200051812343,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1190,
+      "center": [
+        -0.0006513273729579772,
+        0.006879627945794758,
+        0.04504870528154688
+      ],
+      "radius": 0.024745590749566934,
+      "initial_offset": [
+        0.0031888011423646823,
+        -0.0008858043193332669,
+        0.0068646741594212725
+      ],
+      "initial_theta": 2.6315388189857813
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501190
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 33,
+    "entry_error_m": 0.0007318851229726683,
+    "exit_error_m": null,
+    "maximum_depth_m": 1.1880941794460698e-05,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1191,
+      "center": [
+        -0.013390577396468591,
+        0.0038958274627430983,
+        0.039515411776774305
+      ],
+      "radius": 0.02464081478139884,
+      "initial_offset": [
+        0.0035781402948244397,
+        -0.005987575092092739,
+        0.009735767054490137
+      ],
+      "initial_theta": 2.489918798211546
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501191
+  },
+  {
+    "success": false,
+    "termination": "invalid_exit",
+    "steps": 29,
+    "entry_error_m": 0.001135373642380377,
+    "exit_error_m": null,
+    "maximum_depth_m": 3.238004388286808e-05,
+    "unwanted_collisions": 0,
+    "peak_contact_force_n": 0.0,
+    "needle_clear": false,
+    "scene": {
+      "seed": 1193,
+      "center": [
+        -0.012347228374434012,
+        -0.0008859442027608286,
+        0.04194010884743914
+      ],
+      "radius": 0.022677352970169228,
+      "initial_offset": [
+        0.00010582124906501154,
+        -0.003728681310046401,
+        0.005238094470950534
+      ],
+      "initial_theta": 2.591466368307325
+    },
+    "simulator_version": "needle-channel-v1",
+    "controller_version": "needle-drive-teacher-v1",
+    "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+    "noise_seed": 501193
+  }
+]

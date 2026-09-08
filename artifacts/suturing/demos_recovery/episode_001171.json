@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "termination": "success",
+  "steps": 291,
+  "entry_error_m": 0.000990289464940499,
+  "exit_error_m": 3.536141961989214e-09,
+  "maximum_depth_m": 0.025946967995345044,
+  "unwanted_collisions": 0,
+  "peak_contact_force_n": 0.0,
+  "needle_clear": true,
+  "scene": {
+    "seed": 1171,
+    "center": [
+      0.0051438911457586944,
+      0.002516242227863187,
+      0.044888282628644374
+    ],
+    "radius": 0.024960370044374142,
+    "initial_offset": [
+      0.00034000664920907486,
+      0.004895252102370181,
+      0.005083222899559317
+    ],
+    "initial_theta": 2.5022307388591103
+  },
+  "simulator_version": "needle-channel-v1",
+  "controller_version": "needle-drive-teacher-v1",
+  "collection": "teacher plus Gaussian action disturbance p=0.5; std=[.30,.30,.30,.03]; disabled in last .25 rad",
+  "noise_seed": 501171
+}

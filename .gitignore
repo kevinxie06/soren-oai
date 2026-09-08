@@ -41,7 +41,6 @@ yarn-error.log*
 __pycache__/
 *.pyc
 *.tsbuildinfo
-smoke-report.json
 
 # Python policy bootstrapping
 .venv/

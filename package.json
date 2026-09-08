@@ -1,5 +1,5 @@
 {
-  "name": "soren-isaac-studio",
+  "name": "soren",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -9,16 +9,15 @@
     "dev": "vinext dev --hostname 127.0.0.1",
     "build": "vinext build",
     "start": "vinext start --hostname 127.0.0.1",
-    "test": "node --test tests/*.test.mjs && python3 -m unittest discover -s simulator/tests -v",
+    "test": "python3 -m unittest discover -s tests -v",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
-    "@nvidia/ov-web-rtc": "6.7.0",
-    "lucide-react": "0.468.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.186.0"
+    "three": "^0.186.0",
+    "lucide-react": "0.468.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.54.6",

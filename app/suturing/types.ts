@@ -1,3 +1,4 @@
+import type { RobotMotion } from "../robot-motion";
 export type Vec3 = [number, number, number];
 export type StitchFrame = {
   time_s: number; center: Vec3; theta: number; tip: Vec3; tail: Vec3;
@@ -7,7 +8,7 @@ export type StitchFrame = {
   poses: {position_m: Vec3; quaternion_wxyz: [number,number,number,number]}[];
 };
 export type StitchMotion = {
-  presentation_assets?: { robot_fit?: string };
+  presentation_assets?: { robot_fit?: string; recording_specific?: boolean; robot_motion?: RobotMotion | null };
   comparison_provenance?: { kind: string; display_name: string };
   schema_version: string; sample_hz: number; duration_s: number;
   scene: { center: Vec3; radius: number; gap: number; seed: number };

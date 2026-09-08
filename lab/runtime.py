@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw
 from .tasks import get_task, ROOT
 from .specs import config_for
 from .rewards import make_reward
+from .presentation import frame as presentation_frame, motion as presentation_motion
 
 BASELINE = Path(__file__).resolve().parents[1] / "artifacts/stitch/policy.npz"
 
@@ -61,6 +62,8 @@ def thumbnail(scenario, path):
     spec = get_task(scenario.get("task", "stitch"))
     env = spec.make_env()
     env.reset(config=config_for(scenario))
+    dump(Path(path).with_suffix('.motion.json'), presentation_motion(
+        env, spec.id, [presentation_frame(env, spec.id, 0.0)]))
     renderer = mujoco.Renderer(env.model, height=480, width=640)
     try:
         Image.fromarray(render_frame(env, renderer, "initial state", spec.id)).save(
@@ -92,6 +95,7 @@ def rollout(
     states = [env.state()]
     actions = []
     frames = []
+    motion_frames = [presentation_frame(env, spec.id, 0.0)] if record else []
     reward = make_reward(spec.id, reward_weights)
     total = 0.0
     renderer = writer = None
@@ -117,6 +121,8 @@ def rollout(
             total += r
             observations.append(obs.copy())
             states.append(env.state())
+            if record:
+                motion_frames.append(presentation_frame(env, spec.id, round((step + 1) * 0.05, 3)))
             actions.append(action.copy())
             frames.append(
                 telemetry_frame(env, spec.id, round((step + 1) * 0.05, 3), terms)
@@ -134,6 +140,8 @@ def rollout(
             actions=actions,
         )
         dump(out / "telemetry.json", dict(frames=frames))
+        if record:
+            dump(out / 'motion.json', presentation_motion(env, spec.id, motion_frames, policy.sha256, info))
         manifest = dict(
             schema="soren-rollout-v1",
             task=spec.id,

@@ -109,7 +109,11 @@ def main():
         slide = model.jnt_type[joint] == mujoco.mjtJoint.mjJNT_SLIDE
         for qpos in angles:
             if slide:
-                outputs.append(model.body_pos[body] + model.jnt_axis[joint] * qpos[joint])
+                # Joint axes are body-local; glTF translations are parent-local.
+                # The right finger's mount rotates its slide axis by 180 degrees.
+                axis = np.zeros(3)
+                mujoco.mju_rotVecQuat(axis, model.jnt_axis[joint], model.body_quat[body])
+                outputs.append(model.body_pos[body] + axis * qpos[joint])
             else:
                 delta, result = np.zeros(4), np.zeros(4)
                 mujoco.mju_axisAngle2Quat(delta, model.jnt_axis[joint], qpos[joint])

@@ -12,13 +12,17 @@ import { SSAOPass } from "three/addons/postprocessing/SSAOPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { FXAAPass } from "three/addons/postprocessing/FXAAPass.js";
 import CameraControls, { type CameraView, type NavigationMode } from "../camera-controls";
+import { recordedHeartGripper, recordedRobot } from "../robot-motion";
+import { createScenarioGuides, type ScenarioGuide } from "../scenario-guides";
 import type { Motion } from "./types";
 
-export default function MotionView({ motion, time, context }: { motion: Motion; time: number; context: boolean }) {
+export default function MotionView({ motion, time, context, initialView, onCapture, guide }: { motion: Motion; time: number; context: boolean; initialView?: CameraView; onCapture?: (url: string) => void; guide?: ScenarioGuide }) {
   const [angle,setAngle] = useState<CameraView>(context ? "room" : "macro");
   const [navigation,setNavigation] = useState<NavigationMode>("orbit");
   const navigationRef=useRef(navigation);
   useEffect(()=>{navigationRef.current=navigation;},[navigation]);
+  const capture = useRef(onCapture);
+  useEffect(() => { capture.current = onCapture; }, [onCapture]);
   const host = useRef<HTMLDivElement>(null);
   const cursor = useRef(time);
   const [error, setError] = useState("");
@@ -33,6 +37,7 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
     let cancelled = false;
     Promise.resolve().then(() => {
       if (cancelled) return;
+      let dirty = true, lastTime = -1;
       const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.shadowMap.enabled = true;
@@ -42,6 +47,7 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       container.appendChild(renderer.domElement);
       const scene = new THREE.Scene();
+      if (guide) scene.add(createScenarioGuides(motion, guide));
       scene.background = new THREE.Color(context ? "#91a7a8" : "#101d29");
       const pmrem = new THREE.PMREMGenerator(renderer);
       const environmentScene = new RoomEnvironment();
@@ -57,6 +63,7 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
       controls.minDistance = .04; controls.maxDistance = 8;
       controls.maxPolarAngle = Math.PI * .88;
       cameraView.current = (view) => {
+        dirty = true;
         const heartIndex=motion.geometry.findIndex(g=>g.name==='object_collision');
         const center=heartIndex>=0?motion.frames[0].poses[heartIndex].position_m:[0,0,.025];
         const positions = { room: [-2.2, -2.8, 1.9], field: [-.48, -.56, .58], patient: [.38, .91, .4], macro: [center[0]+.14,center[1]-.20,center[2]+.16], overhead: [center[0],center[1]-.002,center[2]+.48] };
@@ -66,7 +73,7 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
         else controls.target.set(.05, view === "patient" ? .48 : -.02, view === "room" ? .2 : .025);
         controls.update();renderer.domElement.dataset.camera=view;
       };
-      const initialView=context?'room':'macro';setAngle(initialView);cameraView.current(initialView);
+      const startingView=initialView ?? (context?'room':'macro');setAngle(startingView);cameraView.current(startingView);
       scene.add(new THREE.HemisphereLight(0xdaefff, 0x536576, .65));
       const light = new THREE.DirectionalLight(0xffffff, 1.5);
       light.position.set(.2, -.3, 1.8); light.castShadow = true;
@@ -111,6 +118,9 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
         composer.addPass(renderPass); composer.addPass(ao); composer.addPass(outputPass);
         if (fxaa) composer.addPass(fxaa);
       }
+      let assetsReady = !context, captured = false;
+      let updateRobot: ((time: number) => void) | null = null;
+      let updateGripper: ((time: number) => void) | null = null;
       let robotMixer: THREE.AnimationMixer | null = null;
       let robotRoot: THREE.Object3D | null = null;
       const robotActions: THREE.AnimationAction[] = [];
@@ -118,7 +128,7 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
       const disposeTree = (root: THREE.Object3D) => {
         const textures = new Set<THREE.Texture>();
         root.traverse((obj) => {
-          if (!(obj instanceof THREE.Mesh)) return;
+          if (!(obj instanceof THREE.Mesh) && !(obj instanceof THREE.Line)) return;
           obj.geometry.dispose();
           for (const material of Array.isArray(obj.material) ? obj.material : [obj.material]) {
             for (const value of Object.values(material)) if (value instanceof THREE.Texture) textures.add(value);
@@ -135,13 +145,13 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
           loader.loadAsync("/models/patient/LeePerrySmith.glb"),
           textures.loadAsync("/models/patient/Map-COL.jpg"),
           textures.loadAsync("/models/patient/Infinite-Level_02_Tangent_SmoothUV.jpg"),
-          loader.loadAsync(motion.presentation_assets?.robot_glb ?? "/models/robot/panda.glb"),
+          motion.presentation_assets?.recording_specific && !motion.presentation_assets.robot_motion ? Promise.resolve(null) : loader.loadAsync(motion.presentation_assets?.robot_glb ?? "/models/robot/panda.glb"),
         ]).then((results) => {
           if (cancelled || results.some((r) => r.status === "rejected")) {
             for (const result of results) if (result.status === "fulfilled") {
-              if (result.value instanceof THREE.Texture) result.value.dispose(); else disposeTree(result.value.scene);
+              if (result.value instanceof THREE.Texture) result.value.dispose(); else if (result.value) disposeTree(result.value.scene);
             }
-            if (!cancelled) setBundledStatus("Patient/robot assets unavailable. Reload to retry.");
+            if (!cancelled) { assetsReady = true; dirty = true; setBundledStatus("Patient/robot assets unavailable. Reload to retry."); }
             return;
           }
           const [head, color, normal, robot] = results.map((r) => (r as PromiseFulfilledResult<unknown>).value) as [
@@ -160,19 +170,31 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
           });
           head.scene.scale.setScalar(.036); head.scene.position.set(0, .565, -.027);
           head.scene.name = "scanned_patient_head"; room.add(head.scene);
+          assetsReady = true; dirty = true;
+          if (!robot) { setBundledStatus(""); return; }
           robotRoot = robot.scene;
           robot.scene.traverse((obj) => { if (obj instanceof THREE.Mesh) { obj.castShadow = true; obj.receiveShadow = true; } });
           room.add(robot.scene);
-          robotMixer = new THREE.AnimationMixer(robot.scene);
+          const fit = motion.presentation_assets?.robot_motion;
+          if (fit && fit.seed === motion.seed && fit.checkpoint_sha256 === motion.checkpoint_sha256 && fit.frames.length === motion.frames.length) {
+            updateRobot = recordedRobot(robot.scene, fit, motion.sample_hz);
+          } else if (!motion.presentation_assets?.recording_specific) {
+            robotMixer = new THREE.AnimationMixer(robot.scene);
           for (const clip of robot.animations) {
             const action = robotMixer.clipAction(clip); action.setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; action.play();
             robotActions.push(action);
           }
+          } else {
+            room.remove(robot.scene); disposeTree(robot.scene); robotRoot = null;
+            setBundledStatus("Robot fit does not match this recording. Showing measured instruments."); return;
+          }
+          updateGripper = recordedHeartGripper(robot.scene, motion);
           motion.geometry.forEach((g, i) => { if (["palm", "finger_l", "finger_r"].includes(g.name)) objects[i].visible = false; });
           setBundledStatus("");
         }).catch((reason) => { if (!cancelled) setBundledStatus(`Scene assets failed: ${String(reason)}`); });
       }
       const resize = new ResizeObserver(() => {
+        dirty = true;
         const { width, height } = container.getBoundingClientRect();
         renderer.setSize(width, height); camera.aspect = width / Math.max(height, 1); camera.updateProjectionMatrix();
         composer?.setSize(width, height);
@@ -201,13 +223,20 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
         if (heart && heartIndex >= 0) {
           heart.position.copy(objects[heartIndex].position); heart.quaternion.copy(objects[heartIndex].quaternion);
         }
+        updateRobot?.(cursor.current);
         // Setting absolute clip time makes seek, reverse seek and pause deterministic.
         if (robotMixer) {
           robotActions.forEach((action) => { action.paused = false; action.enabled = true; });
           robotMixer.setTime(Math.min(cursor.current, motion.duration_s));
         }
-        controls.update();
-        if (composer) composer.render(); else renderer.render(scene, camera);
+        // Apply after either animation source so older saved fits cannot overwrite the claw opening.
+        updateGripper?.(cursor.current);
+        const moved = controls.update();
+        if (dirty || moved || lastTime !== cursor.current) {
+          if (composer) composer.render(); else renderer.render(scene, camera);
+          dirty = false; lastTime = cursor.current;
+          if (assetsReady && !captured && capture.current) { captured = true; capture.current(renderer.domElement.toDataURL("image/webp", .86)); }
+        }
         frameId = requestAnimationFrame(draw);
       }
       draw();
@@ -216,11 +245,11 @@ export default function MotionView({ motion, time, context }: { motion: Motion; 
         if (robotMixer && robotRoot) { robotMixer.stopAllAction(); robotMixer.uncacheRoot(robotRoot); }
         ao?.dispose(); renderPass?.dispose(); outputPass?.dispose(); fxaa?.dispose(); composer?.dispose();
         disposeTree(scene); environment.dispose(); light.shadow.dispose(); cameraView.current = () => {};
-        renderer.dispose(); renderer.domElement.remove();
+        renderer.dispose(); renderer.forceContextLoss(); renderer.domElement.remove();
       };
     }).catch((reason) => { if (!cancelled) setError(String(reason)); });
     return () => { cancelled = true; dispose(); };
-  }, [motion, context]);
+  }, [motion, context, initialView, guide]);
   return <div className="motion-canvas" ref={host} data-scene-ready={context && bundledStatus === ""} aria-label="Recorded heart extraction in an interactive 3D scene">
     <CameraControls view={angle} onView={v=>{setAngle(v);cameraView.current(v);}} mode={navigation} onMode={setNavigation} geometry={!context}/>
     {context && bundledStatus && <div className="scene-tools"><span role="status">{bundledStatus}</span></div>}

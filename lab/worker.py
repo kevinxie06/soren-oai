@@ -19,6 +19,7 @@ import urllib.request
 import uuid
 from .runtime import BaselinePolicy, dump, rollout, thumbnail
 from .specs import template_plan, validate_plan
+from .presentation import backfill_one
 from .tasks import get_task
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -168,6 +169,8 @@ class Execution:
                     path = self.folder / f"{scenario['id']}.jpg"
                     thumbnail(scenario, path)
                     scenario["thumbnail"] = self.upload(path)
+                    scenario["motion"] = self.upload(path.with_suffix('.motion.json'))
+                    scenario["presentation_version"] = 1
                 dump(self.folder / "plan.json", plan)
                 result = {
                     "plan_artifact": self.upload(self.folder / "plan.json"),
@@ -228,6 +231,8 @@ class Execution:
                                 folder / filename, f"{prefix}/{filename}"
                             )
                         if episode == 0:
+                            run["motion"] = self.upload(folder / "motion.json", f"{prefix}/motion.json")
+                            run["presentation_version"] = 1
                             run["video"] = self.upload(
                                 folder / "rollout.mp4", f"{prefix}/rollout.mp4"
                             )
@@ -367,6 +372,10 @@ def main():
             elif args.once:
                 return
             else:
+                try:
+                    backfill_one(client)
+                except Exception as error:
+                    print("Presentation backfill retry:", error, flush=True)
                 time.sleep(2)
         except KeyboardInterrupt:
             return

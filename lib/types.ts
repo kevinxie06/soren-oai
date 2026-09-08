@@ -6,6 +6,8 @@ export type JobStatus =
 export type TaskKind = "stitch" | "lifting";
 interface ScenarioBase {
   training_bounds?: Record<string, [number, number]>;
+  motion?: string;
+  presentation_version?: number;
   thumbnail?: string;
   id: string;
   name: string;
@@ -102,6 +104,9 @@ export interface Outcome {
   released?: boolean;
 }
 export interface Run {
+  trajectory?: string;
+  motion?: string;
+  presentation_version?: number;
   id: string;
   experiment_id: string;
   job_id: string;

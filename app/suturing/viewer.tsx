@@ -13,9 +13,11 @@ import type { NavigationMode } from "../camera-controls";
 import { surgicalScene } from "./scene";
 import { roomContext, disposeTree } from "./room-context";
 import { simulationScene } from "./simulation-scene";
+import { createScenarioGuides, type ScenarioGuide } from "../scenario-guides";
 import type { StitchFrame, StitchMotion, Vec3 } from "./types";
 
-export default function Viewer({motion,time,angle,navigation="orbit",geometry=false,asset,onStatus}:{motion:StitchMotion;time:number;angle:string;navigation?:NavigationMode;geometry?:boolean;asset:{data:ArrayBuffer;name:string}|null;onStatus:(message:string)=>void}) {
+export default function Viewer({motion,time,angle,navigation="orbit",geometry=false,asset,onStatus,onCapture,guide}:{motion:StitchMotion;time:number;angle:string;navigation?:NavigationMode;geometry?:boolean;asset:{data:ArrayBuffer;name:string}|null;onStatus:(message:string)=>void;onCapture?:(url:string)=>void;guide?:ScenarioGuide}) {
+  const capture=useRef(onCapture);useEffect(()=>{capture.current=onCapture;},[onCapture]);
   const navigationRef=useRef(navigation);
   useEffect(()=>{navigationRef.current=navigation;},[navigation]);
   const host=useRef<HTMLDivElement>(null),cursor=useRef(time),view=useRef(angle);const [error,setError]=useState("");
@@ -28,10 +30,11 @@ export default function Viewer({motion,time,angle,navigation="orbit",geometry=fa
       renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.85;el.appendChild(renderer.domElement);
       const scene=new T.Scene();scene.background=new T.Color(geometry?'#142428':'#91a7a8');scene.fog=new T.Fog(geometry?'#142428':'#91a7a8',6,12);
       const pmrem=new T.PMREMGenerator(renderer),room=new RoomEnvironment(),env=pmrem.fromScene(room);scene.environment=env.texture;scene.environmentIntensity=.65;pmrem.dispose();room.dispose();
-      let dirty=true;
+      let dirty=true,assetsReady=geometry,captured=false;
       const surgical=geometry?simulationScene(motion):surgicalScene(motion,()=>{dirty=true;});scene.add(surgical.root);
+      if(guide)scene.add(createScenarioGuides(motion,guide));
       onStatus(geometry?'Measured MuJoCo geometry':'Loading patient and robot…');
-      const context=geometry?null:roomContext(motion,()=>{lastTime=-1;dirty=true;},message=>{if(!asset)onStatus(message);},()=>cancelled);
+      const context=geometry?null:roomContext(motion,()=>{assetsReady=true;lastTime=-1;dirty=true;},message=>{if(message.includes('unavailable'))assetsReady=true;if(!asset)onStatus(message);},()=>cancelled);
       if(context)scene.add(context.root);
       const bindings:{anchor:T.Group;name:string;index:number}[]=[];
       if(!geometry&&asset){new GLTFLoader().parseAsync(asset.data,'').then(gltf=>{
@@ -83,11 +86,11 @@ export default function Viewer({motion,time,angle,navigation="orbit",geometry=fa
             else{const p=frame.poses[index],q=p.quaternion_wxyz;anchor.position.fromArray(p.position_m);anchor.quaternion.set(q[1],q[2],q[3],q[0]);}
           }
         }
-        const moved=controls.update();if(dirty||moved){composer.render();dirty=false;}id=requestAnimationFrame(draw);
+        const moved=controls.update();if(dirty||moved){composer.render();dirty=false;if(assetsReady&&!captured&&capture.current){captured=true;capture.current(renderer.domElement.toDataURL("image/webp",.86));}}id=requestAnimationFrame(draw);
       }draw();
-      cleanup=()=>{cancelAnimationFrame(id);resize.disconnect();controls.dispose();disposeTree(scene);key.shadow.dispose();composer.passes.forEach(p=>p.dispose());composer.dispose();env.dispose();renderer.dispose();renderer.domElement.remove();};
+      cleanup=()=>{cancelAnimationFrame(id);resize.disconnect();controls.dispose();disposeTree(scene);key.shadow.dispose();composer.passes.forEach(p=>p.dispose());composer.dispose();env.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();};
     }).catch(e=>{if(!cancelled)setError(String(e));});
     return()=>{cancelled=true;cleanup();};
-  },[motion,geometry,asset,onStatus]);
+  },[motion,geometry,asset,onStatus,guide]);
   return <div className="stitch-canvas" ref={host} role="img" aria-label="Three-dimensional playback of the learned suturing policy">{error&&<p role="alert">3D view unavailable: {error}. The original simulation video remains available.</p>}</div>;
 }

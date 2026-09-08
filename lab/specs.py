@@ -56,6 +56,8 @@ def validate_plan(plan, task=None):
             "rationale",
             "seed",
             "thumbnail",
+            "motion",
+            "presentation_version",
             "task",
             "training_bounds",
         }

@@ -1,7 +1,8 @@
-﻿export type Pose = { position_m: number[]; quaternion_wxyz: number[] };
+import type { RobotMotion } from "../robot-motion";
+export type Pose = { position_m: number[]; quaternion_wxyz: number[] };
 export type Shape = { name: string; shape: string; half_size_m: number[]; rgba: number[]; dynamic: boolean };
 export type Motion = {
-  presentation_assets?: { robot_glb?: string };
+  presentation_assets?: { robot_glb?: string; recording_specific?: boolean; robot_motion?: RobotMotion | null };
   comparison_provenance?: { kind: string; display_name: string };
   schema_version: string; seed: number; duration_s: number; sample_hz: number; checkpoint_sha256: string;
   geometry: Shape[];

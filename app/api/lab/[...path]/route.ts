@@ -3,6 +3,7 @@ import {
   SpecificationError,
   matchesReviewedPlan,
 } from "@/lib/experiment-spec";
+import { presentationRequest } from "@/lib/presentation-server";
 import {
   database,
   enqueue,
@@ -80,6 +81,8 @@ async function handle(request: Request) {
     if (!request.headers.get("Content-Type")?.includes("application/json"))
       return json({ error: "JSON body required" }, 415);
   }
+  if (isWorker && path[1] === "presentation")
+    return presentationRequest(request);
   const db = await database();
   if (path[0] === "health" && method === "GET") {
     const rows = await db

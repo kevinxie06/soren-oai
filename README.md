@@ -1,138 +1,213 @@
-# Soren policy lab
+# Soren
 
-A working experiment workspace for natural-language scenario generation, native MuJoCo evaluation, reward composition, PPO training, and baseline/candidate comparison.
+Soren is a simulation workspace for finding robot-policy failures, correcting them, and testing whether post-training improves the result. It combines native MuJoCo physics, an interactive Three.js frontend, scenario planning, operator demonstrations, and PPO training.
 
-## Run the complete application
+The workflow is simple: **build an experiment -> evaluate the starting policy -> inspect failures -> adjust rewards or demonstrate a correction -> train -> compare matched runs**.
 
-Requires Node.js 22.13+, Python 3.14, and Chrome for browser acceptance tests. The current dependency lock targets Python 3.14. On macOS, native offscreen rendering uses OpenGL; Linux workers need a working EGL or OSMesa configuration.
+## The Problem
+
+Training robots for high-stakes tasks, such as surgery, is bottlenecked by data. Real surgical data is scarce, hard to label, and too risky to generate through trial and error: a robot cannot learn proper suturing technique by practicing on real patients. This gap is especially acute for rare complications and edge cases, where reliable performance matters most. Without diverse, representative training scenarios, it is difficult to design useful rewards and evaluate whether a policy can handle failure conditions.
+
+The bottleneck also includes tooling. For every new task, someone must build a simulation environment, model the objects involved, and design a reward function, often through painstaking trial and error. That work is expensive even for simple tasks. In surgery, the scenarios most important to cover can also be the hardest and riskiest to collect real data on.
+
+## Our Solution: An Interface for Instant RL Environments
+
+Our product vision is a pipeline where you describe a robotics task in plain language and Astra coordinates the work needed to turn it into a trainable environment:
+
+1. **Asset generation.** Generate reusable objects required by the task. For a task such as dish cleaning, these could include plates, racks, sponges, and cups.
+2. **Environment assembly.** Assemble those assets into many simulated environments, potentially thousands of variations of a kitchen sink scene, with different layouts, object states, and conditions.
+3. **Reward assignment.** Translate the task's success condition, such as all dishes being correctly placed in a rack, into a reward specification that can be inspected, tested, and refined.
+4. **Trainable output.** Deliver an environment and training workflow from a single task description, shortening the path from an initial policy to a working capability.
+
+The ambition is to make this possible in one or two iterations. That is a product goal, not a measured guarantee of the current implementation.
+
+**What this repository implements today:** a working experiment, evaluation, and post-training loop for two existing MuJoCo task families. Astra proposes bounded scenario configurations and reward weights; the workspace generates variations, records policy execution, supports operator corrections, trains candidates, and compares outcomes. Arbitrary asset generation, new task physics, and automatic synthesis of unrestricted reward functions remain part of the broader vision. The current system uses existing assets, implemented mechanics, and predefined reward terms.
+
+## Why This Generalizes to Medicine
+
+Medicine motivates this direction because collecting representative failure data is particularly difficult. The proposed extension goes beyond generating organs, tissue, or vasculature with anatomical and deformable variation: it would identify edge cases missing from a policy's training coverage and generate scenarios specifically targeting those gaps.
+
+Instead of relying only on random variation, the goal is to build targeted suites around where a robot is likely to fail. Heart transplantation, liver abscess treatment, and appendix removal illustrate the longer-term applications. They are not procedures implemented or validated by this repository.
+
+The opportunity is to give surgical teams a safer way to investigate rare complications, identify useful training cases, and practice in simulation before considering physical deployment. Our target is to turn parts of a multi-year data-collection process into targeted generation tasks measured in hours. Achieving that requires anatomically grounded simulation and validation beyond the simplified tasks demonstrated here.
+
+## Why It Matters
+
+The core idea is to bring three normally separate, expert-driven steps into one interface: asset creation, environment design, and reward engineering. Automating and connecting these steps could remove substantial work between identifying a desired robotic capability and testing a trained policy for it.
+
+Our ambition is to generate hundreds of diverse, labeled synthetic scenarios in an afternoon, with reward specifications and a reproducible training loop included. Knowing which data to generate is as important as generating it at scale: measured failures, paired evaluations, and operator demonstrations should guide the next training iteration.
+
+This repository is a step toward that approach. Its purpose is to make failures observable, corrections reusable, and improvements testable. The longer-term vision is a foundation for training high-stakes robotic systems safely and systematically, without using real patients as a trial-and-error training environment. Simulation evidence alone does not establish clinical readiness.
+
+## What you can do
+
+- Create experiments with configurable environment counts, parameter ranges, episode counts, and training budgets.
+- Generate bounded scenario plans with Astra or use the built-in study planner.
+- Inspect recorded simulations, robot motion, task metrics, and failure outcomes.
+- Manually move the simulated robot and save a successful correction as training data.
+- Edit reward weights, post-train a candidate, and resume from a saved checkpoint.
+- Compare baseline and candidate policies on the same configurations and episode seeds, including regressions.
+
+## Supported environments
+
+| Task | Simulated behavior | Controls and outcomes |
+| --- | --- | --- |
+| Object lifting & placement | Grasp a heart-shaped rigid object, lift it out of a cavity, and release it onto a tray | XYZ motion and gripper closure; placement error, clearance, release, drops, and contacts |
+| Needle transfer & wound closure | Pass a needle across a wound, transfer it between opposing jaws, and pull the wound edges together under thread tension | XYZ motion, rotation, donor and receiver jaws, and tension; entry, exit, transfer, clearance, and wound gap |
+
+These are simplified research environments. The lifting task represents detached-object transfer, not a complete heart transplant. Suturing uses rigid spring-mounted patches and assisted grasp transfer, without deformable tissue or knot tying. Policies observe simulator state. Presentation meshes add visual context; they do not add corresponding collision or tissue mechanics.
+
+## Run locally
+
+Use **Node.js 22.13 or newer** and **Python 3.14** for the pinned Python dependencies. Run commands from the repository root.
+
+### Windows PowerShell
+
+```powershell
+npm.cmd ci
+py -3.14 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-lab.txt
+npm.cmd run lab
+```
+
+### macOS / Linux
 
 ```sh
 npm ci
-python3 -m venv .venv
+python3.14 -m venv .venv
 .venv/bin/python -m pip install -r requirements-lab.txt
 npm run lab
 ```
 
-Open **http://127.0.0.1:3210**. The launcher starts the web application and Python worker, creates a random local worker credential in the ignored `.dev.vars`, and stops both processes on Ctrl+C. Set `LAB_PORT` to choose a different port.
+Open **[http://127.0.0.1:3210](http://127.0.0.1:3210)**.
 
-For Astra planning, install the Codex CLI and authenticate using `codex login`. The worker uses `gpt-6-astra` by default (`LAB_ASTRA_MODEL` overrides it). Credentials remain in the CLI's authentication store; they are not copied into the app or exposed to the browser. Astra receives the task and the bounded environment/reward schema, and returns structured configuration. There is no silent replacement with a different model. The explicitly labeled built-in gap/stiffness sweep also works without model access.
+The launcher starts the frontend and Python worker. On first launch it creates an ignored `.dev.vars` file containing a random local worker token. Keep the terminal running. Use `LAB_PORT` to select another port. Native rendering requires a working graphics backend; headless Linux hosts may need EGL or OSMesa configured for MuJoCo.
 
-To run the components separately:
+The built-in planner works without model access. Optional Astra planning calls the authenticated `codex` CLI from the worker; the model defaults to `gpt-6-astra` and can be set with `LAB_ASTRA_MODEL`. The planner returns bounded scenario and reward configurations. It does not implement new physics from a prompt or execute model-generated programs.
+
+To start components separately:
 
 ```sh
 npm run dev -- --port 3210
-# In another terminal, after configuring .dev.vars:
+# In another terminal, with a matching LAB_WORKER_TOKEN configured:
 .venv/bin/python -m lab.worker --url http://127.0.0.1:3210
 ```
 
-## Workflow
+On Windows, use `.\.venv\Scripts\python.exe` for the worker command.
 
-1. **Define and review a study:** choose a versioned **Needle transfer & closure** or **Object lifting & placement** task package, select **Evaluate reliability** or **Improve policy**, and edit the suggested research question. The compatible starting checkpoint is fixed by the package. **Study settings** exposes bounded parameter ranges, episodes, seed, and training budget. Select **Generate experiment plan** (Cmd/Ctrl+Enter) to review exact coverage, policy, outcomes, and limitations without starting a job. **Launch experiment** executes that reviewed plan. No Astra access is needed for this flow.
-2. **Environment suite:** generation opens a dedicated grid of configurations (16 by default, with a configurable count). Select an environment to inspect its physical parameters, shared reward function, baseline outcomes, and seed. Choose **Open simulation** to view the rendering and recorded telemetry. Environment and view URLs support reload and browser back/forward navigation.
-3. **Evaluate baseline:** run 1–20 episodes per scenario. Reviewed episode, seed, and transition budgets become run defaults; later overrides are recorded in job history. Each scenario's first episode has a native MP4; every episode has a trajectory, telemetry, and versioned manifest.
-4. **Rewards & training:** inspect or edit five bounded reward weights and run PPO for 1,024–131,072 transitions. The actor starts from the selected task's NumPy checkpoint with verified action parity (including the lifting gripper's binary close/open command). A critic and stochastic exploration enable real policy-gradient updates. Continue from a saved candidate to resume weights, optimizer state, and transition count at a new episode boundary.
-5. **Compare:** evaluate the trained checkpoint on the same configurations and episode seeds as the completed baseline. Inspect paired recordings, success counts, failures, and regressions. Comparison automatically uses the baseline's episode count.
-6. **Follow-up studies:** reviewed experiments reopen their specification for a new question and operating envelope, requiring a fresh review before launch. Legacy experiments still support Astra refinement using the latest completed baseline and candidate development evidence. Repeated evaluations of different checkpoints are not pooled.
+## Experiment workflow
 
-Gallery selection opens playback, measured gap/tension, a time scrubber, configuration, and artifact links. Experiments survive refresh; their URL includes the selected experiment ID. Jobs expose progress, errors, and cancellation.
+1. **Create and review a study.** Choose a task, describe the question, and configure parameter ranges, environment count, seeds, and budgets. Review the plan before launching it. The reviewed study builder supports configurable counts; the Astra planning path currently requests 16 scenarios.
+2. **Evaluate the baseline.** Run the starting policy across the generated environments. Inspect success counts, failures, native recordings, and telemetry.
+3. **Inspect a simulation.** Open an environment's simulation view to explore the recorded motion and identify where the policy fails.
+4. **Train a candidate.** Edit the bounded reward weights and run PPO, or supply a successful manual correction. Training begins from the task's existing actor or resumes a saved candidate.
+5. **Compare.** Evaluate the candidate on the baseline configurations and episode seeds. Look at completed tasks, failure types, and regressions alongside reward totals.
+6. **Refine.** Use development results and operator feedback to design the next experiment.
 
-Reviewed study specifications are stored with their package, compatible policy, exploratory evidence identifier, ranges, question, and protocol. `POST /api/lab/plans` validates and previews a deterministic plan without creating an experiment. `POST /api/lab/experiments` with `specification` and `review_fingerprint` recomputes the preview and rejects stale reviews. The worker uses the persisted plan, adds rendering artifacts, and is prevented from changing reviewed configurations. Restart an existing Python worker after updating this code.
+Reward weights change training incentives. They never change the simulator's success criteria. A higher training reward alone does not establish a better policy.
 
-Two varying parameters with a square environment count produce a square grid (4 × 4 by default); other envelopes use the selected number of stratified combinations. Fixed parameters stay fixed during PPO resets, and training perturbations are clipped to the reviewed envelope. Other task-native seeded initialization remains unchanged. These are development suites, not held-out validation sets. The included evidence package is explicitly exploratory: there is no physical calibration or clinical evidence attached. Natural language records the research question; explicit ranges define execution and do not introduce unsupported mechanics.
+## Manual operator corrections
 
-Study checks: `node --experimental-strip-types --test tests/experiment-spec.test.mjs`, `.venv/bin/python -m unittest tests.test_experiment_spec -v`, and `node --experimental-strip-types scripts/test-study-api.mjs` against a running lab. The last check creates one study, renders all 16 environments, and evaluates one baseline episode per environment.
+Manual control is available **only in the environment's Simulation view**. Expand **Manual operator control** to:
 
-## RL research workspace
+- **Advance policy** to reach the part of an attempt you want to correct.
+- Nudge **X, Y, and Z**, and open or close the gripper. Suturing also exposes rotation, donor/receiver jaws, and thread tension.
+- Select **1-20 simulation steps per click** and adjust movement strength.
+- Use **Apply grippers / hold** to execute the selected gripper and tension settings.
+- **Reset attempt** or **Restore last attempt** for the selected environment.
 
-The environment suite exposes an interactive **Observe → Act → Score → Update** explanation, including the observation/action contract, frozen normalization, policy architecture, control frequency, and training/evaluation sampling protocol. The task policies use simulator state; the rendered scene is an inspection view.
+This is stepped control: each click replays the accumulated commands through native physics and displays the resulting frame. Attempts and executed observation/action pairs are saved. It is not real-time hardware teleoperation.
 
-**Rewards & training** connects the five editable weights to a per-transition equation, with exact progress gates, one-time milestones, action-change penalties, and independent completion criteria. Choose the original baseline or latest candidate as initialization, a transition budget, and an explicit training seed. PPO's clipped objective, advantage estimation, critic loss, and fixed optimizer settings are available in an expandable explanation. Reward edits are a draft until a job is launched; jobs snapshot their own weights, and reload restores the latest candidate's saved weights (or the original proposal before training).
+After the simulator reports success and at least one operator action has executed, **Update from successful attempt** becomes available. Complete baseline evaluation first, then optionally edit the update's reward weights. Update performs 100 behavior-cloning optimizer steps on the operator's actions followed by 1,024 PPO transitions. It resumes the latest candidate when available and saves a new checkpoint with correction provenance.
 
-Saved runs expose raw episode return, episode length, and trailing-ten-episode training success curves. New `soren-training-v2` reports additionally record approximate KL, clipping fraction, critic loss, explained variance, per-episode reward contributions, actual optimizer settings, and the actor parameter L2 change. Metrics are captured after each PPO rollout update, including the final update. These diagnostics appear after checkpoint completion; older reports show unavailable fields explicitly. The run selector exposes checkpoint lineage and downloads without replacing historical records. Resuming restores model/optimizer state and starts a new sampling stream with the selected seed; it is not an exact simulator-state continuation.
+Manual attempts remain separate from baseline/candidate evaluation scores. Run a candidate evaluation in Compare to check whether the correction helped beyond that demonstration.
 
-**Compare** explains paired regressions, provisional results, checkpoint/scoring provenance, and the limits of development evaluation. Switch between baseline and candidate telemetry to inspect that policy's measured curve, per-step weighted reward breakdown, task outcomes, and artifacts. Playback presents the first episode per scenario while outcome counts include all episodes.
+## Recorded showcases
 
-Research UI validation: `node --experimental-strip-types --test tests/research.test.mjs`. Python RL tests verify real parameter updates, finite optimizer diagnostics, reward accounting, checkpoint reload, and seeded continuation.
-
-## Implementation
-
-| Location | Responsibility |
+| Route | View |
 | --- | --- |
-| `app/workspace.tsx`, `app/globals.css` | Experiment UI, gallery, telemetry, reward controls, comparison |
-| `app/research-workspace.tsx`, `app/research-workspace.css`, `lib/research.ts` | RL contract, reward equations, PPO explanation, learning curves, checkpoint provenance |
-| `app/api/lab/[...path]/route.ts` | Experiment/job API, validation, leases, artifact access |
-| `db/schema.ts`, `drizzle/0001_lab.sql` | D1 schema and idempotent hosting migration |
-| `lab/tasks.py`, `lab/specs.py`, `lab/planner.py` | Task/checkpoint registry, bounded configuration, structured Astra planning |
-| `lab/runtime.py` | Reusable native rollout/rendering and provenance |
-| `lab/rewards.py` | Reward composition; fixed simulator completion logic |
-| `lab/rl.py` | Gymnasium wrapper, actor migration, PPO, checkpoint resume/inference |
-| `lab/worker.py` | Job execution, heartbeat, cancellation, uploads |
-| `stitch/`, `bootstrap/` | Existing suturing and object-lifting physics, teachers, and policies |
+| `/` | Experiment workspace, simulations, manual controls, rewards, training, and comparison |
+| `/showcase` | Recorded heart-object transfer with an articulated robot and patient presentation |
+| `/suturing` | Recorded needle transfer and wound-closure presentation |
 
-The React/vinext frontend retains Sites compatibility. D1 stores experiments, jobs, and run metadata; R2 stores recordings, trajectories, reports, and policy checkpoints. Locally, Miniflare persists these services under `.wrangler/`. The Python worker only accesses them through authenticated HTTP endpoints. `.lab/` contains worker scratch files and test evidence; it is not the authoritative database.
+The standalone showcases offer **Current version**, **Old version**, playback controls, and motion export. Their Old version recordings are intentionally degraded demonstrations, not historical policy checkpoints. See [Policy comparison](POLICY-COMPARISON.md) for how the faults and outcomes are produced.
 
-Workers atomically claim jobs with a 60-second renewable lease, heartbeat every three seconds, and publish using a unique attempt token. Stale or cancelled attempts cannot publish results. Expired attempts may be retried up to three times. Only one active job per experiment is permitted. All runs belonging to a reclaimed attempt are replaced; artifacts from older attempts retain unique immutable keys. Jobs have a one-hour wall-clock limit.
+## Reproducible training demos
 
-Native physics executes at 500 Hz; control and telemetry run at 20 Hz; recorded video runs at 10 fps. Training skips rendering. Training samples use a disjoint seed range and bounded local parameter variation; evaluation seeds/configurations are retained for paired comparison.
+[RL-DEMO.md](RL-DEMO.md) documents saved experiments, reproduction commands, and paired outcome evidence. The recorded lifting-corner development study improved from **54/80 to 70/80 successes**, with **17 fixed failures and 1 regression**. These results describe that selected simulation study, not a held-out generalization benchmark.
+
+Saved experiment links require the corresponding local database. Use the reproduction instructions to create the experiments on a fresh checkout.
+
+## Architecture
+
+| Location | Purpose |
+| --- | --- |
+| `app/` | React/vinext workspace, experiment composer, research views, and Three.js playback |
+| `app/manual-control.tsx` | Operator controls, saved-attempt restoration, and Update flow |
+| `app/api/lab/[...path]/route.ts` | Experiment/job API, validation, worker leases, and artifact access |
+| `lib/experiment-spec.ts` | Reviewed study specifications and scenario generation |
+| `lab/worker.py` | Simulation, evaluation, training, and manual-control job execution |
+| `lab/manual.py` | Native replay and operator demonstration capture |
+| `lab/rl.py`, `lab/rewards.py` | PPO, behavior-cloning updates, and task-specific reward composition |
+| `lab/runtime.py`, `lab/presentation.py` | Recorded trajectories, telemetry, rendering, and presentation exports |
+| `bootstrap/`, `stitch/` | Active lifting and suturing physics, starting policies, and teachers |
+| `suturing/` | Earlier channel-only suturing experiment |
+| `db/`, `drizzle/` | Database schema and migrations |
+| `public/`, `artifacts/` | Presentation assets, checkpoints, recordings, and evaluation evidence |
+| `tests/`, `scripts/` | Verification and reproducible workflow tools |
+
+D1 stores experiments, jobs, and run metadata; R2 stores recordings, trajectories, reports, and checkpoints. Local services persist under `.wrangler/`. Worker scratch files live under `.lab/`. Keep `.wrangler/` to retain local experiments between sessions.
 
 ## Verification
 
 ```sh
-npm run test:python
 npm run typecheck
 npm run lint
 npm run build
-# With npm run lab running and one completed baseline/train/candidate experiment:
-npm run test:browser
 ```
 
-The Python tests verify configuration rejection, reproducible execution, independent success criteria, reward shortcuts, Gymnasium compatibility, actual optimizer changes, checkpoint reload, and resumed training. Browser tests exercise real media, byte-range seeking, all 16 scenarios, paired playback, reward controls, persistence, mobile layout, new task creation, job conflicts, and cancellation. They do not substitute fixture results for worker execution.
-
-The acceptance experiment generated by Astra completed **48/48 baseline** and **48/48 candidate** episodes after **8,192 PPO transitions**. After restarting the complete application, training resumed for another **1,024 transitions** (**9,216 total**), and the resumed checkpoint also completed **48/48 episodes**. All checkpoints were evaluated on the same 16 scenarios with three seeds each. This demonstrates the complete workflow and equivalent completion performance on that development suite; it does not demonstrate a generalization improvement. Original baseline results remain documented in [stitch/README.md](stitch/README.md).
-
-## Object lifting
-
-Choose **New experiment → Task package → Object lifting & placement**. This uses the existing `bootstrap.ExtractionEnv` and recommended `artifacts/policy_recovery.npz`, with 32 state observations and four controls (XYZ motion plus close/open). Astra receives only the lifting mechanics and parameter schema. The built-in sweep covers four object approaches and four tray locations.
-
-| Scenario parameter | Supported range |
-| --- | --- |
-| Object X / Y | −22 to +22 mm on each axis |
-| Object yaw | −8.5° to +8.5° |
-| Tray X | 250–320 mm |
-| Tray Y | −45 to +45 mm |
-
-Each scenario retains its object pose and tray location while episode seeds vary the starting gripper XY within ±25 mm. Baseline and candidate use paired episode seeds. The native gallery and inspector show object height, horizontal placement error, rim clearance, release, drops, and flagged contact events. Reports and refinement evidence use lifting metrics; they do not reuse wound-gap measurements.
-
-Lifting uses task completion, one-time grasp/clearance/release milestones, net placement progress after rim clearance, action smoothness, and terminal failure rewards. PPO training, checkpoint download/resume, and candidate evaluation use the lifting actor and preserve its binary gripper command. Cross-task checkpoint loading and refinement are rejected. Existing experiments without a task identifier continue to use suturing.
-
-The first real Astra-generated lifting suite ran **48 baseline episodes across 16 scenarios**: **44 successes**, **3 drops**, and **9 flagged contacts**. Failed episodes remain in the gallery, recordings, and aggregate placement metrics. These are development results, not a claim of improved performance.
-
-Object shape, collision box, mass, friction, cavity, and tray dimensions remain fixed in this simulator. Grasping is assisted by a weld gated on actual finger closure and proximity. This adds test cases for the existing lifting task; it does not model arbitrary objects or a new robot.
-
-## Scope and deployment
-
-The suturing environment is **needle transfer and wound closure under tension**, using rigid spring-mounted patches, assisted grasp transfer, and simplified penetration. It does not model deformable tissue, puncture resistance, tearing, a full robot, or knot retention. The policy receives simulator state, not camera images. Astra cannot add unsupported mechanics by changing a parameter. Physical calibration and clinical validation are not established.
-
-Reward composition changes training incentives without changing the environment's fixed success/failure checker. All gallery evaluations are **development evaluations**, not a sealed final test set. Refinement consumes that development evidence. Medical acceptance criteria and physical validation require separate work.
-
-For hosted execution, deploy the frontend through Sites with the existing `DB` and `ARTIFACTS` bindings, configure matching `LAB_WORKER_TOKEN` secrets, and run the Python worker on a compute host pointed at the deployed URL. Hosted UI requests require the `lab_access` cookie matching `LAB_ACCESS_TOKEN`; keep deployment private and integrate organizational authentication before multi-user use. No cloud compute or hosted deployment is automatically provisioned by the local launcher.
-
-The original command-line workflows remain available: [BOOTSTRAP.md](BOOTSTRAP.md), [RECOVERY.md](RECOVERY.md), and [stitch/README.md](stitch/README.md).
-
-## Recorded heart-policy showcase (no Isaac Sim required)
-
-For the revised suturing use case, see [across-wound needle transfer and closure](stitch/README.md): opposing entry/exit points, receiving jaws, donor release, and physical closure under thread tension in a simplified CPU MuJoCo model. The earlier channel-only experiment is preserved in `suturing/`; it does not perform wound closure.
-
-Open `/showcase` to play measured motion from the trained heart policy. The page includes an interactive 3D surgical-context prototype, the original simulation geometry, the native MuJoCo MP4, a scrubber and speed controls, recorded outcome metrics, and Unreal export downloads. Compare Current version and Old version in either showcase.
+Python tests:
 
 ```powershell
-.\.venv\Scripts\python.exe -m bootstrap.export_motion --video
-npm ci
-npm run dev -- --port 3000
+# Windows
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Use the actual port printed by the server; `npm run lab` serves `http://127.0.0.1:3210/showcase` and `http://127.0.0.1:3210/suturing`. See [Unreal handoff and motion schema](unreal/README.md). The checked-in export is a successful 5.55-second rollout of seed 30000 with 0.71 mm placement error. It is measured policy execution, not generated choreography.
+```sh
+# macOS / Linux
+npm run test:python
+```
 
-`unreal/SorenPlayback.uproject` and `unreal/import_soren.py` provide a UE 5.7 Sequencer import path. Unreal is not installed here, so no Unreal render or editor execution is claimed. The patient/drapes are decorative proxy geometry; photorealism needs licensed models, art direction and an Unreal workstation. There is no tissue simulation or real-person recording.
+With the lab running:
 
-Verification: `npm run typecheck`, `npm run build`, `node scripts/test-showcase.mjs` (set `SHOWCASE_URL` if needed), and `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. The browser check saves desktop/mobile screenshots under `artifacts/showcase/`.
+```sh
+npm run test:browser
+node scripts/test-manual-control.mjs
+```
+
+The Playwright suite uses installed Chrome and existing experiment data; some checks require completed baseline and candidate evaluations. The manual-control check requires a generated 16-scenario experiment and submits a small native operator attempt. Python tests cover physics, action validation, replay, reward behavior, checkpoint migration, and actual optimizer updates.
+
+## Configuration and deployment
+
+| Setting | Purpose |
+| --- | --- |
+| `LAB_PORT` | Local launcher port; defaults to `3210` |
+| `LAB_WORKER_TOKEN` | Shared credential for worker API requests; generated locally in `.dev.vars` |
+| `LAB_URL` | Worker default URL and browser-test target |
+| `LAB_ASTRA_MODEL` | Model selected by the optional Astra planner |
+| `LAB_ACCESS_TOKEN` | Hosted browser access credential, checked through the `lab_access` cookie |
+
+Keep credentials out of version control. The repository ignores `.env*` files and `.dev.vars`.
+
+Hosted operation requires the frontend's `DB` and `ARTIFACTS` bindings, matching worker credentials, and a separate Python compute worker pointed at the deployed application. Starting the local lab does not provision cloud compute or deploy the site.
+
+## Further documentation
+
+- [Lifting policy bootstrapping](BOOTSTRAP.md)
+- [Recovery training](RECOVERY.md)
+- [Needle transfer and closure](stitch/README.md)
+- [Measured RL demo](RL-DEMO.md)
+- [Degraded-policy comparisons](POLICY-COMPARISON.md)
+- [Simulation presentation](lab/PRESENTATION.md)
+- [Model credits and licenses](public/models/ATTRIBUTION.md)
+- [Unreal motion import](unreal/README.md)
